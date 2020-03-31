@@ -1,120 +1,84 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿body{background: #eee;}
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+.animate{
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }
 
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.header{background: #808080}
+
+.header__logo {
+    color: white;
+    float: leftdisplay: block;
+    padding: 15px;
+}
+.header__menu{
+    float:right;
+    margin:0;
+    padding:0;
+}
+.header__menu__item{
+    display: inline-block;
+}
+.header__menu__item a{
+    color: white;
+    display: block;
+    padding:15px;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+.header__menu__item a:hover{
+    background: #000;
 }
 
 
-.column {
-    float: left;
-    width: 25%;
-    padding: 0 10px;
+.header__icon-bar{
+    display:block;
+    float: right;
+    padding: 20px;
+    display: none;
 }
 
-/* Remove extra left and right margins, due to padding in columns */
-.row 
-{
-    margin: 0 -5px;
+.header__icon-bar span{
+    display: block;
+    height: 3px;
+    width: 30px;
+    background: white;
+    margin-bottom: 5px;
 }
 
-    /* Clear floats after the columns */
-    .row:after {
-        content: "";
-        display: table;
-        clear: both;
+
+/* tablet */
+@media (max-width: 998px){
+
+}
+
+/* telefono */
+@media (max-width: 767px) {
+    .header__icon-bar{
+        display:block;
     }
 
-/* Style the counter cards */
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-    padding: 16px;
-    text-align: center;
-    background-color: #f1f1f1;
-}
-
-/* Responsive columns - one column layout (vertical) on small screens */
-@media screen and (max-width: 600px) {
-    .column {
+    .header__menu{
         width: 100%;
-        display: block;
-        margin-bottom: 20px;
+        height: 0px;
+        overflow: hidden;
+    }
+
+    .is-open{
+        height: 300px;
+        overflow: auto;
     }
 }
 
-.card > label:first-child 
-{
-    font-size: 20px;
-    font-weight: bold;
-}
-.card > label
-{
-    font-size: 13px;
+
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
 }
 
+* html .clearfix {zoom: 1;} /* IE6 */
+*:first-child + html .clearfix {zoom: 1;} /* IE7 */

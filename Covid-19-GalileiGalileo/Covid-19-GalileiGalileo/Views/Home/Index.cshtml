@@ -1,39 +1,74 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link rel="stylesheet" href="style.css">
 
-    <div class="list-group-">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
 
-        <div class="row">
-            <div class="column">
-                <div class="card">
-                    <label>Attualmente positivi</label>
-                    <label>73.880</label>
+        <header class="header clearfix">
+            <a href="" class="header__logo">Logo</a>
+            <a href="" class="header__icon-bar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+            <ul class="header__menu animate">
+                <li class="header__menu__item"><a href="">Item</a></li>
+                <li class="header__menu__item"><a href="">Item</a></li>
+                <li class="header__menu__item"><a href="">Item</a></li>
+                <li class="header__menu__item"><a href="">Item</a></li>
+            </ul>
+
+        </header>
+
+        <div class="list-group-">
+
+            <div class="row">
+                <div class="column">
+                    <div class="card">
+                        <label>Attualmente positivi</label>
+                        <label>73.880</label>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <label>Guariti</label>
+                        <label>13.030</label>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <label>Deceduti</label>
+                        <label>10.779</label>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <label>Totale positivi</label>
+                        <label>97.689</label>
+                    </div>
                 </div>
             </div>
 
-            <div class="column">
-                <div class="card">
-                    <label>Guariti</label>
-                    <label>13.030</label>
-                </div>
-            </div>
 
-            <div class="column">
-                <div class="card">
-                    <label >Deceduti</label>
-                    <label>10.779</label>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="card">
-                    <label>Totale positivi</label>
-                    <label>97.689</label>
-                </div>
-            </div>
         </div>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.15.0/d3.min.js"></script>
+        <script>
+        $(document).ready(function(){
+        $(".header__icon-bar").click(function(e){
 
-    </div>
-           
+        $(".header__menu").toggleClass('is-open');
+        e.preventDefault();
+        }
+        );})
+        </script>
+    </body>        
