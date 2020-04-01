@@ -6,6 +6,10 @@
     <title>@ViewData["Title"] - Covid_19_GalileiGalileo</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'"
+                      Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" 
+                      Include="WestWind.AspnetCore.LiveReload" Version="0.1.12" />
 </head>
 <body>
     <header>

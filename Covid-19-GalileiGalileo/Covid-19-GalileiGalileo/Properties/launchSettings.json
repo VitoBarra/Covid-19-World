@@ -1,7 +1,7 @@
 ﻿{
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:62303",
       "sslPort": 44397
@@ -23,5 +23,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
+  },
+  "LiveReload": {
+    "LiveReloadEnabled": true,
+    "ClientFileExtensions": ".cshtml,.razor,.css,.js,.htm,.html",
+    "ServerRefreshTimeout": 3000,
+    "WebSocketUrl": "/__livereload",
+    "WebSocketHost": "wss://localhost:5001",
+    "FolderToMonitor": "~/"
   }
 }

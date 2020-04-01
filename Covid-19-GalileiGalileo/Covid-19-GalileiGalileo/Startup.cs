@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Westwind.AspNetCore.LiveReload;
 
 namespace Covid_19_GalileiGalileo
 {
@@ -23,12 +24,24 @@ namespace Covid_19_GalileiGalileo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+#if DEBUG
+            services.AddLiveReload();
+#endif
+            services.AddControllersWithViews()
+#if DEBUG
+                .AddRazorRuntimeCompilation();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
+#if DEBUG
+            app.UseLiveReload();
+#endif
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
