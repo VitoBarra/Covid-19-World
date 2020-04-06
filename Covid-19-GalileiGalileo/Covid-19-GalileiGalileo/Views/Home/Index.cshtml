@@ -1,111 +1,113 @@
-﻿@model  Covid_19_GalileiGalileo.Models.CovidData
+﻿@model Covid_19_GalileiGalileo.Models.CovidData
 
-    @{
-        ViewData["Title"] = "Home Page";
-    }
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-        <link rel="stylesheet" href="style.css">
+@{
+    ViewData["Title"] = "Home Page";
+    ChartJSCore.Models.Chart chart = (ChartJSCore.Models.Chart)ViewData["chart"];
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body>
+}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+    <link rel="stylesheet" href="style.css">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
 
 
 
 
-        <div class="list-group-">
-            <p class="text-light">world stat:</p>
+    <div class="list-group-">
+        <p class="text-light">world stat:</p>
 
-            <div class="row">
-                <div class="column">
-                    <div class="card">
-                        <label>Attualmente positivi</label>
-                        <label>@Model.new_cases</label>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <label>Guariti</label>
-                        <label>@Model.total_recovered</label>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <label>Deceduti</label>
-                        <label>@Model.total_deaths</label>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <label>Totale positivi</label>
-                        <label>@Model.total_cases</label>
-                    </div>
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <label>Attualmente positivi</label>
+                    <label>@Model.new_cases</label>
                 </div>
             </div>
 
-
-
-            <div class="ChartBox" >
-                <div class="ChartBox" id="SelectCounty">
-                    <div class="row">
-                        <div class="column">
-                            <div class="card">
-                                <label>Attualmente positivi</label>
-                                <label>73.880</label>
-                            </div>
-                        </div>
-
-                        <div class="column">
-                            <div class="card">
-                                <label>Guariti</label>
-                                <label>13.030</label>
-                            </div>
-                        </div>
-
-                        <div class="column">
-                            <div class="card">
-                                <label>Deceduti</label>
-                                <label>10.779</label>
-                            </div>
-                        </div>
-
-                        <div class="column">
-                            <div class="card">
-                                <label>Totale positivi</label>
-                                <label>97.689</label>
-                            </div>
-                        </div>
-                    </div>
-                    <label> Mappa modo</label>
-                </div>
-
-                <div class="ChartBox" id="ChartPlace">
-                    <div class="row ChartBox">
-                        <label> Grafico Globale</label>
-                    </div>
-                    <div class="ChartBox">
-                        <label> Grafico selezionato</label>
-                    </div>
+            <div class="column">
+                <div class="card">
+                    <label>Guariti</label>
+                    <label>@Model.total_recovered</label>
                 </div>
             </div>
 
+            <div class="column">
+                <div class="card">
+                    <label>Deceduti</label>
+                    <label>@Model.total_deaths</label>
+                </div>
+            </div>
 
+            <div class="column">
+                <div class="card">
+                    <label>Totale positivi</label>
+                    <label>@Model.total_cases</label>
+                </div>
+            </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.15.0/d3.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                $(".header__icon-bar").click(function (e) {
 
-                    $(".header__menu").toggleClass('is-open');
-                    e.preventDefault();
-                }
-                );
-            })
-        </script>
-    </body>        
+
+        <div class="ChartBox">
+            <div class="ChartBox" id="SelectCounty">
+                <div class="row">
+                    <div class="column">
+                        <div class="card">
+                            <label>Attualmente positivi</label>
+                            <label>73.880</label>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="card">
+                            <label>Guariti</label>
+                            <label>13.030</label>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="card">
+                            <label>Deceduti</label>
+                            <label>10.779</label>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="card">
+                            <label>Totale positivi</label>
+                            <label>97.689</label>
+                        </div>
+                    </div>
+                </div>
+                <label> Mappa modo</label>
+            </div>
+
+            <div class="ChartBox" id="ChartPlace">
+
+                <div class="row ChartBox">
+                    <div><canvas id="lineChart1"></canvas></div>
+                </div>
+
+                <div class="ChartBox ">
+                    <div><canvas id="lineChart2" ></canvas></div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    @section Scripts
+        {
+           <script>
+                @Html.Raw(chart.CreateChartCode("lineChart1"));
+                @Html.Raw(chart.CreateChartCode("lineChart2"));
+           </script>
+
+        }
+</body>
