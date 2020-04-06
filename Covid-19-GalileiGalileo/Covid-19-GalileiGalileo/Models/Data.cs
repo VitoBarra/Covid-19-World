@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Covid_19_GalileiGalileo.Services
+namespace Covid_19_GalileiGalileo.Models
 {
     
-    public class CovidDataData
+    public class CovidData
     {
-
-
         [JsonProperty("total_deaths")]
         public string total_deaths { get; set; }
         [JsonProperty("total_cases")]

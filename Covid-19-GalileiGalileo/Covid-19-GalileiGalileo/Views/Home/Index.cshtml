@@ -1,6 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model  Covid_19_GalileiGalileo.Models.CovidData
+
+    @{
+        ViewData["Title"] = "Home Page";
+    }
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
         <link rel="stylesheet" href="style.css">
@@ -15,39 +17,40 @@
 
         <div class="list-group-">
             <p class="text-light">world stat:</p>
+
             <div class="row">
                 <div class="column">
                     <div class="card">
                         <label>Attualmente positivi</label>
-                        <label>73.000</label>
+                        <label>@Model.new_cases</label>
                     </div>
                 </div>
 
                 <div class="column">
                     <div class="card">
                         <label>Guariti</label>
-                        <label>13.030</label>
+                        <label>@Model.total_recovered</label>
                     </div>
                 </div>
 
                 <div class="column">
                     <div class="card">
                         <label>Deceduti</label>
-                        <label>10.779</label>
+                        <label>@Model.total_deaths</label>
                     </div>
                 </div>
 
                 <div class="column">
                     <div class="card">
                         <label>Totale positivi</label>
-                        <label>97.689</label>
+                        <label>@Model.total_cases</label>
                     </div>
                 </div>
             </div>
 
 
-            
-            <div class="ChartBox">
+
+            <div class="ChartBox" >
                 <div class="ChartBox" id="SelectCounty">
                     <div class="row">
                         <div class="column">
@@ -96,12 +99,13 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.15.0/d3.min.js"></script>
         <script>
-        $(document).ready(function(){
-        $(".header__icon-bar").click(function(e){
+            $(document).ready(function () {
+                $(".header__icon-bar").click(function (e) {
 
-        $(".header__menu").toggleClass('is-open');
-        e.preventDefault();
-        }
-        );})
+                    $(".header__menu").toggleClass('is-open');
+                    e.preventDefault();
+                }
+                );
+            })
         </script>
     </body>        

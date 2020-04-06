@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Covid_19_GalileiGalileo.Models;
+using Covid_19_GalileiGalileo.Services;
 
 namespace Covid_19_GalileiGalileo.Controllers
 {
@@ -18,9 +19,16 @@ namespace Covid_19_GalileiGalileo.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public  IActionResult Index()
         {
-            return View();
+            RestServices.StartUpAPI();
+
+            CovidData data = RestServices.GetDataWorld();
+
+            if (data != null)
+                return View(data);
+            else
+                return BadRequest();
         }
 
         public IActionResult Privacy()
@@ -38,8 +46,6 @@ namespace Covid_19_GalileiGalileo.Controllers
         {
             return View();
         }
-
-
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
