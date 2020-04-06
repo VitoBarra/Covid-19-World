@@ -24,12 +24,10 @@ namespace Covid_19_GalileiGalileo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-#if DEBUG
-            services.AddLiveReload();
-#endif
             services.AddControllersWithViews()
 #if DEBUG
-                .AddRazorRuntimeCompilation();
+            .AddRazorRuntimeCompilation();
+            services.AddLiveReload();
 #endif
         }
 
