@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ChartJSCore.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Covid_19_GalileiGalileo.Models
         public string new_cases { get; set; }
         [JsonProperty("new_deaths")]
         public string new_deaths { get; set; }
+        public List<Dataset> Datasets { get; internal set; }
         [JsonProperty("statistic_taken_at")]
         DateTime statistic_taken_at { get; set; }
     }
