@@ -21,13 +21,14 @@ namespace Covid_19_GalileiGalileo.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
             RestServices.StartUpAPI();
 
             List<CovidData> wordHistory = new List<CovidData>(RestServices.GetDataHistory());
 
-
+           
 
 
             #region ChartCreation
