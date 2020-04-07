@@ -14,100 +14,128 @@
 </head>
 <body>
 
+    <div class="row">
+    <p class="arancio">Statistiche mondiali:</p>
+    <p class="arancio update">Ultimo aggiornamento: @Model.Time</p>
+     </div>
+
+    <div class="row">
+        <div class="column">
+            <div class="card">
+                <label>Attualmente positivi</label>
+                <label>@Model.Cases.Active</label>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <label>Guariti</label>
+                <label>@Model.Cases.Recovered</label>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <label>Deceduti</label>
+                <label>@Model.Deaths.Total</label>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card">
+                <label>Totale positivi</label>
+                <label>@Model.Cases.Total</label>
+            </div>
+        </div>
+    </div>
+    <div style="text-align:center; padding-top:20px" > 
+        <img src="~/Resource/jvectormaps.png" width="1000" height="500"/>
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="column ChartBox grafico">
+            <div><canvas id="lineChart1" width="400" height="200"></canvas></div>
+        </div>
+
+        <div class="column ChartBox grafico">
+            <div><canvas id="lineChart2" width="400" height="200"></canvas></div>
+        </div>
+
+    </div>
 
 
 
     <div class="list-group-">
-        <p class="text-light">world stat:</p>
 
-        <div class="row">
-            <div class="column">
-                <div class="card">
-                    <label>Attualmente positivi</label>
-                    <label>@Model.new_cases</label>
+
+
+        <div class="ChartBox world" style="height:800px" id="SelectCounty">
+            <div class="row">
+                <div class="column">
+                    <div class="card">
+                        <label>Attualmente positivi</label>
+                        <label>73.880</label>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <label>Guariti</label>
+                        <label>13.030</label>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <label>Deceduti</label>
+                        <label>10.779</label>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <label>Totale positivi</label>
+                        <label>97.689</label>
+                    </div>
                 </div>
             </div>
 
-            <div class="column">
-                <div class="card">
-                    <label>Guariti</label>
-                    <label>@Model.total_recovered</label>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="card">
-                    <label>Deceduti</label>
-                    <label>@Model.total_deaths</label>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="card">
-                    <label>Totale positivi</label>
-                    <label>@Model.total_cases</label>
-                </div>
+            <div style="text-align:center; width:1000px; height:500px">
+                <img src="~/Resource/jvectormaps.png" width="1000"style="margin-top: 50px" />
             </div>
         </div>
 
 
+        <div class="row">
 
-        <div class="ChartBox">
-            <div class="ChartBox" id="SelectCounty">
-                <div class="row">
-                    <div class="column">
-                        <div class="card">
-                            <label>Attualmente positivi</label>
-                            <label>73.880</label>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="card">
-                            <label>Guariti</label>
-                            <label>13.030</label>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="card">
-                            <label>Deceduti</label>
-                            <label>10.779</label>
-                        </div>
-                    </div>
-
-                    <div class="column">
-                        <div class="card">
-                            <label>Totale positivi</label>
-                            <label>97.689</label>
-                        </div>
-                    </div>
-                </div>
-                <label> Mappa modo</label>
+            <div class="column ChartBox grafico">
+                <div><canvas id="lineChart3" width="400" height="200"></canvas></div>
             </div>
 
-            <div class="ChartBox" id="ChartPlace">
-
-                <div class="row ChartBox">
-                    <div><canvas id="lineChart1"></canvas></div>
-                </div>
-
-                <div class="ChartBox ">
-                    <div><canvas id="lineChart2" ></canvas></div>
-                </div>
+            <div class="column ChartBox grafico">
+                <div><canvas id="lineChart4" width="400" height="200"></canvas></div>
             </div>
+
         </div>
 
 
 
     </div>
 
+
+
+
     @section Scripts
         {
-           <script>
+        <script>
                 @Html.Raw(chart.CreateChartCode("lineChart1"));
                 @Html.Raw(chart.CreateChartCode("lineChart2"));
-           </script>
+                @Html.Raw(chart.CreateChartCode("lineChart3"));
+                @Html.Raw(chart.CreateChartCode("lineChart4"));
+        </script>
 
-        }
+    }
 </body>

@@ -1,7 +1,9 @@
-﻿body 
-{
-    background: #302e36;
-    font-family: Arial, Helvetica, sans-serif;
+﻿body {
+    background: #1f1e24;
+    /*font-family: Arial, Helvetica, sans-serif;
+        
+    */
+    font-family: "Trebuchet MS";
 }
 
 .animate
@@ -10,55 +12,6 @@
     transition: all 0.3s ease-out;
 }
 
-
-
-.header
-{
-    padding: 60px;
-    text-align: center;
-    background: #1abc9c;
-    color: black;
-    font-size: 30px;
-}
-
-.header__logo {
-    color: white;
-    /*leftdisplay: block;*/
-    padding: 15px;
-}
-.header__menu{
-    float:right;
-    margin:0;
-    padding:0;
-}
-.header__menu__item{
-    display: inline-block;
-}
-.header__menu__item a{
-    color: white;
-    display: block;
-    padding:15px;
-}
-
-.header__menu__item a:hover{
-    background: #000;
-}
-
-
-.header__icon-bar{
-    display:block;
-    float: right;
-    padding: 20px;
-    display: none;
-}
-
-.header__icon-bar span{
-    display: block;
-    height: 3px;
-    width: 30px;
-    background: white;
-    margin-bottom: 5px;
-}
 
 
 /* tablet */
@@ -124,8 +77,9 @@
 /* Remove extra left and right margins, due to padding in columns */
 .row 
 {
-    margin: 0 -5px;
+    margin: 0 5px;
 }
+
 
  /* Clear floats after the columns */
 .row:after 
@@ -136,39 +90,48 @@
 }
 
 /* Style the counter cards */
-.card 
-{
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+.card {
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.6); /* this adds the "card" effect */
     padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
 }
 .card > label:first-child 
 {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: initial;
+    
 }
 
-.card > label 
-{
-    font-size: 13px;
+.card > label {
+    font-size: 25px;
+    font-weight: bold;
 }
 
 
 
 .ChartBox {
-    background-color: lightgreen;
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.6);
+    background-color: #222;
     width: auto;
     height: auto;
-    border: 4px solid gray;
-    padding: 50px;
-    margin: 20px;
+    border: 2px solid rgba(0, 169, 255, 0.55);
+    border-radius: 25px;
+    padding: 10px;
+    margin: 10px;
 }
 .ChartBox > .ChartBox 
 {
     display:inline-block;
 }
 
+.grafico
+{
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 45%;
+}
 
 #SelectCounty 
 {
@@ -180,10 +143,27 @@
     left: 300px;
 }
 
+.arancio
+{
+    color: #ff8d00;
+    font-size: 17px;
+}
 
+.update
+{
+    position: absolute;
+    right: 100px;
+}
+
+.world
+{
+    padding: 50px
+}
 
 /*  Tip:
     se il browser non aggiorna il css è perche salva il file in cache
     basta premre Control-F5 per risolvere il poroblema
     sto cercando altre solunzioni ma per ora quest è
+    
+    EDIT DI EGIDIO: grazie vito per questo pro tip :)
 */
