@@ -39,7 +39,7 @@ namespace Covid_19_GalileiGalileo.Models
         [JsonProperty("deaths")]
         public Deaths Deaths { get; set; }
         [JsonProperty("time")]
-        DateTime Time { get; set; }
+        public DateTime Time { get; set; }
     }
 
     public class Cases
