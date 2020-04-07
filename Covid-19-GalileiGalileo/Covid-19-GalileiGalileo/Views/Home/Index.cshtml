@@ -24,28 +24,28 @@
             <div class="column">
                 <div class="card">
                     <label>Attualmente positivi</label>
-                    <label>@Model.new_cases</label>
+                    <label>@Model.Cases.Active</label>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
                     <label>Guariti</label>
-                    <label>@Model.total_recovered</label>
+                    <label>@Model.Cases.Recovered</label>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
                     <label>Deceduti</label>
-                    <label>@Model.total_deaths</label>
+                    <label>@Model.Deaths.Total</label>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
                     <label>Totale positivi</label>
-                    <label>@Model.total_cases</label>
+                    <label>@Model.Cases.Total</label>
                 </div>
             </div>
         </div>

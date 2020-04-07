@@ -7,21 +7,64 @@ using System.Threading.Tasks;
 
 namespace Covid_19_GalileiGalileo.Models
 {
-    
+
+    public class Responce
+    {
+        [JsonProperty("get")]
+        public string Get { get; set; }
+        [JsonProperty("parameters")]
+        public Parameters Parameters { get; set; }
+        [JsonProperty("errors")]
+        public string[] errors { get; set; }
+        [JsonProperty("results")]
+        public string Results { get; set; }
+        [JsonProperty("response")]
+        public List<CovidData> Response { get; set; } = new List<CovidData>();
+    }
+
+
+    public class Parameters
+    {
+        [JsonProperty("country")]
+        public string Country { get; set; }
+    }
+
+
     public class CovidData
     {
-        [JsonProperty("total_deaths")]
-        public string total_deaths { get; set; }
-        [JsonProperty("total_cases")]
-        public string total_cases { get; set; }
-        [JsonProperty("total_recovered")]
-        public string total_recovered { get; set; }
-        [JsonProperty("new_cases")]
-        public string new_cases { get; set; }
-        [JsonProperty("new_deaths")]
-        public string new_deaths { get; set; }
-        public List<Dataset> Datasets { get; internal set; }
-        [JsonProperty("statistic_taken_at")]
-        DateTime statistic_taken_at { get; set; }
+        [JsonProperty("country")]
+        public string Country { get; set; }
+        [JsonProperty("cases")]
+        public Cases Cases { get; set; }
+        [JsonProperty("deaths")]
+        public Deaths Deaths { get; set; }
+        [JsonProperty("time")]
+        DateTime Time { get; set; }
     }
+
+    public class Cases
+    {
+        [JsonProperty("new")]
+        public string New { get; set; }
+        [JsonProperty("active")]
+        public string Active { get; set; }
+        [JsonProperty("critical")]
+        public string Critical { get; set; }
+        [JsonProperty("recovered")]
+        public string Recovered { get; set; }
+        [JsonProperty("total")]
+        public string Total { get; set; }
+    }
+
+
+    public class Deaths
+    {
+        [JsonProperty("new")]
+        public string New { get; set; }
+        [JsonProperty("total")]
+        public string Total { get; set; }
+    }
+
+
+
 }

@@ -20,39 +20,17 @@ namespace Covid_19_GalileiGalileo.Services
         {
             if (Unstarded)
             {
-                client.DefaultRequestHeaders.Add("x-rapidapi-host", "coronavirus-monitor.p.rapidapi.com");
+                client.DefaultRequestHeaders.Add("x-rapidapi-host", "covid-193.p.rapidapi.com");
                 client.DefaultRequestHeaders.Add("x-rapidapi-key", "f4d025568cmsh12e79fdec8e33b1p174ff5jsn48a341aa1fc0");
                 Unstarded = false;
             }
 
         }
 
-
-        //public static async Task<CovidData> GetDataWorld()
-        //{
-        //    CovidData Data = null;
-        //    string EndPoint = $"https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php";
-
-        //    try
-        //    {
-        //        HttpResponseMessage response = await client.GetAsync(EndPoint);
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            string content = await response.Content.ReadAsStringAsync();
-        //            Data = JsonConvert.DeserializeObject<CovidData>(content);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Debug.WriteLine("\tERROR {0}", ex.Message);
-        //    }
-
-        //    return Data;
-        //}
-        public static CovidData GetDataWorld()
+        public static IList<CovidData> GetDataHistory(string Country ="all")
         {
-            CovidData Data = null;
-            string EndPoint = $"https://coronavirus-monitor.p.rapidapi.com/coronavirus/worldstat.php";
+            IList<CovidData> Data = null;
+            string EndPoint = $"https://covid-193.p.rapidapi.com/history?country={Country}";
 
             try
             {
@@ -60,55 +38,7 @@ namespace Covid_19_GalileiGalileo.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = response.Content.ReadAsStringAsync().Result;
-                    Data = JsonConvert.DeserializeObject<CovidData>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("\tERROR {0}", ex.Message);
-            }
-
-            return Data;
-        }
-
-
-        public static async Task<CovidData> GetLatestStatByCountry(string CountryName)
-        {
-
-            CovidData Data = null;
-            string EndPoint = $"https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=${CountryName}";
-
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(EndPoint);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Data = JsonConvert.DeserializeObject<CovidData>(content);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("\tERROR {0}", ex.Message);
-            }
-
-            return Data;
-        }
-
-
-
-        public static async Task<CovidData> GetDataHistoryByCountry(string CountryName)
-        {
-            CovidData Data = null;
-            string EndPoint = $"https://coronavirus-monitor.p.rapidapi.com/coronavirus/cases_by_particular_country.php?country={CountryName}";
-
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(EndPoint);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    Data = JsonConvert.DeserializeObject<CovidData>(content);
+                    Data = JsonConvert.DeserializeObject<Responce>(content).Response;
                 }
             }
             catch (Exception ex)

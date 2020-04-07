@@ -21,12 +21,11 @@ namespace Covid_19_GalileiGalileo.Controllers
             _logger = logger;
         }
 
-        public  IActionResult Index()
+        public IActionResult Index()
         {
             RestServices.StartUpAPI();
 
-            CovidData dataCovid = RestServices.GetDataWorld();
-
+            List<CovidData> wordHistory = new List<CovidData>(RestServices.GetDataHistory());
 
             #region ChartCreation
             Chart chart = new Chart();
@@ -38,7 +37,7 @@ namespace Covid_19_GalileiGalileo.Controllers
 
             LineDataset dataset = new LineDataset()
             {
-                Label = "My First dataset",
+                Label = "casi positivi",
                 Data = new List<double?> { 65, 59, 80, 81, 56, 55, 40 },
                 Fill = "false",
                 LineTension = 0.1,
@@ -69,7 +68,7 @@ namespace Covid_19_GalileiGalileo.Controllers
             #endregion
 
             if (data != null)
-                return View(dataCovid);
+                return View(wordHistory[0]);
             else
                 return BadRequest();
         }
