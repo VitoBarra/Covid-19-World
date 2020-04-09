@@ -1,6 +1,7 @@
 ﻿using ChartJSCore.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,6 +41,11 @@ namespace Covid_19_GalileiGalileo.Models
         public Deaths Deaths { get; set; }
         [JsonProperty("time")]
         public DateTime Time { get; set; }
+
+
+
+
+
     }
 
     public class Cases
@@ -67,4 +73,49 @@ namespace Covid_19_GalileiGalileo.Models
 
 
 
+
+
+
+    public class CovidList<T> : List<T> where T : CovidData
+    {
+
+        public CovidList(T[] ItemList) : base(ItemList) { }
+
+        public IList<double?> TotalCases()
+        {
+            List<double?> DoubleList = new List<double?>();
+            foreach (CovidData cd in this)
+            {
+                DoubleList.Add(int.Parse(cd.Cases.Total));
+            }
+            return DoubleList;
+        }
+
+
+        public IList<double?> DiferenceCases()
+        {
+            List<double?> DoubleList = new List<double?>();
+            for (int i = 0; i < this.Count - 1; i++)
+            {
+                DoubleList.Add(int.Parse(this[i].Cases.New) - int.Parse(this[i+1].Cases.New));
+            }
+            return DoubleList;
+        }
+
+
+        public IList<string> ListTime()
+        {
+            List<string> labelList = new List<string>();
+            foreach (CovidData cd in this)
+            {
+                labelList.Add(cd.Time.ToString());
+            }
+            return labelList;
+        }
+
+
+    }
+
+
 }
+
