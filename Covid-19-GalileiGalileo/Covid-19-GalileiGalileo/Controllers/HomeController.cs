@@ -26,12 +26,28 @@ namespace Covid_19_GalileiGalileo.Controllers
         {
             RestServices.StartUpAPI();
 
-            List<CovidData> wordHistory = new List<CovidData>(RestServices.GetDataHistory());
-
-           
+            CovidList<CovidData> wordHistory = new CovidList<CovidData>(RestServices.GetDataHistory().ToArray());
 
 
-            #region ChartCreation
+         
+
+
+
+            ViewBag.chartTotalCases = CreateChart("casi positivi", wordHistory.TotalCases(), wordHistory.ListTime(), 41);
+            ViewBag.chartNewCases = CreateChart("nuovi casi giornalieri", wordHistory.DiferenceCases(), wordHistory.ListTime(), 79);
+
+            if (wordHistory != null)
+                return View(wordHistory[0]);
+            else
+                return BadRequest();
+        }
+
+ 
+
+
+        public static Chart CreateChart(string DatasetName,IList<double?> DataList, IList<string> LabelList, int DataRatio)
+        {
+
             Chart chart = new Chart()
             {
                 Type = Enums.ChartType.Line
@@ -44,7 +60,7 @@ namespace Covid_19_GalileiGalileo.Controllers
                 {
                     new LineDataset()
                     {
-                        Label = "casi positivi",
+                        Label = DatasetName,
                         Data = new List<double?>(),
                         Fill = "true",
                         LineTension = 0.1,
@@ -70,15 +86,16 @@ namespace Covid_19_GalileiGalileo.Controllers
 
 
 
-            for (int i = 0; i < wordHistory.Count; i++)
+            for (int i = 0; i < DataList.Count; i++)
             {
-                if (i % 48 == 0 || i == wordHistory.Count - 1)
+                if (i % DataRatio == 0)
                 {
-                    data.Datasets[0].Data.Add(int.Parse(wordHistory[i].Cases.Total));
-                    if (i % 96 == 0 || i == wordHistory.Count - 1)
-                        data.Labels.Add(wordHistory[i].Time.ToString());
-                    else
-                        data.Labels.Add("");
+                    data.Datasets[0].Data.Add(DataList[i]);
+
+                    //if (i % DataRatio == 0)
+                        data.Labels.Add(LabelList[i]);
+                    //else
+                    //    data.Labels.Add("");
                 }
             }
 
@@ -87,16 +104,13 @@ namespace Covid_19_GalileiGalileo.Controllers
 
             chart.Data = data;
 
-            ViewData["chart"] = chart;
-            #endregion
 
+            return chart;
+  
 
-
-            if (data != null)
-                return View(wordHistory[0]);
-            else
-                return BadRequest();
         }
+
+
 
         public IActionResult Privacy()
         {
