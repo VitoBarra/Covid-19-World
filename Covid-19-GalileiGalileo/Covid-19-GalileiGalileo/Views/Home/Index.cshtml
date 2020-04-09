@@ -15,8 +15,8 @@
 <body>
 
     <div class="row">
-    <p class="text-light">world stat:</p>
-    <p class="text-light" style="padding-left:300px">ultimo aggiornamento: @Model.Time</p>
+    <p class="arancio">Statistiche mondiali:</p>
+    <p class="arancio update">Ultimo aggiornamento: @Model.Time</p>
      </div>
 
     <div class="row">
@@ -56,11 +56,11 @@
 
     <div class="row">
 
-        <div class="column ChartBox">
+        <div class="column ChartBox grafico">
             <div><canvas id="lineChart1" width="400" height="200"></canvas></div>
         </div>
 
-        <div class="column ChartBox ">
+        <div class="column ChartBox grafico">
             <div><canvas id="lineChart2" width="400" height="200"></canvas></div>
         </div>
 
@@ -72,7 +72,7 @@
 
 
 
-        <div class="ChartBox" style="height:800px" id="SelectCounty">
+        <div class="ChartBox world" style="height:800px" id="SelectCounty">
             <div class="row">
                 <div class="column">
                     <div class="card">
@@ -104,18 +104,18 @@
             </div>
 
             <div style="text-align:center; width:1000px; height:500px">
-                <img src="~/Resource/jvectormaps.png" width="1000" height="500" />
+                <img src="~/Resource/jvectormaps.png" width="1000"style="margin-top: 50px" />
             </div>
         </div>
 
 
         <div class="row">
 
-            <div class="column ChartBox">
+            <div class="column ChartBox grafico">
                 <div><canvas id="lineChart3" width="400" height="200"></canvas></div>
             </div>
 
-            <div class="column ChartBox ">
+            <div class="column ChartBox grafico">
                 <div><canvas id="lineChart4" width="400" height="200"></canvas></div>
             </div>
 
