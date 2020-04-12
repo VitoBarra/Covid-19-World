@@ -79,39 +79,66 @@ namespace Covid_19_GalileiGalileo.Models
     public class CovidList<T> : List<T> where T : CovidData
     {
 
-        public CovidList(T[] ItemList) : base(ItemList) { }
+        public CovidList(T[] ItemList) : base(ItemList) 
+        {
+            int i = 0;
+            while (i != this.Count-1)
+            {
+                if (this[i].Time.Day == this[i+1].Time.Day)
+                    this.RemoveAt(i + 1);
+                else
+                    i++;
+            }
+        }
 
-        public IList<double?> TotalCases()
+        public IList<double?> TotalCases(int DataRatio = 1)
         {
             List<double?> DoubleList = new List<double?>();
-            foreach (CovidData cd in this)
-            {
-                DoubleList.Add(int.Parse(cd.Cases.Total));
-            }
+
+            for (int i = 0; i < this.Count; i++)
+                if (i % DataRatio == 0)
+                    DoubleList.Add(int.Parse(this[i].Cases.Active));
+
             return DoubleList;
         }
 
 
-        public IList<double?> DiferenceCases()
+        public IList<double?> DiferenceIncrease(int DataRatio = 1)
         {
             List<double?> DoubleList = new List<double?>();
-            for (int i = 0; i < this.Count - 1; i++)
-            {
-                DoubleList.Add(int.Parse(this[i].Cases.New) - int.Parse(this[i+1].Cases.New));
-            }
+
+            for (int i = 1; i < this.Count - 1; i++)
+                if (i % DataRatio == 0)
+                    DoubleList.Add(int.Parse(this[i].Cases.New) - int.Parse(this[i + 1].Cases.New));
+
+            return DoubleList;
+        }
+
+        public IList<double?> DiferenceCases(int DataRatio = 1)
+        {
+            List<double?> DoubleList = new List<double?>();
+
+            for (int i = 1; i < this.Count - 1; i++)
+                if (i % DataRatio == 0)
+                    DoubleList.Add(int.Parse(this[i].Cases.New));
+
             return DoubleList;
         }
 
 
-        public IList<string> ListTime()
+
+        public IList<string> ListTime(int DataRatio = 1)
         {
             List<string> labelList = new List<string>();
-            foreach (CovidData cd in this)
-            {
-                labelList.Add(cd.Time.ToString());
-            }
+
+            for (int i = 0; i < this.Count; i++)
+                if (i % DataRatio == 0)
+                    labelList.Add(this[i].Time.Date.ToString("dd/MM/yyyy"));
+
             return labelList;
         }
+
+
 
 
     }
