@@ -9,6 +9,7 @@ using Covid_19_GalileiGalileo.Models;
 using Covid_19_GalileiGalileo.Services;
 using ChartJSCore.Models;
 using ChartJSCore.Helpers;
+using Covid_19_GalileiGalileo.Tool;
 
 namespace Covid_19_GalileiGalileo.Controllers
 {
@@ -29,12 +30,24 @@ namespace Covid_19_GalileiGalileo.Controllers
             CovidList<CovidData> wordHistory = new CovidList<CovidData>(RestServices.GetDataHistory().ToArray());
 
 
-         
-
-
-
-            ViewBag.chartTotalCases = CreateChart("casi positivi", wordHistory.TotalCases(), wordHistory.ListTime(), 41);
-            ViewBag.chartNewCases = CreateChart("nuovi casi giornalieri", wordHistory.DiferenceCases(), wordHistory.ListTime(), 79);
+            ViewBag.chartTotalCases = ChartTool.CreateChart(wordHistory.ListTime(),
+                new List<ChartData>() { new ChartData() 
+                {
+                    DatasetName = "casi positivi",
+                    Data = wordHistory.TotalCases()
+                }});
+            ViewBag.chartNewCases = ChartTool.CreateChart(wordHistory.ListTime().Skip(1).SkipLast(1).ToList(),
+                new List<ChartData>() { new ChartData()
+                {
+                    DatasetName = "nuovi casi giornalieri",
+                    Data = wordHistory.DiferenceCases(),
+                    ChartPalette = ChartPalette.blue
+                }, new ChartData()
+                {
+                    DatasetName = "diferenza di incremento",
+                    Data = wordHistory.DiferenceIncrease(),
+                    ChartPalette = ChartPalette.orange
+                }});
 
             if (wordHistory != null)
                 return View(wordHistory[0]);
@@ -43,74 +56,6 @@ namespace Covid_19_GalileiGalileo.Controllers
         }
 
  
-
-
-        public static Chart CreateChart(string DatasetName,IList<double?> DataList, IList<string> LabelList, int DataRatio)
-        {
-
-            Chart chart = new Chart()
-            {
-                Type = Enums.ChartType.Line
-            };
-
-            Data data = new Data()
-            {
-                Labels = new List<string>(),
-                Datasets = new List<Dataset>()
-                {
-                    new LineDataset()
-                    {
-                        Label = DatasetName,
-                        Data = new List<double?>(),
-                        Fill = "true",
-                        LineTension = 0.1,
-                        BackgroundColor = ChartColor.FromRgba(75, 192, 192, 0.4),
-                        BorderColor = ChartColor.FromRgb(75, 192, 192),
-                        BorderCapStyle = "butt",
-                        BorderDash = new List<int> { },
-                        BorderDashOffset = 0.0,
-                        BorderJoinStyle = "miter",
-                        PointBorderColor = new List<ChartColor> { ChartColor.FromRgb(75, 192, 192) },
-                        PointBackgroundColor = new List<ChartColor> { ChartColor.FromHexString("#ffffff") },
-                        PointBorderWidth = new List<int> { 1 },
-                        PointHoverRadius = new List<int> { 5 },
-                        PointHoverBackgroundColor = new List<ChartColor> { ChartColor.FromRgb(75, 192, 192) },
-                        PointHoverBorderColor = new List<ChartColor> { ChartColor.FromRgb(220, 220, 220) },
-                        PointHoverBorderWidth = new List<int> { 2 },
-                        PointRadius = new List<int> { 1 },
-                        PointHitRadius = new List<int> { 10 },
-                        SpanGaps = false
-                    }
-                }
-            };
-
-
-
-            for (int i = 0; i < DataList.Count; i++)
-            {
-                if (i % DataRatio == 0)
-                {
-                    data.Datasets[0].Data.Add(DataList[i]);
-
-                    //if (i % DataRatio == 0)
-                        data.Labels.Add(LabelList[i]);
-                    //else
-                    //    data.Labels.Add("");
-                }
-            }
-
-            data.Datasets[0].Data = data.Datasets[0].Data.Reverse().ToList();
-            data.Labels = data.Labels.Reverse().ToList();
-
-            chart.Data = data;
-
-
-            return chart;
-  
-
-        }
-
-
 
         public IActionResult Privacy()
         {
