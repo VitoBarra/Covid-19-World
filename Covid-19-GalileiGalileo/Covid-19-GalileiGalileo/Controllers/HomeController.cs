@@ -37,10 +37,11 @@ namespace Covid_19_GalileiGalileo.Controllers
                     Data = wordHistory.TotalCases()
                 }});
             ViewBag.chartNewCases = ChartTool.CreateChart(wordHistory.ListTime().Skip(1).SkipLast(1).ToList(),
-                new List<ChartData>() { new ChartData()
+                new List<ChartData>() { 
+                new ChartData()
                 {
                     DatasetName = "nuovi casi giornalieri",
-                    Data = wordHistory.DiferenceCases(),
+                    Data = wordHistory.NewCases(),
                     ChartPalette = ChartPalette.blue
                 }, new ChartData()
                 {

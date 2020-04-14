@@ -114,7 +114,7 @@ namespace Covid_19_GalileiGalileo.Models
             return DoubleList;
         }
 
-        public IList<double?> DiferenceCases(int DataRatio = 1)
+        public IList<double?> NewCases(int DataRatio = 1)
         {
             List<double?> DoubleList = new List<double?>();
 
@@ -124,8 +124,23 @@ namespace Covid_19_GalileiGalileo.Models
 
             return DoubleList;
         }
+        public IList<double?> fixeds(int DataRatio = 1)
+        {
+            List<double?> DoubleList = new List<double?>();
 
+            for (int i = 1; i < this.Count - 1; i++)
+                if (i % DataRatio == 0)
+                    DoubleList.Add(int.Parse(this[i].Cases.Active) - int.Parse(this[i + 1].Cases.Active) + 
+                        (int.Parse(this[i].Cases.Recovered)-int.Parse(this[i+1].Cases.Recovered)));
 
+            return DoubleList;
+        }
+
+        //tot = OGcasiAt +OGcasMort+OgCasRec
+
+        // casi attivi = casi attivi ieri + casi nuovi oggi -morti oggi - guariti oggi
+
+            //nuovi attivi oggi = casi nuovi-casi morti oggi -casi guariti
 
         public IList<string> ListTime(int DataRatio = 1)
         {
