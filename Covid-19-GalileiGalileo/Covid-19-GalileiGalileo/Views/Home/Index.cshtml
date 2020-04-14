@@ -47,9 +47,11 @@
             </div>
         </div>
     </div>
-    <div style="text-align:center; padding-top:20px">
-        <img src="~/Resource/jvectormaps.png" width="1000" height="500" />
-    </div>
+
+
+
+        <div id="vmap" style="width: 1000px; height: 800px; margin:auto"></div>
+
 
 
 
@@ -67,62 +69,11 @@
 
 
 
-    <div class="list-group-">
 
 
 
-        <div class="ChartBox world" style="height:800px" id="SelectCounty">
-            <div class="row">
-                <div class="column">
-                    <div class="card">
-                        <label>Attualmente positivi</label>
-                        <label>73.880</label>
-                    </div>
-                </div>
 
-                <div class="column">
-                    <div class="card">
-                        <label>Guariti</label>
-                        <label>13.030</label>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <label>Deceduti</label>
-                        <label>10.779</label>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <label>Totale positivi</label>
-                        <label>97.689</label>
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align:center; width:1000px; height:500px">
-                <img src="~/Resource/jvectormaps.png" width="1000" style="margin-top: 50px" />
-            </div>
-        </div>
-
-
-        <div class="row">
-
-            <div class="column ChartBox grafico">
-                <div><canvas id="lineChart3" width="400" height="200"></canvas></div>
-            </div>
-
-            <div class="column ChartBox grafico">
-                <div><canvas id="lineChart4" width="400" height="200"></canvas></div>
-            </div>
-
-        </div>
-
-
-
-    </div>
+    
 
 
 
@@ -130,10 +81,572 @@
     @section Scripts
         {
         <script>
-                @Html.Raw( ViewBag.chartTotalCases.CreateChartCode("lineChart1"));
-                @Html.Raw( ViewBag.chartNewCases.CreateChartCode("lineChart2"));
-                @Html.Raw( ViewBag.chartTotalCases.CreateChartCode("lineChart3"));
-                @Html.Raw( ViewBag.chartNewCases.CreateChartCode("lineChart4"));
+                @Html.Raw(ViewBag.chartTotalCases.CreateChartCode("lineChart1"));
+                @Html.Raw(ViewBag.chartNewCases.CreateChartCode("lineChart2"));
         </script>
-        }
+
+        <script>
+
+
+
+
+                var sample_data = {
+                "af": "@ViewBag.CountryValue["af"]",
+                "al": "@ViewBag.CountryValue["al"]",
+                "dz": "@ViewBag.CountryValue["dz"]",
+                "ao": "@ViewBag.CountryValue["ao"]",
+                "ag": "@ViewBag.CountryValue["ag"]",
+                "ar": "@ViewBag.CountryValue["ar"]",
+                "am": "@ViewBag.CountryValue["am"]",
+                "au": "@ViewBag.CountryValue["au"]",
+                "at": "@ViewBag.CountryValue["at"]",
+                "az": "@ViewBag.CountryValue["az"]",
+                "bs": "@ViewBag.CountryValue["bs"]",
+                @*"bh": "@ViewBag.CountryValue["bh"]",*@
+                "bd": "@ViewBag.CountryValue["bd"]",
+                "bb": "@ViewBag.CountryValue["bb"]",
+                "by": "@ViewBag.CountryValue["by"]",
+                "be": "@ViewBag.CountryValue["be"]",
+                "bz": "@ViewBag.CountryValue["bz"]",
+                "bj": "@ViewBag.CountryValue["bj"]",
+                 @*"bt": "@ViewBag.CountryValue["bt"]",*@
+                "bo": "@ViewBag.CountryValue["bo"]",
+                "ba": "@ViewBag.CountryValue["ba"]",
+                "bw": "@ViewBag.CountryValue["bw"]",
+                "br": "@ViewBag.CountryValue["br"]",
+                "bn": "@ViewBag.CountryValue["bn"]",
+                "bg": "@ViewBag.CountryValue["bg"]",
+                "bf": "@ViewBag.CountryValue["bf"]",
+                "bi": "@ViewBag.CountryValue["bi"]",
+                "kh": "@ViewBag.CountryValue["kh"]",
+                "cm": "@ViewBag.CountryValue["cm"]",
+                "ca": "@ViewBag.CountryValue["ca"]",
+                "cv": "@ViewBag.CountryValue["cv"]",
+                @*"cf": "@ViewBag.CountryValue["cf"]",*@
+                "td": "@ViewBag.CountryValue["td"]",
+                "cl": "@ViewBag.CountryValue["cl"]",
+                "cn": "@ViewBag.CountryValue["cn"]",
+                "co": "@ViewBag.CountryValue["co"]",
+                @*"km": "@ViewBag.CountryValue["km"]",*@
+                @*"cd": "@ViewBag.CountryValue["cd"]",*@
+                "cg": "@ViewBag.CountryValue["cg"]",
+                "cr": "@ViewBag.CountryValue["cr"]",
+                @*"ci": "@ViewBag.CountryValue["ci"]",*@
+                "hr": "@ViewBag.CountryValue["hr"]",
+                "cy": "@ViewBag.CountryValue["cy"]",
+                "cz": "@ViewBag.CountryValue["cz"]",
+                "dk": "@ViewBag.CountryValue["dk"]",
+                "dj": "@ViewBag.CountryValue["dj"]",
+                "dm": "@ViewBag.CountryValue["dm"]",
+                "do": "@ViewBag.CountryValue["do"]",
+                "ec": "@ViewBag.CountryValue["ec"]",
+                "eg": "@ViewBag.CountryValue["eg"]",
+                "sv": "@ViewBag.CountryValue["sv"]",
+                "gq": "@ViewBag.CountryValue["gq"]",
+                "er": "@ViewBag.CountryValue["er"]",
+                "ee": "@ViewBag.CountryValue["ee"]",
+                "et": "@ViewBag.CountryValue["et"]",
+                "fj": "@ViewBag.CountryValue["fj"]",
+                "fi": "@ViewBag.CountryValue["fi"]",
+                "fr": "@ViewBag.CountryValue["fr"]",
+                "ga": "@ViewBag.CountryValue["ga"]",
+                "gm": "@ViewBag.CountryValue["gm"]",
+                "ge": "@ViewBag.CountryValue["ge"]",
+                "de": "@ViewBag.CountryValue["de"]",
+                "gh": "@ViewBag.CountryValue["gh"]",
+                "gr": "@ViewBag.CountryValue["gr"]",
+                "gd": "@ViewBag.CountryValue["gd"]",
+                "gt": "@ViewBag.CountryValue["gt"]",
+                "gn": "@ViewBag.CountryValue["gn"]",
+                "gw": "@ViewBag.CountryValue["gw"]",
+                "gy": "@ViewBag.CountryValue["gy"]",
+                "ht": "@ViewBag.CountryValue["ht"]",
+                "hn": "@ViewBag.CountryValue["hn"]",
+                 @*"hk": "@ViewBag.CountryValue["hk"]",*@
+                "hu": "@ViewBag.CountryValue["hu"]",
+                "is": "@ViewBag.CountryValue["is"]",
+                "in": "@ViewBag.CountryValue["in"]",
+                "id": "@ViewBag.CountryValue["id"]",
+                "ir": "@ViewBag.CountryValue["ir"]",
+                "iq": "@ViewBag.CountryValue["iq"]",
+                "ie": "@ViewBag.CountryValue["ie"]",
+                "il": "@ViewBag.CountryValue["il"]",
+                "it": "@ViewBag.CountryValue["it"]",
+                "jm": "@ViewBag.CountryValue["jm"]",
+                "jp": "@ViewBag.CountryValue["jp"]",
+                "jo": "@ViewBag.CountryValue["jo"]",
+                "kz": "@ViewBag.CountryValue["kz"]",
+                "ke": "@ViewBag.CountryValue["ke"]",
+                 @*"ki": "@ViewBag.CountryValue["ki"]",*@
+                "kr": "@ViewBag.CountryValue["kr"]",
+                @*"undefined": "@ViewBag.CountryValue["undefined"]",*@
+                "kw": "@ViewBag.CountryValue["kw"]",
+                @*"kg": "@ViewBag.CountryValue["kg"]",*@
+               @* "la": "@ViewBag.CountryValue["la"]",*@
+                "lv": "@ViewBag.CountryValue["lv"]",
+                "lb": "@ViewBag.CountryValue["lb"]",
+              @*  "ls": "@ViewBag.CountryValue["ls"]",*@
+                "lr": "@ViewBag.CountryValue["lr"]",
+                "ly": "@ViewBag.CountryValue["ly"]",
+                "lt": "@ViewBag.CountryValue["lt"]",
+                @*"lu": "@ViewBag.CountryValue["lu"]",*@
+                "mk": "@ViewBag.CountryValue["mk"]",
+                "mg": "@ViewBag.CountryValue["mg"]",
+                "mw": "@ViewBag.CountryValue["mw"]",
+                "my": "@ViewBag.CountryValue["my"]",
+                "mv": "@ViewBag.CountryValue["mv"]",
+                "ml": "@ViewBag.CountryValue["ml"]",
+                "mt": "@ViewBag.CountryValue["mt"]",
+                "mr": "@ViewBag.CountryValue["mr"]",
+                "mu": "@ViewBag.CountryValue["mu"]",
+                "mx": "@ViewBag.CountryValue["mx"]",
+                "md": "@ViewBag.CountryValue["md"]",
+                "mn": "@ViewBag.CountryValue["mn"]",
+               @* "me": "@ViewBag.CountryValue["me"]",*@
+                "ma": "@ViewBag.CountryValue["ma"]",
+                "mz": "@ViewBag.CountryValue["mz"]",
+                "mm": "@ViewBag.CountryValue["mm"]",
+                "na": "@ViewBag.CountryValue["na"]",
+                "np": "@ViewBag.CountryValue["np"]",
+                "nl": "@ViewBag.CountryValue["nl"]",
+                "nz": "@ViewBag.CountryValue["nz"]",
+                "ni": "@ViewBag.CountryValue["ni"]",
+                "ne": "@ViewBag.CountryValue["ne"]",
+                "ng": "@ViewBag.CountryValue["ng"]",
+                "no": "@ViewBag.CountryValue["no"]",
+                "om": "@ViewBag.CountryValue["om"]",
+                "pk": "@ViewBag.CountryValue["pk"]",
+                "pa": "@ViewBag.CountryValue["pa"]",
+                "pg": "@ViewBag.CountryValue["pg"]",
+                "py": "@ViewBag.CountryValue["py"]",
+                "pe": "@ViewBag.CountryValue["pe"]",
+                "ph": "@ViewBag.CountryValue["ph"]",
+                "pl": "@ViewBag.CountryValue["pl"]",
+                "pt": "@ViewBag.CountryValue["pt"]",
+                "qa": "@ViewBag.CountryValue["qa"]",
+                "ro": "@ViewBag.CountryValue["ro"]",
+                "ru": "@ViewBag.CountryValue["ru"]",
+                "rw": "@ViewBag.CountryValue["rw"]",
+                @*"ws": "@ViewBag.CountryValue["ws"]",*@
+                "st": "@ViewBag.CountryValue["st"]",
+                "sa": "@ViewBag.CountryValue["sa"]",
+                "sn": "@ViewBag.CountryValue["sn"]",
+                "rs": "@ViewBag.CountryValue["rs"]",
+                "sc": "@ViewBag.CountryValue["sc"]",
+                "sl": "@ViewBag.CountryValue["sl"]",
+                @*"sg": "@ViewBag.CountryValue["sg"]",*@
+                "sk": "@ViewBag.CountryValue["sk"]",
+                "si": "@ViewBag.CountryValue["si"]",
+                @*"sb": "@ViewBag.CountryValue["sb"]",*@
+                "za": "@ViewBag.CountryValue["za"]",
+                "es": "@ViewBag.CountryValue["es"]",
+                "lk": "@ViewBag.CountryValue["lk"]",
+                "kn": "@ViewBag.CountryValue["kn"]",
+                "lc": "@ViewBag.CountryValue["lc"]",
+               @* "vc": "@ViewBag.CountryValue["vc"]",*@
+                "sd": "@ViewBag.CountryValue["sd"]",
+                "sr": "@ViewBag.CountryValue["sr"]",
+                @*"sz": "@ViewBag.CountryValue["sz"]",*@
+                "se": "@ViewBag.CountryValue["se"]",
+                "ch": "@ViewBag.CountryValue["ch"]",
+                "sy": "@ViewBag.CountryValue["sy"]",
+                "tw": "@ViewBag.CountryValue["tw"]",
+                @*"tj": "@ViewBag.CountryValue["tj"]",*@
+                "tz": "@ViewBag.CountryValue["tz"]",
+                "th": "@ViewBag.CountryValue["th"]",
+                "tl": "@ViewBag.CountryValue["tl"]",
+                "tg": "@ViewBag.CountryValue["tg"]",
+                @*"to": "@ViewBag.CountryValue["to"]",*@
+                "tt": "@ViewBag.CountryValue["tt"]",
+                "tn": "@ViewBag.CountryValue["tn"]",
+                "tr": "@ViewBag.CountryValue["tr"]",
+                @*"tm": "@ViewBag.CountryValue["tm"]",*@
+                "ug": "@ViewBag.CountryValue["ug"]",
+                "ua": "@ViewBag.CountryValue["ua"]",
+                "ae": "@ViewBag.CountryValue["ae"]",
+                "gb": "@ViewBag.CountryValue["gb"]",
+                "us": "@ViewBag.CountryValue["us"]",
+                "uy": "@ViewBag.CountryValue["uy"]",
+                "uz": "@ViewBag.CountryValue["uz"]",
+                @*"vu": "@ViewBag.CountryValue["vu"]",*@
+                "ve": "@ViewBag.CountryValue["ve"]",
+                "vn": "@ViewBag.CountryValue["vn"]",
+                "ye": "@ViewBag.CountryValue["ye"]",
+                "zm": "@ViewBag.CountryValue["zm"]",
+                "zw": "@ViewBag.CountryValue["zw"]"
+            };
+
+
+
+                jQuery(document).ready(function () {
+                    jQuery('#vmap').vectorMap({
+                    map: 'world_en',
+                    backgroundColor: 'rgb(0,0,0,0)',
+                    color: '#ffffff',
+                    hoverOpacity: 0.7,
+                    selectedColor: '#666666',
+                    enableZoom: true,
+                    showTooltip: true,
+                    scaleColors: ['#C8EEFF', '#910000'],
+                    values: sample_data,
+                    normalizeFunction: 'polynomial',
+                    onRegionClick: function (element, code, region) {
+                            var message = 'You clicked "'
+                                + region
+                                + '" which has the code: '
+                                + code.toUpperCase();
+
+
+                        if (code == "cn") 
+                        {
+
+                        }
+                        else if (code == "it")
+                        {   
+
+
+                        }
+                        else if (code == "es")
+                        {
+
+                        }
+                        else if (code == "us")
+                        {
+
+                        }
+                        else if (code == "de") {
+                        }
+                        else if (code == "ir") {
+                        }
+                        else if (code == "fr") {
+                        }
+                        else if (code == "kr") {
+                        }
+                        else if (code == "ch") {
+                        }
+                        else if (code == "gb") {
+                        }
+                        else if (code == "nl") {
+                        }
+                        else if (code == "at") {
+                        }
+                        else if (code == "be") {
+                        }
+                        else if (code == "no") {
+                        }
+                        else if (code == "se") {
+                        }
+                        else if (code == "ca") {
+                        }
+                        else if (code == "dk") {
+                        }
+                        else if (code == "pt") {
+                        }
+                        else if (code == "my") {
+                        }
+                        else if (code == "br") {
+                        }
+                        else if (code == "au") {
+                        }
+                        else if (code == "jp") {
+                        }
+                        else if (code == "cz") {
+                        }
+                        else if (code == "tr") {
+                        }
+                        else if (code == "il") {
+                        }
+                        else if (code == "ie") {
+                        }
+                        else if (code == "pk") {
+                        }
+                        else if (code == "cl") {
+                        }
+                        else if (code == "pl") {
+                        }
+                        else if (code == "ec") {
+                        }
+                        else if (code == "gr") {
+                        }
+                        else if (code == "fi") {
+                        }
+                        else if (code == "qa") {
+                        }
+                        else if (code == "is") {
+                        }
+                        else if (code == "id") {
+                        }
+                        else if (code == "th") {
+                        }
+                        else if (code == "sa") {
+                        }
+                        else if (code == "si") {
+                        }
+                        else if (code == "ro") {
+                        }
+                        else if (code == "in") {
+                        }
+                        else if (code == "pe") {
+                        }
+                        else if (code == "ph") {
+                        }
+                        else if (code == "ru") {
+                        }
+                        else if (code == "ee") {
+                        }
+                        else if (code == "eg") {
+                        }
+                        else if (code == "za") {
+                        }
+                        else if (code == "lb") {
+                        }
+                        else if (code == "iq") {
+                        }
+                        else if (code == "hr") {
+                        }
+                        else if (code == "mx") {
+                        }
+                        else if (code == "pa") {
+                        }
+                        else if (code == "co") {
+                        }
+                        else if (code == "sk") {
+                        }
+                        else if (code == "kw") {
+                        }
+                        else if (code == "rs") {
+                        }
+                        else if (code == "bg") {
+                        }
+                        else if (code == "am") {
+                        }
+                        else if (code == "ar") {
+                        }
+                        else if (code == "tw") {
+                        }
+                        else if (code == "ae") {
+                        }
+                        else if (code == "dz") {
+                        }
+                        else if (code == "lv") {
+                        }
+                        else if (code == "cr") {
+                        }
+                        else if (code == "do") {
+                        }
+                        else if (code == "uy") {
+                        }
+                        else if (code == "hu") {
+                        }
+                        else if (code == "jo") {
+                        }
+                        else if (code == "lt") {
+                        }
+                        else if (code == "ma") {
+                        }
+                        else if (code == "vn") {
+                        }
+                        else if (code == "ba") {
+                        }
+                        else if (code == "mk") {
+                        }
+                        else if (code == "cy") {
+                        }
+                        else if (code == "bn") {
+                        }
+                        else if (code == "md") {
+                        }
+                        else if (code == "lk") {
+                        }
+                        else if (code == "al") {
+                        }
+                        else if (code == "by") {
+                        }
+                        else if (code == "mt") {
+                        }
+                        else if (code == "ve") {
+                        }
+                        else if (code == "bf") {
+                        }
+                        else if (code == "tn") {
+                        }
+                        else if (code == "sn") {
+                        }
+                        else if (code == "kz") {
+                        }
+                        else if (code == "az") {
+                        }
+                        else if (code == "kh") {
+                        }
+                        else if (code == "nz") {
+                        }
+                        else if (code == "om") {
+                        }
+                        else if (code == "ge") {
+                        }
+                        else if (code == "tt") {
+                        }
+                        else if (code == "ua") {
+                        }
+                        else if (code == "uz") {
+                        }
+                        else if (code == "cm") {
+                        }
+                        else if (code == "bd") {
+                        }
+                        else if (code == "af") {
+                        }
+                        else if (code == "hn") {
+                        }
+                        else if (code == "ng") {
+                        }
+                        else if (code == "cu") {
+                        }
+                        else if (code == "gh") {
+                        }
+                        else if (code == "jm") {
+                        }
+                        else if (code == "bo") {
+                        }
+                        else if (code == "gy") {
+                        }
+                        else if (code == "py") {
+                        }
+                        else if (code == "gf") {
+                        }
+                        else if (code == "gt") {
+                        }
+                        else if (code == "rw") {
+                        }
+                        else if (code == "tg") {
+                        }
+                        else if (code == "pf") {
+                        }
+                        else if (code == "mu") {
+                        }
+                        else if (code == "bb") {
+                        }
+                        else if (code == "mv") {
+                        }
+                        else if (code == "mn") {
+                        }
+                        else if (code == "et") {
+                        }
+                        else if (code == "ke") {
+                        }
+                        else if (code == "sc") {
+                        }
+                        else if (code == "gq") {
+                        }
+                        else if (code == "tz") {
+                        }
+                        else if (code == "ga") {
+                        }
+                        else if (code == "sr") {
+                        }
+                        else if (code == "bs") {
+                        }
+                        else if (code == "nc") {
+                        }
+                        else if (code == "cv") {
+                        }
+                        else if (code == "cg") {
+                        }
+                        else if (code == "sv") {
+                        }
+                        else if (code == "lr") {
+                        }
+                        else if (code == "mg") {
+                        }
+                        else if (code == "na") {
+                        }
+                        else if (code == "zw") {
+                        }
+                        else if (code == "sd") {
+                        }
+                        else if (code == "ao") {
+                        }
+                        else if (code == "bj") {
+                        }
+                        else if (code == "fj") {
+                        }
+                        else if (code == "gl") {
+                        }
+                        else if (code == "gn") {
+                        }
+                        else if (code == "ht") {
+                        }
+                        else if (code == "mr") {
+                        }
+                        else if (code == "ni") {
+                        }
+                        else if (code == "lc") {
+                        }
+                        else if (code == "zm") {
+                        }
+                        else if (code == "np") {
+                        }
+                        else if (code == "ag") {
+                        }
+                        else if (code == "td") {
+                        }
+                        else if (code == "dj") {
+                        }
+                        else if (code == "er") {
+                        }
+                        else if (code == "gm") {
+                        }
+                        else if (code == "ne") {
+                        }
+                        else if (code == "pg") {
+                        }
+                        else if (code == "so") {
+                        }
+                        else if (code == "tl") {
+                        }
+                        else if (code == "ug") {
+                        }
+                        else if (code == "mz") {
+                        }
+                        else if (code == "sy") {
+                        }
+                        else if (code == "gd") {
+                        }
+                        else if (code == "dm") {
+                        }
+                        else if (code == "bz") {
+                        }
+                        else if (code == "ec") {
+                        }
+                        else if (code == "ly") {
+                        }
+                        else if (code == "ml") {
+                        }
+                        else if (code == "gw") {
+                        }
+                        else if (code == "kn") {
+                        }
+                        else if (code == "bw") {
+                        }
+                        else if (code == "sl") {
+                        }
+                        else if (code == "bi") {
+                        }
+                        else if (code == "mw") {
+                        }
+                        else if (code == "fk") {
+                        }
+                        else if (code == "st") {
+                        }
+                        else if (code == "ye") {
+                        }
+
+
+                            alert(message);
+                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            });
+                });
+        </script>
+
+    }
 </body>
