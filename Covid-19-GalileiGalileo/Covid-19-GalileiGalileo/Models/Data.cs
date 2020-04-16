@@ -9,7 +9,22 @@ using System.Threading.Tasks;
 namespace Covid_19_GalileiGalileo.Models
 {
 
+
     public class Responce
+    {
+        [JsonProperty("get")]
+        public string Get { get; set; }
+        [JsonProperty("parameters")]
+        public Parameters[] Parameters { get; set; }
+        [JsonProperty("errors")]
+        public string[] errors { get; set; }
+        [JsonProperty("results")]
+        public string Results { get; set; }
+        [JsonProperty("response")]
+        public List<CovidData> Response { get; set; } = new List<CovidData>();
+    }
+
+    public class ResponceHistory
     {
         [JsonProperty("get")]
         public string Get { get; set; }
@@ -79,15 +94,18 @@ namespace Covid_19_GalileiGalileo.Models
     public class CovidList<T> : List<T> where T : CovidData
     {
 
-        public CovidList(T[] ItemList) : base(ItemList) 
+        public CovidList(T[] ItemList, bool isHistory = false) : base(ItemList)
         {
-            int i = 0;
-            while (i != this.Count-1)
+            if (isHistory)
             {
-                if (this[i].Time.Day == this[i+1].Time.Day)
-                    this.RemoveAt(i + 1);
-                else
-                    i++;
+                int i = 0;
+                while (i != this.Count - 1)
+                {
+                    if (this[i].Time.Day == this[i + 1].Time.Day)
+                        this.RemoveAt(i + 1);
+                    else
+                        i++;
+                }
             }
         }
 

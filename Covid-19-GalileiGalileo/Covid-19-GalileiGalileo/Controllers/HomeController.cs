@@ -27,7 +27,7 @@ namespace Covid_19_GalileiGalileo.Controllers
         {
             RestServices.StartUpAPI();
 
-            CovidList<CovidData> wordHistory = new CovidList<CovidData>(RestServices.GetDataHistory().ToArray());
+            CovidList<CovidData> wordHistory = new CovidList<CovidData>(RestServices.GetDataHistory().ToArray(),true);
 
 
             ViewBag.chartTotalCases = ChartTool.CreateChart(wordHistory.ListTime(),
@@ -49,6 +49,15 @@ namespace Covid_19_GalileiGalileo.Controllers
                     Data = wordHistory.DiferenceIncrease(),
                     ChartPalette = ChartPalette.orange
                 }});
+
+            CovidList<CovidData> c = new CovidList<CovidData>(RestServices.GetStatByCountry().ToArray());
+            string s = "";
+            foreach (CovidData cd in c)
+            {
+                s += "{\"\",\""+cd.Country+"\"},\n";
+            }
+
+            Debug.WriteLine(s);
 
             if (wordHistory != null)
                 return View(wordHistory[0]);

@@ -38,6 +38,33 @@ namespace Covid_19_GalileiGalileo.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = response.Content.ReadAsStringAsync().Result;
+                    Data = JsonConvert.DeserializeObject<ResponceHistory>(content).Response;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("\tERROR {0}", ex.Message);
+            }
+
+            return Data;
+        }
+
+
+        public static IList<CovidData> GetStatByCountry(string? country = null)
+        {
+            IList<CovidData> Data = null;
+            string EndPoint;
+            if (string.IsNullOrEmpty(country))
+                EndPoint = $"https://covid-193.p.rapidapi.com/statistics";
+            else
+                EndPoint = $"https://covid-193.p.rapidapi.com/statistics?country={country}";
+
+            try
+            {
+                HttpResponseMessage response = client.GetAsync(EndPoint).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = response.Content.ReadAsStringAsync().Result;
                     Data = JsonConvert.DeserializeObject<Responce>(content).Response;
                 }
             }
@@ -49,6 +76,27 @@ namespace Covid_19_GalileiGalileo.Services
             return Data;
         }
 
+        public static IList<string> GetCountryList()
+        {
+            IList<string> Data = null;
+            string EndPoint = $"https://covid-193.p.rapidapi.com/countries";
+
+            try
+            {
+                HttpResponseMessage response = client.GetAsync(EndPoint).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = response.Content.ReadAsStringAsync().Result;
+                    Data = JsonConvert.DeserializeObject<List<string>>(content);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("\tERROR {0}", ex.Message);
+            }
+
+            return Data;
+        }
 
 
 

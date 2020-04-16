@@ -21,27 +21,6 @@ namespace Covid_19_GalileiGalileo.Tool
     public class ChartTool
     {
 
-        private static string _Fill = "true";
-        private static float _LineTension = 0.1f;
-        private static ChartColor _BackgroundColor = ChartColor.FromRgba(75, 192, 192, 0.4);
-        private static ChartColor _BorderColor = ChartColor.FromRgb(75, 192, 192);
-        private static string _BorderCapStyle = "butt";
-        private static IList<int> _BorderDash = new List<int> { };
-        private static float _BorderDashOffset = 0.0f;
-        private static string _BorderJoinStyle = "miter";
-        private static IList<ChartColor> _PointBorderColor = new List<ChartColor> { ChartColor.FromRgb(75, 192, 192) };
-        private static IList<ChartColor> _PointBackgroundColor = new List<ChartColor> { ChartColor.FromHexString("#ffffff") };
-        private static List<int> _PointBorderWidth = new List<int> { 1 };
-        private static List<int> _PointHoverRadius = new List<int> { 5 };
-        private static List<ChartColor> _PointHoverBackgroundColor = new List<ChartColor> { ChartColor.FromRgb(75, 192, 192) };
-        private static List<ChartColor> _PointHoverBorderColor = new List<ChartColor> { ChartColor.FromRgb(220, 220, 220) };
-        private static List<int> _PointHoverBorderWidth = new List<int> { 2 };
-        private static List<int> _PointRadius = new List<int> { 1 };
-        private static List<int> _PointHitRadius = new List<int> { 10 };
-        private static bool _SpanGaps = false;
-
-
-
         public static Chart CreateChart(IList<string> LabelList, IList<ChartData> chartDatas)
         {
 
