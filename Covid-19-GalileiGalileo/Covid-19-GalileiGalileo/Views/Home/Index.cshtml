@@ -69,62 +69,11 @@
 
 
 
-    <div class="list-group-">
 
 
 
-        <div class="ChartBox world" style="height:800px" id="SelectCounty">
-            <div class="row">
-                <div class="column">
-                    <div class="card">
-                        <label>Attualmente positivi</label>
-                        <label>73.880</label>
-                    </div>
-                </div>
 
-                <div class="column">
-                    <div class="card">
-                        <label>Guariti</label>
-                        <label>13.030</label>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <label>Deceduti</label>
-                        <label>10.779</label>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <label>Totale positivi</label>
-                        <label>97.689</label>
-                    </div>
-                </div>
-            </div>
-
-            <div style="text-align:center; width:1000px; height:500px">
-                <img src="~/Resource/jvectormaps.png" width="1000" style="margin-top: 50px" />
-            </div>
-        </div>
-
-
-        <div class="row">
-
-            <div class="column ChartBox grafico">
-                <div><canvas id="lineChart3" width="400" height="200"></canvas></div>
-            </div>
-
-            <div class="column ChartBox grafico">
-                <div><canvas id="lineChart4" width="400" height="200"></canvas></div>
-            </div>
-
-        </div>
-
-
-
-    </div>
+    
 
 
 
@@ -134,8 +83,6 @@
         <script>
                 @Html.Raw(ViewBag.chartTotalCases.CreateChartCode("lineChart1"));
                 @Html.Raw(ViewBag.chartNewCases.CreateChartCode("lineChart2"));
-                @Html.Raw(ViewBag.chartTotalCases.CreateChartCode("lineChart3"));
-                @Html.Raw(ViewBag.chartNewCases.CreateChartCode("lineChart4"));
         </script>
 
         <script>
@@ -334,17 +281,370 @@
                 jQuery(document).ready(function () {
                     jQuery('#vmap').vectorMap({
                     map: 'world_en',
-          backgroundColor: 'rgb(0,0,0,0)',
-          color: '#ffffff',
-          hoverOpacity: 0.7,
-          selectedColor: '#666666',
-          enableZoom: true,
-          showTooltip: true,
-          scaleColors: ['#C8EEFF', '#910000'],
-          values: sample_data,
-                        normalizeFunction: 'polynomial'
-              
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                });
+                    backgroundColor: 'rgb(0,0,0,0)',
+                    color: '#ffffff',
+                    hoverOpacity: 0.7,
+                    selectedColor: '#666666',
+                    enableZoom: true,
+                    showTooltip: true,
+                    scaleColors: ['#C8EEFF', '#910000'],
+                    values: sample_data,
+                    normalizeFunction: 'polynomial',
+                    onRegionClick: function (element, code, region) {
+                            var message = 'You clicked "'
+                                + region
+                                + '" which has the code: '
+                                + code.toUpperCase();
+
+
+                        if (code == "cn") 
+                        {
+
+                        }
+                        else if (code == "it")
+                        {   
+
+
+                        }
+                        else if (code == "es")
+                        {
+
+                        }
+                        else if (code == "us")
+                        {
+
+                        }
+                        else if (code == "de") {
+                        }
+                        else if (code == "ir") {
+                        }
+                        else if (code == "fr") {
+                        }
+                        else if (code == "kr") {
+                        }
+                        else if (code == "ch") {
+                        }
+                        else if (code == "gb") {
+                        }
+                        else if (code == "nl") {
+                        }
+                        else if (code == "at") {
+                        }
+                        else if (code == "be") {
+                        }
+                        else if (code == "no") {
+                        }
+                        else if (code == "se") {
+                        }
+                        else if (code == "ca") {
+                        }
+                        else if (code == "dk") {
+                        }
+                        else if (code == "pt") {
+                        }
+                        else if (code == "my") {
+                        }
+                        else if (code == "br") {
+                        }
+                        else if (code == "au") {
+                        }
+                        else if (code == "jp") {
+                        }
+                        else if (code == "cz") {
+                        }
+                        else if (code == "tr") {
+                        }
+                        else if (code == "il") {
+                        }
+                        else if (code == "ie") {
+                        }
+                        else if (code == "pk") {
+                        }
+                        else if (code == "cl") {
+                        }
+                        else if (code == "pl") {
+                        }
+                        else if (code == "ec") {
+                        }
+                        else if (code == "gr") {
+                        }
+                        else if (code == "fi") {
+                        }
+                        else if (code == "qa") {
+                        }
+                        else if (code == "is") {
+                        }
+                        else if (code == "id") {
+                        }
+                        else if (code == "th") {
+                        }
+                        else if (code == "sa") {
+                        }
+                        else if (code == "si") {
+                        }
+                        else if (code == "ro") {
+                        }
+                        else if (code == "in") {
+                        }
+                        else if (code == "pe") {
+                        }
+                        else if (code == "ph") {
+                        }
+                        else if (code == "ru") {
+                        }
+                        else if (code == "ee") {
+                        }
+                        else if (code == "eg") {
+                        }
+                        else if (code == "za") {
+                        }
+                        else if (code == "lb") {
+                        }
+                        else if (code == "iq") {
+                        }
+                        else if (code == "hr") {
+                        }
+                        else if (code == "mx") {
+                        }
+                        else if (code == "pa") {
+                        }
+                        else if (code == "co") {
+                        }
+                        else if (code == "sk") {
+                        }
+                        else if (code == "kw") {
+                        }
+                        else if (code == "rs") {
+                        }
+                        else if (code == "bg") {
+                        }
+                        else if (code == "am") {
+                        }
+                        else if (code == "ar") {
+                        }
+                        else if (code == "tw") {
+                        }
+                        else if (code == "ae") {
+                        }
+                        else if (code == "dz") {
+                        }
+                        else if (code == "lv") {
+                        }
+                        else if (code == "cr") {
+                        }
+                        else if (code == "do") {
+                        }
+                        else if (code == "uy") {
+                        }
+                        else if (code == "hu") {
+                        }
+                        else if (code == "jo") {
+                        }
+                        else if (code == "lt") {
+                        }
+                        else if (code == "ma") {
+                        }
+                        else if (code == "vn") {
+                        }
+                        else if (code == "ba") {
+                        }
+                        else if (code == "mk") {
+                        }
+                        else if (code == "cy") {
+                        }
+                        else if (code == "bn") {
+                        }
+                        else if (code == "md") {
+                        }
+                        else if (code == "lk") {
+                        }
+                        else if (code == "al") {
+                        }
+                        else if (code == "by") {
+                        }
+                        else if (code == "mt") {
+                        }
+                        else if (code == "ve") {
+                        }
+                        else if (code == "bf") {
+                        }
+                        else if (code == "tn") {
+                        }
+                        else if (code == "sn") {
+                        }
+                        else if (code == "kz") {
+                        }
+                        else if (code == "az") {
+                        }
+                        else if (code == "kh") {
+                        }
+                        else if (code == "nz") {
+                        }
+                        else if (code == "om") {
+                        }
+                        else if (code == "ge") {
+                        }
+                        else if (code == "tt") {
+                        }
+                        else if (code == "ua") {
+                        }
+                        else if (code == "uz") {
+                        }
+                        else if (code == "cm") {
+                        }
+                        else if (code == "bd") {
+                        }
+                        else if (code == "af") {
+                        }
+                        else if (code == "hn") {
+                        }
+                        else if (code == "ng") {
+                        }
+                        else if (code == "cu") {
+                        }
+                        else if (code == "gh") {
+                        }
+                        else if (code == "jm") {
+                        }
+                        else if (code == "bo") {
+                        }
+                        else if (code == "gy") {
+                        }
+                        else if (code == "py") {
+                        }
+                        else if (code == "gf") {
+                        }
+                        else if (code == "gt") {
+                        }
+                        else if (code == "rw") {
+                        }
+                        else if (code == "tg") {
+                        }
+                        else if (code == "pf") {
+                        }
+                        else if (code == "mu") {
+                        }
+                        else if (code == "bb") {
+                        }
+                        else if (code == "mv") {
+                        }
+                        else if (code == "mn") {
+                        }
+                        else if (code == "et") {
+                        }
+                        else if (code == "ke") {
+                        }
+                        else if (code == "sc") {
+                        }
+                        else if (code == "gq") {
+                        }
+                        else if (code == "tz") {
+                        }
+                        else if (code == "ga") {
+                        }
+                        else if (code == "sr") {
+                        }
+                        else if (code == "bs") {
+                        }
+                        else if (code == "nc") {
+                        }
+                        else if (code == "cv") {
+                        }
+                        else if (code == "cg") {
+                        }
+                        else if (code == "sv") {
+                        }
+                        else if (code == "lr") {
+                        }
+                        else if (code == "mg") {
+                        }
+                        else if (code == "na") {
+                        }
+                        else if (code == "zw") {
+                        }
+                        else if (code == "sd") {
+                        }
+                        else if (code == "ao") {
+                        }
+                        else if (code == "bj") {
+                        }
+                        else if (code == "fj") {
+                        }
+                        else if (code == "gl") {
+                        }
+                        else if (code == "gn") {
+                        }
+                        else if (code == "ht") {
+                        }
+                        else if (code == "mr") {
+                        }
+                        else if (code == "ni") {
+                        }
+                        else if (code == "lc") {
+                        }
+                        else if (code == "zm") {
+                        }
+                        else if (code == "np") {
+                        }
+                        else if (code == "ag") {
+                        }
+                        else if (code == "td") {
+                        }
+                        else if (code == "dj") {
+                        }
+                        else if (code == "er") {
+                        }
+                        else if (code == "gm") {
+                        }
+                        else if (code == "ne") {
+                        }
+                        else if (code == "pg") {
+                        }
+                        else if (code == "so") {
+                        }
+                        else if (code == "tl") {
+                        }
+                        else if (code == "ug") {
+                        }
+                        else if (code == "mz") {
+                        }
+                        else if (code == "sy") {
+                        }
+                        else if (code == "gd") {
+                        }
+                        else if (code == "dm") {
+                        }
+                        else if (code == "bz") {
+                        }
+                        else if (code == "ec") {
+                        }
+                        else if (code == "ly") {
+                        }
+                        else if (code == "ml") {
+                        }
+                        else if (code == "gw") {
+                        }
+                        else if (code == "kn") {
+                        }
+                        else if (code == "bw") {
+                        }
+                        else if (code == "sl") {
+                        }
+                        else if (code == "bi") {
+                        }
+                        else if (code == "mw") {
+                        }
+                        else if (code == "fk") {
+                        }
+                        else if (code == "st") {
+                        }
+                        else if (code == "ye") {
+                        }
+
+
+                            alert(message);
+                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            });
                 });
         </script>
 
