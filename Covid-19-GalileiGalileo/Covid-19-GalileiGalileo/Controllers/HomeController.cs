@@ -10,6 +10,7 @@ using Covid_19_GalileiGalileo.Services;
 using ChartJSCore.Models;
 using ChartJSCore.Helpers;
 using Covid_19_GalileiGalileo.Tool;
+using Newtonsoft.Json;
 
 namespace Covid_19_GalileiGalileo.Controllers
 {
@@ -25,31 +26,35 @@ namespace Covid_19_GalileiGalileo.Controllers
             _logger = logger;
         }
 
-
         public IActionResult Index()
         {
-            RestServices.StartUpAPI();
+            CovidList<CovidData> worldHistory;
+            try
+            {
+                RestServices.StartUpAPI();
+                worldHistory = new CovidList<CovidData>(RestServices.GetDataHistory().ToArray(), true);
+            } catch (Exception e)
+            {
+                return Error();
+            }
 
-            CovidList<CovidData> wordHistory = new CovidList<CovidData>(RestServices.GetDataHistory().ToArray(),true);
-
-
-            ViewBag.chartTotalCases = ChartTool.CreateChart(wordHistory.ListTime(),
+            ViewBag.chartTotalCases = ChartTool.CreateChart(worldHistory.ListTime(),
                 new List<ChartData>() { new ChartData() 
                 {
                     DatasetName = "casi positivi",
-                    Data = wordHistory.TotalCases()
+                    Data = worldHistory.TotalCases()
                 }});
-            ViewBag.chartNewCases = ChartTool.CreateChart(wordHistory.ListTime().Skip(1).SkipLast(1).ToList(),
+            ViewBag.chartNewCases = ChartTool.CreateChart(worldHistory.ListTime().Skip(1).SkipLast(1).ToList(),
                 new List<ChartData>() { 
                 new ChartData()
                 {
                     DatasetName = "nuovi casi giornalieri",
-                    Data = wordHistory.NewCases(),
+                    Data = worldHistory.NewCases(),
                     ChartPalette = ChartPalette.blue
                 }, new ChartData()
                 {
                     DatasetName = "diferenza di incremento",
-                    Data = wordHistory.DiferenceIncrease(),
+                    Data = worldHistory.DiferenceIncrease(),
                     ChartPalette = ChartPalette.orange
                 }});
 
@@ -734,13 +739,24 @@ namespace Covid_19_GalileiGalileo.Controllers
             ViewBag.CountryValue = pairs;
 
 
-            if (wordHistory != null)
-                return View(wordHistory[0]);
+            if (worldHistory != null)
+                return View(worldHistory[0]);
             else
                 return BadRequest();
         }
 
+
+
+        public IActionResult CovidStatistic(string Country = "all")
+        {
+            CovidList<CovidData> List = new CovidList<CovidData>(RestServices.GetDataHistory(Country).ToArray(), true);
+                IList<string> s = new List<string>();
+            foreach (double? d in List.TotalCases())
+                s.Add(d.ToString());
  
+            return new JsonResult(JsonConvert.SerializeObject(s));
+        }
+
 
         public IActionResult Privacy()
         {

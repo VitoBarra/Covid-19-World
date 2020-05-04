@@ -154,12 +154,6 @@ namespace Covid_19_GalileiGalileo.Models
             return DoubleList;
         }
 
-        //tot = OGcasiAt +OGcasMort+OgCasRec
-
-        // casi attivi = casi attivi ieri + casi nuovi oggi -morti oggi - guariti oggi
-
-            //nuovi attivi oggi = casi nuovi-casi morti oggi -casi guariti
-
         public IList<string> ListTime(int DataRatio = 1)
         {
             List<string> labelList = new List<string>();
