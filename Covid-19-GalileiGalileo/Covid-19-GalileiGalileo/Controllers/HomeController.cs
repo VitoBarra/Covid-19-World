@@ -75,678 +75,681 @@ namespace Covid_19_GalileiGalileo.Controllers
 
 
 
-            foreach (CovidData cd in new CovidList<CovidData>(RestServices.GetStatByCountry().ToArray()))
+            foreach (CovidData CovidD in new CovidList<CovidData>(RestServices.GetStatByCountry().ToArray()))
             {
-                if (cd.Country.Equals("China"))
+                if (CovidD.Country.Equals("China"))
                 {
-                    pairs.Add("cn", int.Parse(cd.Cases.Active));
+                    pairs.Add("cn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Italy"))
+                else if (CovidD.Country.Equals("Italy"))
                 {
-                    pairs.Add("it", int.Parse(cd.Cases.Active));
+                    pairs.Add("it", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Spain"))
+                else if (CovidD.Country.Equals("Spain"))
                 {
-                    pairs.Add("es", int.Parse(cd.Cases.Active));
+                    pairs.Add("es", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("USA"))
+                else if (CovidD.Country.Equals("USA"))
                 {
-                    pairs.Add("us", int.Parse(cd.Cases.Active));
+                    pairs.Add("us", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Germany"))
+                else if (CovidD.Country.Equals("Germany"))
                 {
-                    pairs.Add("de", int.Parse(cd.Cases.Active));
+                    pairs.Add("de", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Iran"))
+                else if (CovidD.Country.Equals("Iran"))
                 {
-                    pairs.Add("ir", int.Parse(cd.Cases.Active));
+                    pairs.Add("ir", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("France"))
+                else if (CovidD.Country.Equals("France"))
                 {
-                    pairs.Add("fr", int.Parse(cd.Cases.Active));
+                    pairs.Add("fr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("S-Korea"))
+                else if (CovidD.Country.Equals("S-Korea"))
                 {
-                    pairs.Add("kr", int.Parse(cd.Cases.Active));
+                    pairs.Add("kr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Switzerland"))
+                else if (CovidD.Country.Equals("Switzerland"))
                 {
-                    pairs.Add("ch", int.Parse(cd.Cases.Active));
+                    pairs.Add("ch", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("UK"))
+                else if (CovidD.Country.Equals("UK"))
                 {
-                    pairs.Add("gb", int.Parse(cd.Cases.Active));
+                    pairs.Add("gb", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Netherlands"))
+                else if (CovidD.Country.Equals("Netherlands"))
                 {
-                    pairs.Add("nl", int.Parse(cd.Cases.Active));
+                    pairs.Add("nl", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Austria"))
+                else if (CovidD.Country.Equals("Austria"))
                 {
-                    pairs.Add("at", int.Parse(cd.Cases.Active));
+                    pairs.Add("at", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Belgium"))
+                else if (CovidD.Country.Equals("Belgium"))
                 {
-                    pairs.Add("be", int.Parse(cd.Cases.Active));
+                    pairs.Add("be", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Norway"))
+                else if (CovidD.Country.Equals("Norway"))
                 {
-                    pairs.Add("no", int.Parse(cd.Cases.Active));
+                    pairs.Add("no", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Sweden"))
+                else if (CovidD.Country.Equals("Sweden"))
                 {
-                    pairs.Add("se", int.Parse(cd.Cases.Active));
+                    pairs.Add("se", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Canada"))
+                else if (CovidD.Country.Equals("Canada"))
                 {
-                    pairs.Add("ca", int.Parse(cd.Cases.Active));
+                    pairs.Add("ca", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Denmark"))
+                else if (CovidD.Country.Equals("Denmark"))
                 {
-                    pairs.Add("dk", int.Parse(cd.Cases.Active));
+                    pairs.Add("dk", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Portugal"))
+                else if (CovidD.Country.Equals("Portugal"))
                 {
-                    pairs.Add("pt", int.Parse(cd.Cases.Active));
+                    pairs.Add("pt", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Malaysia"))
+                else if (CovidD.Country.Equals("Malaysia"))
                 {
-                    pairs.Add("my", int.Parse(cd.Cases.Active));
+                    pairs.Add("my", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Brazil"))
+                else if (CovidD.Country.Equals("Brazil"))
                 {
-                    pairs.Add("br", int.Parse(cd.Cases.Active));
+                    pairs.Add("br", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Australia"))
+                else if (CovidD.Country.Equals("Australia"))
                 {
-                    pairs.Add("au", int.Parse(cd.Cases.Active));
+                    pairs.Add("au", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Japan"))
+                else if (CovidD.Country.Equals("Japan"))
                 {
-                    pairs.Add("jp", int.Parse(cd.Cases.Active));
+                    pairs.Add("jp", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Czechia"))
+                else if (CovidD.Country.Equals("Czechia"))
                 {
-                    pairs.Add("cz", int.Parse(cd.Cases.Active));
+                    pairs.Add("cz", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Turkey"))
+                else if (CovidD.Country.Equals("Turkey"))
                 {
-                    pairs.Add("tr", int.Parse(cd.Cases.Active));
+                    pairs.Add("tr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Israel"))
+                else if (CovidD.Country.Equals("Israel"))
                 {
-                    pairs.Add("il", int.Parse(cd.Cases.Active));
+                    pairs.Add("il", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Ireland"))
+                else if (CovidD.Country.Equals("Ireland"))
                 {
-                    pairs.Add("ie", int.Parse(cd.Cases.Active));
+                    pairs.Add("ie", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Pakistan"))
+                else if (CovidD.Country.Equals("Pakistan"))
                 {
-                    pairs.Add("pk", int.Parse(cd.Cases.Active));
+                    pairs.Add("pk", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Chile"))
+                else if (CovidD.Country.Equals("Chile"))
                 {
-                    pairs.Add("cl", int.Parse(cd.Cases.Active));
+                    pairs.Add("cl", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Poland"))
+                else if (CovidD.Country.Equals("Poland"))
                 {
-                    pairs.Add("pl", int.Parse(cd.Cases.Active));
+                    pairs.Add("pl", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Ecuador"))
+                else if (CovidD.Country.Equals("Ecuador"))
                 {
-                    pairs.Add("ec", int.Parse(cd.Cases.Active));
+                    pairs.Add("ec", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Greece"))
+                else if (CovidD.Country.Equals("Greece"))
                 {
-                    pairs.Add("gr", int.Parse(cd.Cases.Active));
+                    pairs.Add("gr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Finland"))
+                else if (CovidD.Country.Equals("Finland"))
                 {
-                    pairs.Add("fi", int.Parse(cd.Cases.Active));
+                    pairs.Add("fi", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Qatar"))
+                else if (CovidD.Country.Equals("Qatar"))
                 {
-                    pairs.Add("qa", int.Parse(cd.Cases.Active));
+                    pairs.Add("qa", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Iceland"))
+                else if (CovidD.Country.Equals("Iceland"))
                 {
-                    pairs.Add("is", int.Parse(cd.Cases.Active));
+                    pairs.Add("is", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Indonesia"))
+                else if (CovidD.Country.Equals("Indonesia"))
                 {
-                    pairs.Add("id", int.Parse(cd.Cases.Active));
+                    pairs.Add("id", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Thailand"))
+                else if (CovidD.Country.Equals("Thailand"))
                 {
-                    pairs.Add("th", int.Parse(cd.Cases.Active));
+                    pairs.Add("th", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Saudi-Arabia"))
+                else if (CovidD.Country.Equals("Saudi-Arabia"))
                 {
-                    pairs.Add("sa", int.Parse(cd.Cases.Active));
+                    pairs.Add("sa", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Slovenia"))
+                else if (CovidD.Country.Equals("Slovenia"))
                 {
-                    pairs.Add("si", int.Parse(cd.Cases.Active));
+                    pairs.Add("si", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Romania"))
+                else if (CovidD.Country.Equals("Romania"))
                 {
-                    pairs.Add("ro", int.Parse(cd.Cases.Active));
+                    pairs.Add("ro", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("India"))
+                else if (CovidD.Country.Equals("India"))
                 {
-                    pairs.Add("in", int.Parse(cd.Cases.Active));
+                    pairs.Add("in", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Peru"))
+                else if (CovidD.Country.Equals("Peru"))
                 {
-                    pairs.Add("pe", int.Parse(cd.Cases.Active));
+                    pairs.Add("pe", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Philippines"))
+                else if (CovidD.Country.Equals("Philippines"))
                 {
-                    pairs.Add("ph", int.Parse(cd.Cases.Active));
+                    pairs.Add("ph", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Russia"))
+                else if (CovidD.Country.Equals("Russia"))
                 {
-                    pairs.Add("ru", int.Parse(cd.Cases.Active));
+                    pairs.Add("ru", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Estonia"))
+                else if (CovidD.Country.Equals("Estonia"))
                 {
-                    pairs.Add("ee", int.Parse(cd.Cases.Active));
+                    pairs.Add("ee", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Egypt"))
+                else if (CovidD.Country.Equals("Egypt"))
                 {
-                    pairs.Add("eg", int.Parse(cd.Cases.Active));
+                    pairs.Add("eg", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("South-Africa"))
+                else if (CovidD.Country.Equals("South-Africa"))
                 {
-                    pairs.Add("za", int.Parse(cd.Cases.Active));
+                    pairs.Add("za", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Lebanon"))
+                else if (CovidD.Country.Equals("Lebanon"))
                 {
-                    pairs.Add("lb", int.Parse(cd.Cases.Active));
+                    pairs.Add("lb", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Iraq"))
+                else if (CovidD.Country.Equals("Iraq"))
                 {
-                    pairs.Add("iq", int.Parse(cd.Cases.Active));
+                    pairs.Add("iq", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Croatia"))
+                else if (CovidD.Country.Equals("Croatia"))
                 {
-                    pairs.Add("hr", int.Parse(cd.Cases.Active));
+                    pairs.Add("hr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Mexico"))
+                else if (CovidD.Country.Equals("Mexico"))
                 {
-                    pairs.Add("mx", int.Parse(cd.Cases.Active));
+                    pairs.Add("mx", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Panama"))
+                else if (CovidD.Country.Equals("Panama"))
                 {
-                    pairs.Add("pa", int.Parse(cd.Cases.Active));
+                    pairs.Add("pa", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Colombia"))
+                else if (CovidD.Country.Equals("Colombia"))
                 {
-                    pairs.Add("co", int.Parse(cd.Cases.Active));
+                    pairs.Add("co", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Slovakia"))
+                else if (CovidD.Country.Equals("DRC"))
                 {
-                    pairs.Add("sk", int.Parse(cd.Cases.Active));
+                    pairs.Add("cd", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Kuwait"))
+                else if (CovidD.Country.Equals("Slovakia"))
                 {
-                    pairs.Add("kw", int.Parse(cd.Cases.Active));
+                    pairs.Add("sk", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Serbia"))
+                else if (CovidD.Country.Equals("Kuwait"))
                 {
-                    pairs.Add("rs", int.Parse(cd.Cases.Active));
+                    pairs.Add("kw", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Bulgaria"))
+                else if (CovidD.Country.Equals("Serbia"))
                 {
-                    pairs.Add("bg", int.Parse(cd.Cases.Active));
+                    pairs.Add("rs", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Armenia"))
+                else if (CovidD.Country.Equals("Bulgaria"))
                 {
-                    pairs.Add("am", int.Parse(cd.Cases.Active));
+                    pairs.Add("bg", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Argentina"))
+                else if (CovidD.Country.Equals("Armenia"))
                 {
-                    pairs.Add("ar", int.Parse(cd.Cases.Active));
+                    pairs.Add("am", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Taiwan"))
+                else if (CovidD.Country.Equals("Argentina"))
                 {
-                    pairs.Add("tw", int.Parse(cd.Cases.Active));
+                    pairs.Add("ar", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("UAE"))
+                else if (CovidD.Country.Equals("Taiwan"))
                 {
-                    pairs.Add("ae", int.Parse(cd.Cases.Active));
+                    pairs.Add("tw", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Algeria"))
+                else if (CovidD.Country.Equals("UAE"))
                 {
-                    pairs.Add("dz", int.Parse(cd.Cases.Active));
+                    pairs.Add("ae", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Latvia"))
+                else if (CovidD.Country.Equals("Algeria"))
                 {
-                    pairs.Add("lv", int.Parse(cd.Cases.Active));
+                    pairs.Add("dz", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Costa-Rica"))
+                else if (CovidD.Country.Equals("Latvia"))
                 {
-                    pairs.Add("cr", int.Parse(cd.Cases.Active));
+                    pairs.Add("lv", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Dominican-Republic"))
+                else if (CovidD.Country.Equals("Costa-Rica"))
                 {
-                    pairs.Add("do", int.Parse(cd.Cases.Active));
+                    pairs.Add("cr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Uruguay"))
+                else if (CovidD.Country.Equals("Dominican-Republic"))
                 {
-                    pairs.Add("uy", int.Parse(cd.Cases.Active));
+                    pairs.Add("do", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Hungary"))
+                else if (CovidD.Country.Equals("Uruguay"))
                 {
-                    pairs.Add("hu", int.Parse(cd.Cases.Active));
+                    pairs.Add("uy", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Jordan"))
+                else if (CovidD.Country.Equals("Hungary"))
                 {
-                    pairs.Add("jo", int.Parse(cd.Cases.Active));
+                    pairs.Add("hu", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Lithuania"))
+                else if (CovidD.Country.Equals("Jordan"))
                 {
-                    pairs.Add("lt", int.Parse(cd.Cases.Active));
+                    pairs.Add("jo", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Morocco"))
+                else if (CovidD.Country.Equals("Lithuania"))
                 {
-                    pairs.Add("ma", int.Parse(cd.Cases.Active));
+                    pairs.Add("lt", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Vietnam"))
+                else if (CovidD.Country.Equals("Morocco"))
                 {
-                    pairs.Add("vn", int.Parse(cd.Cases.Active));
+                    pairs.Add("ma", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Bosnia-and-Herzegovina"))
+                else if (CovidD.Country.Equals("Vietnam"))
                 {
-                    pairs.Add("ba", int.Parse(cd.Cases.Active));
+                    pairs.Add("vn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("North-Macedonia"))
+                else if (CovidD.Country.Equals("Bosnia-and-Herzegovina"))
                 {
-                    pairs.Add("mk", int.Parse(cd.Cases.Active));
+                    pairs.Add("ba", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Cyprus"))
+                else if (CovidD.Country.Equals("North-Macedonia"))
                 {
-                    pairs.Add("cy", int.Parse(cd.Cases.Active));
+                    pairs.Add("mk", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Brunei"))
+                else if (CovidD.Country.Equals("Cyprus"))
                 {
-                    pairs.Add("bn", int.Parse(cd.Cases.Active));
+                    pairs.Add("cy", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Moldova"))
+                else if (CovidD.Country.Equals("Brunei"))
                 {
-                    pairs.Add("md", int.Parse(cd.Cases.Active));
+                    pairs.Add("bn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Sri-Lanka"))
+                else if (CovidD.Country.Equals("Moldova"))
                 {
-                    pairs.Add("lk", int.Parse(cd.Cases.Active));
+                    pairs.Add("md", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Albania"))
+                else if (CovidD.Country.Equals("Sri-Lanka"))
                 {
-                    pairs.Add("al", int.Parse(cd.Cases.Active));
+                    pairs.Add("lk", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Belarus"))
+                else if (CovidD.Country.Equals("Albania"))
                 {
-                    pairs.Add("by", int.Parse(cd.Cases.Active));
+                    pairs.Add("al", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Malta"))
+                else if (CovidD.Country.Equals("Belarus"))
                 {
-                    pairs.Add("mt", int.Parse(cd.Cases.Active));
+                    pairs.Add("by", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Venezuela"))
+                else if (CovidD.Country.Equals("Malta"))
                 {
-                    pairs.Add("ve", int.Parse(cd.Cases.Active));
+                    pairs.Add("mt", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Burkina-Faso"))
+                else if (CovidD.Country.Equals("Venezuela"))
                 {
-                    pairs.Add("bf", int.Parse(cd.Cases.Active));
+                    pairs.Add("ve", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Tunisia"))
+                else if (CovidD.Country.Equals("Burkina-Faso"))
                 {
-                    pairs.Add("tn", int.Parse(cd.Cases.Active));
+                    pairs.Add("bf", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Senegal"))
+                else if (CovidD.Country.Equals("Tunisia"))
                 {
-                    pairs.Add("sn", int.Parse(cd.Cases.Active));
+                    pairs.Add("tn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Kazakhstan"))
+                else if (CovidD.Country.Equals("Senegal"))
                 {
-                    pairs.Add("kz", int.Parse(cd.Cases.Active));
+                    pairs.Add("sn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Azerbaijan"))
+                else if (CovidD.Country.Equals("Kazakhstan"))
                 {
-                    pairs.Add("az", int.Parse(cd.Cases.Active));
+                    pairs.Add("kz", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Cambodia"))
+                else if (CovidD.Country.Equals("Azerbaijan"))
                 {
-                    pairs.Add("kh", int.Parse(cd.Cases.Active));
+                    pairs.Add("az", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("New-Zealand"))
+                else if (CovidD.Country.Equals("Cambodia"))
                 {
-                    pairs.Add("nz", int.Parse(cd.Cases.Active));
+                    pairs.Add("kh", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Oman"))
+                else if (CovidD.Country.Equals("New-Zealand"))
                 {
-                    pairs.Add("om", int.Parse(cd.Cases.Active));
+                    pairs.Add("nz", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Georgia"))
+                else if (CovidD.Country.Equals("Oman"))
                 {
-                    pairs.Add("ge", int.Parse(cd.Cases.Active));
+                    pairs.Add("om", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Trinidad-and-Tobago"))
+                else if (CovidD.Country.Equals("Georgia"))
                 {
-                    pairs.Add("tt", int.Parse(cd.Cases.Active));
+                    pairs.Add("ge", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Ukraine"))
+                else if (CovidD.Country.Equals("Trinidad-and-Tobago"))
                 {
-                    pairs.Add("ua", int.Parse(cd.Cases.Active));
+                    pairs.Add("tt", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Uzbekistan"))
+                else if (CovidD.Country.Equals("Ukraine"))
                 {
-                    pairs.Add("uz", int.Parse(cd.Cases.Active));
+                    pairs.Add("ua", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Cameroon"))
+                else if (CovidD.Country.Equals("Uzbekistan"))
                 {
-                    pairs.Add("cm", int.Parse(cd.Cases.Active));
+                    pairs.Add("uz", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Bangladesh"))
+                else if (CovidD.Country.Equals("Cameroon"))
                 {
-                    pairs.Add("bd", int.Parse(cd.Cases.Active));
+                    pairs.Add("cm", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Afghanistan"))
+                else if (CovidD.Country.Equals("Bangladesh"))
                 {
-                    pairs.Add("af", int.Parse(cd.Cases.Active));
+                    pairs.Add("bd", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Honduras"))
+                else if (CovidD.Country.Equals("Afghanistan"))
                 {
-                    pairs.Add("hn", int.Parse(cd.Cases.Active));
+                    pairs.Add("af", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Nigeria"))
+                else if (CovidD.Country.Equals("Honduras"))
                 {
-                    pairs.Add("ng", int.Parse(cd.Cases.Active));
+                    pairs.Add("hn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Cuba"))
+                else if (CovidD.Country.Equals("Nigeria"))
                 {
-                    pairs.Add("cu", int.Parse(cd.Cases.Active));
+                    pairs.Add("ng", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Ghana"))
+                else if (CovidD.Country.Equals("Cuba"))
                 {
-                    pairs.Add("gh", int.Parse(cd.Cases.Active));
+                    pairs.Add("cu", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Jamaica"))
+                else if (CovidD.Country.Equals("Ghana"))
                 {
-                    pairs.Add("jm", int.Parse(cd.Cases.Active));
+                    pairs.Add("gh", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Bolivia"))
+                else if (CovidD.Country.Equals("Jamaica"))
                 {
-                    pairs.Add("bo", int.Parse(cd.Cases.Active));
+                    pairs.Add("jm", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Guyana"))
+                else if (CovidD.Country.Equals("Bolivia"))
                 {
-                    pairs.Add("gy", int.Parse(cd.Cases.Active));
+                    pairs.Add("bo", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Paraguay"))
+                else if (CovidD.Country.Equals("Guyana"))
                 {
-                    pairs.Add("py", int.Parse(cd.Cases.Active));
+                    pairs.Add("gy", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("French-Guiana"))
+                else if (CovidD.Country.Equals("Paraguay"))
                 {
-                    pairs.Add("gf", int.Parse(cd.Cases.Active));
+                    pairs.Add("py", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Guatemala"))
+                else if (CovidD.Country.Equals("French-Guiana"))
                 {
-                    pairs.Add("gt", int.Parse(cd.Cases.Active));
+                    pairs.Add("gf", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Rwanda"))
+                else if (CovidD.Country.Equals("Guatemala"))
                 {
-                    pairs.Add("rw", int.Parse(cd.Cases.Active));
+                    pairs.Add("gt", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Togo"))
+                else if (CovidD.Country.Equals("Rwanda"))
                 {
-                    pairs.Add("tg", int.Parse(cd.Cases.Active));
+                    pairs.Add("rw", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("French-Polynesia"))
+                else if (CovidD.Country.Equals("Togo"))
                 {
-                    pairs.Add("pf", int.Parse(cd.Cases.Active));
+                    pairs.Add("tg", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Mauritius"))
+                else if (CovidD.Country.Equals("French-Polynesia"))
                 {
-                    pairs.Add("mu", int.Parse(cd.Cases.Active));
+                    pairs.Add("pf", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Barbados"))
+                else if (CovidD.Country.Equals("Mauritius"))
                 {
-                    pairs.Add("bb", int.Parse(cd.Cases.Active));
+                    pairs.Add("mu", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Barbados"))
+                {
+                    pairs.Add("bb", int.Parse(CovidD.Cases.Active));
                 }  
-                else if (cd.Country.Equals("Maldives"))
+                else if (CovidD.Country.Equals("Maldives"))
                 {
-                    pairs.Add("mv", int.Parse(cd.Cases.Active));
+                    pairs.Add("mv", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Mongolia"))
+                else if (CovidD.Country.Equals("Mongolia"))
                 {
-                    pairs.Add("mn", int.Parse(cd.Cases.Active));
+                    pairs.Add("mn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Ethiopia"))
+                else if (CovidD.Country.Equals("Ethiopia"))
                 {
-                    pairs.Add("et", int.Parse(cd.Cases.Active));
+                    pairs.Add("et", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Kenya"))
+                else if (CovidD.Country.Equals("Kenya"))
                 {
-                    pairs.Add("ke", int.Parse(cd.Cases.Active));
+                    pairs.Add("ke", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Seychelles"))
+                else if (CovidD.Country.Equals("Seychelles"))
                 {
-                    pairs.Add("sc", int.Parse(cd.Cases.Active));
+                    pairs.Add("sc", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Equatorial-Guinea"))
+                else if (CovidD.Country.Equals("Equatorial-Guinea"))
                 {
-                    pairs.Add("gq", int.Parse(cd.Cases.Active));
+                    pairs.Add("gq", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Tanzania"))
+                else if (CovidD.Country.Equals("Tanzania"))
                 {
-                    pairs.Add("tz", int.Parse(cd.Cases.Active));
+                    pairs.Add("tz", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Gabon"))
+                else if (CovidD.Country.Equals("Gabon"))
                 {
-                    pairs.Add("ga", int.Parse(cd.Cases.Active));
+                    pairs.Add("ga", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Suriname"))
+                else if (CovidD.Country.Equals("Suriname"))
                 {
-                    pairs.Add("sr", int.Parse(cd.Cases.Active));
+                    pairs.Add("sr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Bahamas"))
+                else if (CovidD.Country.Equals("Bahamas"))
                 {
-                    pairs.Add("bs", int.Parse(cd.Cases.Active));
+                    pairs.Add("bs", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("New-Caledonia"))
+                else if (CovidD.Country.Equals("New-Caledonia"))
                 {
-                    pairs.Add("nc", int.Parse(cd.Cases.Active));
+                    pairs.Add("nc", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Cabo-Verde"))
+                else if (CovidD.Country.Equals("Cabo-Verde"))
                 {
-                    pairs.Add("cv", int.Parse(cd.Cases.Active));
-                }
-
-                else if (cd.Country.Equals("Congo"))
-                {
-                    pairs.Add("cg", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("El-Salvador"))
-                {
-                    pairs.Add("sv", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Liberia"))
-                {
-                    pairs.Add("lr", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Madagascar"))
-                {
-                    pairs.Add("mg", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Namibia"))
-                {
-                    pairs.Add("na", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Zimbabwe"))
-                {
-                    pairs.Add("zw", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Sudan"))
-                {
-                    pairs.Add("sd", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Angola"))
-                {
-                    pairs.Add("ao", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Benin"))
-                {
-                    pairs.Add("bj", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Fiji"))
-                {
-                    pairs.Add("fj", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Greenland"))
-                {
-                    pairs.Add("gl", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Guinea"))
-                {
-                    pairs.Add("gn", int.Parse(cd.Cases.Active));
-                }
-                else if (cd.Country.Equals("Haiti"))
-                {
-                    pairs.Add("ht", int.Parse(cd.Cases.Active));
+                    pairs.Add("cv", int.Parse(CovidD.Cases.Active));
                 }
 
-                else if (cd.Country.Equals("Mauritania"))
+                else if (CovidD.Country.Equals("Congo"))
                 {
-                    pairs.Add("mr", int.Parse(cd.Cases.Active));
+                    pairs.Add("cg", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Nicaragua"))
+                else if (CovidD.Country.Equals("El-Salvador"))
                 {
-                    pairs.Add("ni", int.Parse(cd.Cases.Active));
+                    pairs.Add("sv", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Saint-Lucia"))
+                else if (CovidD.Country.Equals("Liberia"))
                 {
-                    pairs.Add("lc", int.Parse(cd.Cases.Active));
+                    pairs.Add("lr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Zambia"))
+                else if (CovidD.Country.Equals("Madagascar"))
                 {
-                    pairs.Add("zm", int.Parse(cd.Cases.Active));
+                    pairs.Add("mg", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Nepal"))
+                else if (CovidD.Country.Equals("Namibia"))
                 {
-                    pairs.Add("np", int.Parse(cd.Cases.Active));
+                    pairs.Add("na", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Antigua-and-Barbuda"))
+                else if (CovidD.Country.Equals("Zimbabwe"))
                 {
-                    pairs.Add("ag", int.Parse(cd.Cases.Active));
+                    pairs.Add("zw", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Chad"))
+                else if (CovidD.Country.Equals("Sudan"))
                 {
-                    pairs.Add("td", int.Parse(cd.Cases.Active));
+                    pairs.Add("sd", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Djibouti"))
+                else if (CovidD.Country.Equals("Angola"))
                 {
-                    pairs.Add("dj", int.Parse(cd.Cases.Active));
+                    pairs.Add("ao", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Eritrea"))
+                else if (CovidD.Country.Equals("Benin"))
                 {
-                    pairs.Add("er", int.Parse(cd.Cases.Active));
+                    pairs.Add("bj", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Gambia"))
+                else if (CovidD.Country.Equals("Fiji"))
                 {
-                    pairs.Add("gm", int.Parse(cd.Cases.Active));
+                    pairs.Add("fj", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Niger"))
+                else if (CovidD.Country.Equals("Greenland"))
                 {
-                    pairs.Add("ne", int.Parse(cd.Cases.Active));
+                    pairs.Add("gl", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Papua-New-Guinea"))
+                else if (CovidD.Country.Equals("Guinea"))
                 {
-                    pairs.Add("pg", int.Parse(cd.Cases.Active));
+                    pairs.Add("gn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Somalia"))
+                else if (CovidD.Country.Equals("Haiti"))
                 {
-                    pairs.Add("so", int.Parse(cd.Cases.Active));
+                    pairs.Add("ht", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Timor-Leste"))
+                else if (CovidD.Country.Equals("Mauritania"))
                 {
-                    pairs.Add("tl", int.Parse(cd.Cases.Active));
+                    pairs.Add("mr", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Uganda"))
+                else if (CovidD.Country.Equals("Nicaragua"))
                 {
-                    pairs.Add("ug", int.Parse(cd.Cases.Active));
+                    pairs.Add("ni", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Mozambique"))
+                else if (CovidD.Country.Equals("Saint-Lucia"))
                 {
-                    pairs.Add("mz", int.Parse(cd.Cases.Active));
+                    pairs.Add("lc", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Syria"))
+                else if (CovidD.Country.Equals("Zambia"))
                 {
-                    pairs.Add("sy", int.Parse(cd.Cases.Active));
+                    pairs.Add("zm", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Grenada"))
+                else if (CovidD.Country.Equals("Nepal"))
                 {
-                    pairs.Add("gd", int.Parse(cd.Cases.Active));
+                    pairs.Add("np", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Dominica"))
+                else if (CovidD.Country.Equals("Antigua-and-Barbuda"))
                 {
-                    pairs.Add("dm", int.Parse(cd.Cases.Active));
+                    pairs.Add("ag", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Chad"))
+                {
+                    pairs.Add("td", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Djibouti"))
+                {
+                    pairs.Add("dj", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Eritrea"))
+                {
+                    pairs.Add("er", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Gambia"))
+                {
+                    pairs.Add("gm", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Niger"))
+                {
+                    pairs.Add("ne", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Papua-New-Guinea"))
+                {
+                    pairs.Add("pg", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Somalia"))
+                {
+                    pairs.Add("so", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Timor-Leste"))
+                {
+                    pairs.Add("tl", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Uganda"))
+                {
+                    pairs.Add("ug", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Mozambique"))
+                {
+                    pairs.Add("mz", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Syria"))
+                {
+                    pairs.Add("sy", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Grenada"))
+                {
+                    pairs.Add("gd", int.Parse(CovidD.Cases.Active));
+                }
+                else if (CovidD.Country.Equals("Dominica"))
+                {
+                    pairs.Add("dm", int.Parse(CovidD.Cases.Active));
                 }
 
-                else if (cd.Country.Equals("Belize"))
+                else if (CovidD.Country.Equals("Belize"))
                 {
-                    pairs.Add("bz", int.Parse(cd.Cases.Active));
+                    pairs.Add("bz", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Myanmar"))
+                else if (CovidD.Country.Equals("Myanmar"))
                 {
-                    pairs.Add("mm", int.Parse(cd.Cases.Active));
+                    pairs.Add("mm", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Libya"))
+                else if (CovidD.Country.Equals("Libya"))
                 {
-                    pairs.Add("ly", int.Parse(cd.Cases.Active));
+                    pairs.Add("ly", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Mali"))
+                else if (CovidD.Country.Equals("Mali"))
                 {
-                    pairs.Add("ml", int.Parse(cd.Cases.Active));
+                    pairs.Add("ml", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Guinea-Bissau"))
+                else if (CovidD.Country.Equals("Guinea-Bissau"))
                 {
-                    pairs.Add("gw", int.Parse(cd.Cases.Active));
+                    pairs.Add("gw", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Saint-Kitts-and-Nevis"))
+                else if (CovidD.Country.Equals("Saint-Kitts-and-Nevis"))
                 {
-                    pairs.Add("kn", int.Parse(cd.Cases.Active));
+                    pairs.Add("kn", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Botswana"))
+                else if (CovidD.Country.Equals("Botswana"))
                 {
-                    pairs.Add("bw", int.Parse(cd.Cases.Active));
+                    pairs.Add("bw", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Sierra-Leone"))
+                else if (CovidD.Country.Equals("Sierra-Leone"))
                 {
-                    pairs.Add("sl", int.Parse(cd.Cases.Active));
+                    pairs.Add("sl", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Burundi"))
+                else if (CovidD.Country.Equals("Burundi"))
                 {
-                    pairs.Add("bi", int.Parse(cd.Cases.Active));
+                    pairs.Add("bi", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Malawi"))
+                else if (CovidD.Country.Equals("Malawi"))
                 {
-                    pairs.Add("mw", int.Parse(cd.Cases.Active));
+                    pairs.Add("mw", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Falkland-Islands"))
+                else if (CovidD.Country.Equals("Falkland-Islands"))
                 {
-                    pairs.Add("fk", int.Parse(cd.Cases.Active));
+                    pairs.Add("fk", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Sao-Tome-and-Principe"))
+                else if (CovidD.Country.Equals("Sao-Tome-and-Principe"))
                 {
-                    pairs.Add("st", int.Parse(cd.Cases.Active));
+                    pairs.Add("st", int.Parse(CovidD.Cases.Active));
                 }
-                else if (cd.Country.Equals("Yemen"))
+                else if (CovidD.Country.Equals("Yemen"))
                 {
-                    pairs.Add("ye", int.Parse(cd.Cases.Active));
+                    pairs.Add("ye", int.Parse(CovidD.Cases.Active));
                 }
             }
 
