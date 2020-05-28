@@ -39,12 +39,27 @@ namespace Covid_19_GalileiGalileo.Controllers
             }
 
             ViewBag.chartTotalCases = ChartTool.CreateChart(worldHistory.ListTime(),
-                new List<ChartData>() { new ChartData() 
+                new List<ChartData>()
+                { new ChartData()
                 {
-                    DatasetName = "casi positivi",
-                    Data = worldHistory.TotalCases()
-                }});
-            ViewBag.chartNewCases = ChartTool.CreateChart(worldHistory.ListTime().Skip(1).SkipLast(1).ToList(),
+                    DatasetName = "Casi attivi",
+                    Data = worldHistory.TotalCases(),
+                    ChartPalette = ChartPalette.red
+
+                }, new ChartData()
+                {
+                    DatasetName = "Morti",
+                    Data = worldHistory.TotalDeaths(),
+                    ChartPalette = ChartPalette.violette
+                },new ChartData()
+                {
+                    DatasetName = "Guariti",
+                    Data = worldHistory.TotalRecoverd(),
+                    ChartPalette = ChartPalette.blue
+                }}) ;
+
+
+                ViewBag.chartNewCases = ChartTool.CreateChart(worldHistory.ListTime().Skip(1).SkipLast(1).ToList(),
                 new List<ChartData>() { 
                 new ChartData()
                 {
@@ -749,12 +764,18 @@ namespace Covid_19_GalileiGalileo.Controllers
 
         public IActionResult CovidStatistic(string Country = "all")
         {
-            CovidList<CovidData> List = new CovidList<CovidData>(RestServices.GetDataHistory(Country).ToArray(), true);
-                IList<string> s = new List<string>();
-            foreach (double? d in List.TotalCases())
-                s.Add(d.ToString());
- 
-            return new JsonResult(JsonConvert.SerializeObject(s));
+            CovidList<CovidData> CountryHistory = new CovidList<CovidData>(RestServices.GetDataHistory(Country).ToArray(), true);
+            JsonChartDataResponse ChartData = new JsonChartDataResponse()
+            {
+                ActiveCase = CountryHistory.TotalCases().ToList(),
+                TotalDeaths = CountryHistory.TotalDeaths().ToList(),
+                TotalRecoverd = CountryHistory.TotalRecoverd().ToList(),
+                DailyCases = CountryHistory.NewCases().ToList(),
+                DiferenceDailyCases = CountryHistory.DiferenceIncrease().ToList()
+            };
+            string jsonStr = JsonConvert.SerializeObject(ChartData, Formatting.Indented);
+            return new JsonResult(jsonStr);
+
         }
 
 

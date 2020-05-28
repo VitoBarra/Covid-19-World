@@ -49,12 +49,12 @@ namespace Covid_19_GalileiGalileo.Tool
             for (int i = 0; i < chartDatas.Count; i++)
             {
                 LineDataset LineDataset = SetColorPalette(chartDatas[i].ChartPalette);
-                LineDataset.Data = chartDatas[i].Data.Reverse().ToList();
+                LineDataset.Data = chartDatas[i].Data;
                 LineDataset.Label = chartDatas[i].DatasetName;
 
                 data.Datasets.Add(LineDataset);
             }
-            data.Labels = data.Labels.Reverse().ToList();
+            data.Labels = data.Labels;
 
             chart.Data = data;
 
