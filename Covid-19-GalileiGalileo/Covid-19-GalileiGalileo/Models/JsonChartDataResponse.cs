@@ -11,15 +11,19 @@ namespace Covid_19_GalileiGalileo.Models
         [JsonProperty("ActiveCase")]
         public List<double?> ActiveCase { get; set; }
         [JsonProperty("TotalDeaths")]
-        public List<double?> TotalRecoverd { get; set; }
+        public List<double?> TotalDeaths { get; set; }
         [JsonProperty("TotalRecoverd")]
-        public List<double?> DailyCases { get; set; }
+        public List<double?> TotalRecoverd { get; set; }
 
 
         [JsonProperty("DailyCases")]
-        public List<double?> TotalDeaths { get; set; }
+        public List<double?> DailyCases { get; set; }
 
         [JsonProperty("DiferenceDailyCases")]
         public List<double?> DiferenceDailyCases { get; set; }
     }
 }
+
+
+
+                

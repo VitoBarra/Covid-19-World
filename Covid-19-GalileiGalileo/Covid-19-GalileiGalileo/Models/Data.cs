@@ -96,11 +96,18 @@ namespace Covid_19_GalileiGalileo.Models
         {
             if (isHistory)
             {
+                    //string str = "";
                 int i = 0;
-                while (i != this.Count - 1)
+                while (i < this.Count - 1)
                 {
-                    if (this[i].Time.Day == this[i + 1].Time.Day)
-                        this.RemoveAt(i);
+                        //str += $"{this[i].Time} A:{this[i].Cases.Active} N:{this[i].Cases.New} R:{this[i].Cases.Recovered} \n" ;
+                    if (this[i].Time.Date == this[i + 1].Time.Date)
+                    {
+                        if (this[i + 1].Cases.New == null)
+                            this.RemoveAt(i + 1);
+                        else
+                            this.RemoveAt(i);
+                    }
                     else
                         i++;
                 }
@@ -185,7 +192,7 @@ namespace Covid_19_GalileiGalileo.Models
                     }
                     catch
                     {
-                        DoubleList.Add(0);
+                        DoubleList.Add(null);
                     }
             return DoubleList;
         }
@@ -194,7 +201,7 @@ namespace Covid_19_GalileiGalileo.Models
         {
             List<double?> DoubleList = new List<double?>();
 
-            for (int i = 1; i < this.Count - 1; i++)
+            for (int i = 0; i < this.Count - 2; i++)
                 if (i % DataRatio == 0)
                     try
                     {
@@ -202,12 +209,8 @@ namespace Covid_19_GalileiGalileo.Models
                     }
                     catch
                     {
-                        if (this[i + 1].Cases.New == null)
-                            DoubleList.Add(-int.Parse(this[i].Cases.New));
-                        else if (this[i ].Cases.New == null)
-                            DoubleList.Add(int.Parse(this[i + 1].Cases.New));
-                        else
-                            DoubleList.Add(0);
+                        if (this[i + 1].Cases.New == null || this[i].Cases.New == null)
+                            DoubleList.Add(null);
                     }
 
             return DoubleList;

@@ -1,71 +1,76 @@
 ﻿@model Covid_19_GalileiGalileo.Models.CovidData
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Covid-19 World";
 
 }
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-    <link rel="stylesheet" href="style.css">
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <link rel="stylesheet" href="~/css/site.css" />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
-<body>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body>
 
-    <div class="row">
-        <p class="arancio">Statistiche mondiali:</p>
-        <p class="arancio update">Ultimo aggiornamento: @Model.Time</p>
-    </div>
+        <div class="row">
+            <p class="arancio">Statistiche mondiali:</p>
+            <p class="arancio update">Ultimo aggiornamento: @Model.Time</p>
+        </div>
 
-    <div class="row">
-        <div class="column">
-            <div class="card">
-                <label>Attualmente positivi</label>
-                <label>@Model.Cases.Active</label>
+        <div class="row">
+            <div class="column">
+                <div class="ChartBox ">
+                    <p>Attualmente positivi</p>
+                    <p>@Model.Cases.Active</p>
+                </div>
             </div>
-        </div>
 
-        <div class="column">
-            <div class="card">
-                <label>Guariti</label>
-                <label>@Model.Cases.Recovered</label>
+            <div class="column">
+                <div class="ChartBox ">
+                    <p>Guariti</p>
+                    <p>@Model.Cases.Recovered</p>
+                </div>
             </div>
-        </div>
 
-        <div class="column">
-            <div class="card">
-                <label>Deceduti</label>
-                <label>@Model.Deaths.Total</label>
+            <div class="column">
+                <div class="ChartBox ">
+                    <p>Deceduti</p>
+                    <p>@Model.Deaths.Total</p>
+                </div>
             </div>
-        </div>
 
-        <div class="column">
-            <div class="card">
-                <label>Totale positivi</label>
-                <label>@Model.Cases.Total</label>
+            <div class="column">
+                <div class="ChartBox ">
+                    <p>Totale positivi</p>
+                    <p>@Model.Cases.Total</p>
+                </div>
             </div>
+        </div>,
+
+
+
+        <div id="vmap" style="width: 1000px; height: 800px; margin:auto"></div>
+
+        <button onclick="findHistoryByCountry();" class="WorldButton" >       
+            <svg  id="GlobeButton" xmlns="http://www.w3.org/2000/svg" class="Worldsvg" viewBox="0 0 24 24" ><path d="M13.144 8.171c-.035-.066.342-.102.409-.102.074.009-.196.452-.409.102zm-2.152-3.072l.108-.031c.064.055-.072.095-.051.136.086.155.021.248.008.332-.014.085-.104.048-.149.093-.053.066.258.075.262.085.011.033-.375.089-.304.171.096.136.824-.195.708-.176.225-.113.029-.125-.097-.19-.043-.215-.079-.547-.213-.68l.088-.102c-.206-.299-.36.362-.36.362zm13.008 6.901c0 6.627-5.373 12-12 12-6.628 0-12-5.373-12-12s5.372-12 12-12c6.627 0 12 5.373 12 12zm-8.31-5.371c-.006-.146-.19-.284-.382-.031-.135.174-.111.439-.184.557-.104.175.567.339.567.174.025-.277.732-.063.87-.025.248.069.643-.226.211-.381-.355-.13-.542-.269-.574-.523 0 0 .188-.176.106-.166-.218.027-.614.786-.614.395zm6.296 5.371c0-1.035-.177-2.08-.357-2.632-.058-.174-.189-.312-.359-.378-.256-.1-1.337.597-1.5.254-.107-.229-.324.146-.572.008-.12-.066-.454-.515-.605-.46-.309.111.474.964.688 1.076.201-.152.852-.465.992-.038.268.804-.737 1.685-1.251 2.149-.768.694-.624-.449-1.147-.852-.275-.211-.272-.66-.55-.815-.124-.07-.693-.725-.688-.813l-.017.166c-.094.071-.294-.268-.315-.321 0 .295.48.765.639 1.001.271.405.416.995.748 1.326.178.178.858.914 1.035.898.193-.017.803-.458.911-.433.644.152-1.516 3.205-1.721 3.583-.169.317.138 1.101.113 1.476-.029.433-.37.573-.693.809-.346.253-.265.745-.556.925-.517.318-.889 1.353-1.623 1.348-.216-.001-1.14.36-1.261.007-.094-.256-.22-.45-.353-.703-.13-.248-.015-.505-.173-.724-.109-.152-.475-.497-.508-.677-.002-.155.117-.626.28-.708.229-.117.044-.458.016-.656-.048-.354-.267-.646-.53-.851-.389-.299-.188-.537-.097-.964 0-.204-.124-.472-.398-.392-.564.164-.393-.44-.804-.413-.296.021-.538.209-.813.292-.346.104-.7-.082-1.042-.125-1.407-.178-1.866-1.786-1.499-2.946.037-.19-.114-.542-.048-.689.158-.352.48-.747.762-1.014.158-.15.361-.112.547-.229.287-.181.291-.553.572-.781.4-.325.946-.318 1.468-.388.278-.037 1.336-.266 1.503-.06 0 .038.191.604-.019.572.433.023 1.05.749 1.461.579.211-.088.134-.736.567-.423.262.188 1.436.272 1.68.069.15-.124.234-.93.052-1.021.116.115-.611.124-.679.098-.12-.044-.232.114-.425.025.116.055-.646-.354-.218-.667-.179.131-.346-.037-.539.107-.133.108.062.18-.128.274-.302.153-.53-.525-.644-.602-.116-.076-1.014-.706-.77-.295l.789.785c-.039.025-.207-.286-.207-.059.053-.135.02.579-.104.347-.055-.089.09-.139.006-.268 0-.085-.228-.168-.272-.226-.125-.155-.457-.497-.637-.579-.05-.023-.764.087-.824.11-.07.098-.13.201-.179.311-.148.055-.287.126-.419.214l-.157.353c-.068.061-.765.291-.769.3.029-.075-.487-.171-.453-.321.038-.165.213-.68.168-.868-.048-.197 1.074.284 1.146-.235.029-.225.046-.487-.313-.525.068.008.695-.246.799-.36.146-.168.481-.442.724-.442.284 0 .223-.413.354-.615.131.053-.07.376.087.507-.01-.103.445.057.489.033.104-.054.684-.022.594-.294-.1-.277.051-.195.181-.253-.022.009.34-.619.402-.413-.043-.212-.421.074-.553.063-.305-.024-.176-.52-.061-.665.089-.115-.243-.256-.247-.036-.006.329-.312.627-.241 1.064.108.659-.735-.159-.809-.114-.28.17-.509-.214-.364-.444.148-.235.505-.224.652-.476.104-.178.225-.385.385-.52.535-.449.683-.09 1.216-.041.521.048.176.124.104.324-.069.19.286.258.409.099.07-.092.229-.323.298-.494.089-.222.901-.197.334-.536-.374-.223-2.004-.672-3.096-.672-.236 0-.401.263-.581.412-.356.295-1.268.874-1.775.698-.519-.179-1.63.66-1.808.666-.065.004.004-.634.358-.681-.153.023 1.247-.707 1.209-.859-.046-.18-2.799.822-2.676 1.023.059.092.299.092-.016.294-.18.109-.372.801-.541.801-.505.221-.537-.435-1.099.409l-.894.36c-1.328 1.411-2.247 3.198-2.58 5.183-.013.079.334.226.379.28.112.134.112.712.167.901.138.478.479.744.74 1.179.154.259.41.914.329 1.186.108-.178 1.07.815 1.246 1.022.414.487.733 1.077.061 1.559-.217.156.33 1.129.048 1.368l-.361.093c-.356.219-.195.756.021.982 1.818 1.901 4.38 3.087 7.22 3.087 5.517 0 9.989-4.472 9.989-9.989zm-11.507-6.357c.125-.055.293-.053.311-.22.015-.148.044-.046.08-.1.035-.053-.067-.138-.11-.146-.064-.014-.108.069-.149.104l-.072.019-.068.087.008.048-.087.106c-.085.084.002.139.087.102z" /></svg>
+        </button>
+
+        <p id="CountryText" class="arancio"  style="display: block; margin: auto; text-align:center; margin-top:7px"> World </p>
+
+
+
+        <div class="row">
+
+            <div class="column ChartBox grafico">
+                <div><canvas id="lineChart1" width="400" height="200"></canvas></div>
+            </div>
+
+            <div class="column ChartBox grafico">
+                <div><canvas id="lineChart2" width="400" height="200"></canvas></div>
+            </div>
+
         </div>
-    </div>
-
-
-
-    <div id="vmap" style="width: 1000px; height: 800px; margin:auto"></div>
-
-
-
-
-    <div class="row">
-
-        <div class="column ChartBox grafico">
-            <div><canvas id="lineChart1" width="400" height="200"></canvas></div>
-        </div>
-
-        <div class="column ChartBox grafico">
-            <div><canvas id="lineChart2" width="400" height="200"></canvas></div>
-        </div>
-
-    </div>
 
 
 
@@ -78,18 +83,16 @@
 
 
 
-    @section Scripts
+        @section Scripts
         {
-        <script>
+            <script>
                 @Html.Raw(ViewBag.chartTotalCases.CreateChartCode("lineChart1"));
                 @Html.Raw(ViewBag.chartNewCases.CreateChartCode("lineChart2"));
-        </script>
+            </script>
 
-        <script>
-   
-         </script>
 
-        <script>
+
+            <script>
 
 
                 var sample_data = {
@@ -104,6 +107,7 @@
                 "at": "@ViewBag.CountryValue["at"]",
                 "az": "@ViewBag.CountryValue["az"]",
                 "bs": "@ViewBag.CountryValue["bs"]",
+                "nc": "@ViewBag.CountryValue["nc"]",
                 @*"bh": "@ViewBag.CountryValue["bh"]",*@
                 "bd": "@ViewBag.CountryValue["bd"]",
                 "bb": "@ViewBag.CountryValue["bb"]",
@@ -130,7 +134,7 @@
                 "cn": "@ViewBag.CountryValue["cn"]",
                 "co": "@ViewBag.CountryValue["co"]",
                 @*"km": "@ViewBag.CountryValue["km"]",*@
-                @*"cd": "@ViewBag.CountryValue["cd"]",*@
+                "cd": "@ViewBag.CountryValue["cd"]",
                 "cg": "@ViewBag.CountryValue["cg"]",
                 "cr": "@ViewBag.CountryValue["cr"]",
                 @*"ci": "@ViewBag.CountryValue["ci"]",*@
@@ -149,6 +153,7 @@
                 "ee": "@ViewBag.CountryValue["ee"]",
                 "et": "@ViewBag.CountryValue["et"]",
                 "fj": "@ViewBag.CountryValue["fj"]",
+                "gl": "@ViewBag.CountryValue["gl"]",
                 "fi": "@ViewBag.CountryValue["fi"]",
                 "fr": "@ViewBag.CountryValue["fr"]",
                 "ga": "@ViewBag.CountryValue["ga"]",
@@ -215,12 +220,15 @@
                 "ni": "@ViewBag.CountryValue["ni"]",
                 "ne": "@ViewBag.CountryValue["ne"]",
                 "ng": "@ViewBag.CountryValue["ng"]",
+                "cu": "@ViewBag.CountryValue["cu"]",
                 "no": "@ViewBag.CountryValue["no"]",
                 "om": "@ViewBag.CountryValue["om"]",
                 "pk": "@ViewBag.CountryValue["pk"]",
                 "pa": "@ViewBag.CountryValue["pa"]",
                 "pg": "@ViewBag.CountryValue["pg"]",
+                "so": "@ViewBag.CountryValue["so"]",
                 "py": "@ViewBag.CountryValue["py"]",
+                "gf": "@ViewBag.CountryValue["gf"]",
                 "pe": "@ViewBag.CountryValue["pe"]",
                 "ph": "@ViewBag.CountryValue["ph"]",
                 "pl": "@ViewBag.CountryValue["pl"]",
@@ -258,6 +266,7 @@
                 "th": "@ViewBag.CountryValue["th"]",
                 "tl": "@ViewBag.CountryValue["tl"]",
                 "tg": "@ViewBag.CountryValue["tg"]",
+                "pf": "@ViewBag.CountryValue["pf"]",
                 @*"to": "@ViewBag.CountryValue["to"]",*@
                 "tt": "@ViewBag.CountryValue["tt"]",
                 "tn": "@ViewBag.CountryValue["tn"]",
@@ -273,44 +282,47 @@
                 @*"vu": "@ViewBag.CountryValue["vu"]",*@
                 "ve": "@ViewBag.CountryValue["ve"]",
                 "vn": "@ViewBag.CountryValue["vn"]",
-                "ye": "@ViewBag.CountryValue["ye"]",
+                "fk": "@ViewBag.CountryValue["fk"]",
                 "zm": "@ViewBag.CountryValue["zm"]",
-                "zw": "@ViewBag.CountryValue["zw"]"
+                "zw": "@ViewBag.CountryValue["zw"]",
+                "ye": "@ViewBag.CountryValue["ye"]"
             };
 
-            async function findHistoryByCountry(country) {
-                let CountryData = [];
+                async function findHistoryByCountry(country = "all") {
+                    let CountryData = [];
 
-                $.ajax({
-                    type: 'GET',
-                    url: 'Home/CovidStatistic?Country=' + country,
-                    success: function (data)
-                    {
-                        CountryData = JSON.parse(data);/*data.split(',');*/
-                    },
-                    error: function (error)
-                    {
-                        alert("Error: " + error);
-                    },
-                    async: false
-                })
+                    $.ajax({
+                        type: 'GET',
+                        url: 'Home/CovidStatistic?Country=' + country,
+                        success: function (data) {
+                            CountryData = JSON.parse(data);
+                        },
+                        error: function (error) {
+                            alert("Error: " + error);
+                        },
+                        async: false
+                    })
 
 
 
-                lineChart1["data"]["datasets"][0]["data"] = CountryData["ActiveCase"];
-                lineChart1.update();
-                lineChart1["data"]["datasets"][1]["data"] = CountryData["TotalDeaths"];
-                lineChart1.update();
-                lineChart1["data"]["datasets"][2]["data"] = CountryData["TotalRecoverd"];
-                lineChart1.update();
+                    lineChart1["data"]["datasets"][0]["data"] = CountryData["ActiveCase"];
+                    lineChart1.update();
+                    lineChart1["data"]["datasets"][1]["data"] = CountryData["TotalDeaths"];
+                    lineChart1.update();
+                    lineChart1["data"]["datasets"][2]["data"] = CountryData["TotalRecoverd"];
+                    lineChart1.update();
 
-                lineChart2["data"]["datasets"][0]["data"] = CountryData["DailyCases"];
-                lineChart2.update();
-                lineChart2["data"]["datasets"][1]["data"] = CountryData["DiferenceDailyCases"];
-                lineChart2.update();
+                    lineChart2["data"]["datasets"][0]["data"] = CountryData["DailyCases"];
+                    lineChart2.update();
+                    lineChart2["data"]["datasets"][1]["data"] = CountryData["DiferenceDailyCases"];
+                    lineChart2.update();
 
+                    if (document.getElementById("CountryText").innerHTML === "all")
+                        document.getElementById("CountryText").innerHTML = "World";
+                    else
+                        document.getElementById("CountryText").innerHTML = country;
 
-            }
+                }
 
 
 
@@ -328,356 +340,184 @@
                         values: sample_data,
                         normalizeFunction: 'polynomial',
                         onRegionClick: function (element, code, region) {
+                            //alert(code)
 
-                            if (code == "cn") {
-
-                            }
-                            else if (code == "it") {
-                                 findHistoryByCountry("Italy");
-                               
-
-                        }
-                        else if (code == "es")
-                        {
-
-                        }
-                        else if (code == "us")
-                        {
-
-                        }
-                        else if (code == "de") {
-                        }
-                        else if (code == "ir") {
-                        }
-                        else if (code == "fr") {
-                        }
-                        else if (code == "kr") {
-                        }
-                        else if (code == "ch") {
-                        }
-                        else if (code == "gb") {
-                        }
-                        else if (code == "nl") {
-                        }
-                        else if (code == "at") {
-                        }
-                        else if (code == "be") {
-                        }
-                        else if (code == "no") {
-                        }
-                        else if (code == "se") {
-                        }
-                        else if (code == "ca") {
-                        }
-                        else if (code == "dk") {
-                        }
-                        else if (code == "pt") {
-                        }
-                        else if (code == "my") {
-                        }
-                        else if (code == "br") {
-                        }
-                        else if (code == "au") {
-                        }
-                        else if (code == "jp") {
-                        }
-                        else if (code == "cz") {
-                        }
-                        else if (code == "tr") {
-                        }
-                        else if (code == "il") {
-                        }
-                        else if (code == "ie") {
-                        }
-                        else if (code == "pk") {
-                        }
-                        else if (code == "cl") {
-                        }
-                        else if (code == "pl") {
-                        }
-                        else if (code == "ec") {
-                        }
-                        else if (code == "gr") {
-                        }
-                        else if (code == "fi") {
-                        }
-                        else if (code == "qa") {
-                        }
-                        else if (code == "is") {
-                        }
-                        else if (code == "id") {
-                        }
-                        else if (code == "th") {
-                        }
-                        else if (code == "sa") {
-                        }
-                        else if (code == "si") {
-                        }
-                        else if (code == "ro") {
-                        }
-                        else if (code == "in") {
-                        }
-                        else if (code == "pe") {
-                        }
-                        else if (code == "ph") {
-                        }
-                        else if (code == "ru") {
-                        }
-                        else if (code == "ee") {
-                        }
-                        else if (code == "eg") {
-                        }
-                        else if (code == "za") {
-                        }
-                        else if (code == "lb") {
-                        }
-                        else if (code == "iq") {
-                        }
-                        else if (code == "hr") {
-                        }
-                        else if (code == "mx") {
-                        }
-                        else if (code == "pa") {
-                        }
-                        else if (code == "co") {
-                        }
-                        else if (code == "sk") {
-                        }
-                        else if (code == "kw") {
-                        }
-                        else if (code == "rs") {
-                        }
-                        else if (code == "bg") {
-                        }
-                        else if (code == "am") {
-                        }
-                        else if (code == "ar") {
-                        }
-                        else if (code == "tw") {
-                        }
-                        else if (code == "ae") {
-                        }
-                        else if (code == "dz") {
-                        }
-                        else if (code == "lv") {
-                        }
-                        else if (code == "cr") {
-                        }
-                        else if (code == "do") {
-                        }
-                        else if (code == "uy") {
-                        }
-                        else if (code == "hu") {
-                        }
-                        else if (code == "jo") {
-                        }
-                        else if (code == "lt") {
-                        }
-                        else if (code == "ma") {
-                        }
-                        else if (code == "vn") {
-                        }
-                        else if (code == "ba") {
-                        }
-                        else if (code == "mk") {
-                        }
-                        else if (code == "cy") {
-                        }
-                        else if (code == "bn") {
-                        }
-                        else if (code == "md") {
-                        }
-                        else if (code == "lk") {
-                        }
-                        else if (code == "al") {
-                        }
-                        else if (code == "by") {
-                        }
-                        else if (code == "mt") {
-                        }
-                        else if (code == "ve") {
-                        }
-                        else if (code == "bf") {
-                        }
-                        else if (code == "tn") {
-                        }
-                        else if (code == "sn") {
-                        }
-                        else if (code == "kz") {
-                        }
-                        else if (code == "az") {
-                        }
-                        else if (code == "kh") {
-                        }
-                        else if (code == "nz") {
-                        }
-                        else if (code == "om") {
-                        }
-                        else if (code == "ge") {
-                        }
-                        else if (code == "tt") {
-                        }
-                        else if (code == "ua") {
-                        }
-                        else if (code == "uz") {
-                        }
-                        else if (code == "cm") {
-                        }
-                        else if (code == "bd") {
-                        }
-                        else if (code == "af") {
-                        }
-                        else if (code == "hn") {
-                        }
-                        else if (code == "ng") {
-                        }
-                        else if (code == "cu") {
-                        }
-                        else if (code == "gh") {
-                        }
-                        else if (code == "jm") {
-                        }
-                        else if (code == "bo") {
-                        }
-                        else if (code == "gy") {
-                        }
-                        else if (code == "py") {
-                        }
-                        else if (code == "gf") {
-                        }
-                        else if (code == "gt") {
-                        }
-                        else if (code == "rw") {
-                        }
-                        else if (code == "tg") {
-                        }
-                        else if (code == "pf") {
-                        }
-                        else if (code == "mu") {
-                        }
-                        else if (code == "bb") {
-                        }
-                        else if (code == "mv") {
-                        }
-                        else if (code == "mn") {
-                        }
-                        else if (code == "et") {
-                        }
-                        else if (code == "ke") {
-                        }
-                        else if (code == "sc") {
-                        }
-                        else if (code == "gq") {
-                        }
-                        else if (code == "tz") {
-                        }
-                        else if (code == "ga") {
-                        }
-                        else if (code == "sr") {
-                        }
-                        else if (code == "bs") {
-                        }
-                        else if (code == "nc") {
-                        }
-                        else if (code == "cv") {
-                        }
-                        else if (code == "cg") {
-                        }
-                        else if (code == "sv") {
-                        }
-                        else if (code == "lr") {
-                        }
-                        else if (code == "mg") {
-                        }
-                        else if (code == "na") {
-                        }
-                        else if (code == "zw") {
-                        }
-                        else if (code == "sd") {
-                        }
-                        else if (code == "ao") {
-                        }
-                        else if (code == "bj") {
-                        }
-                        else if (code == "fj") {
-                        }
-                        else if (code == "gl") {
-                        }
-                        else if (code == "gn") {
-                        }
-                        else if (code == "ht") {
-                        }
-                        else if (code == "mr") {
-                        }
-                        else if (code == "ni") {
-                        }
-                        else if (code == "lc") {
-                        }
-                        else if (code == "zm") {
-                        }
-                        else if (code == "np") {
-                        }
-                        else if (code == "ag") {
-                        }
-                        else if (code == "td") {
-                        }
-                        else if (code == "dj") {
-                        }
-                        else if (code == "er") {
-                        }
-                        else if (code == "gm") {
-                        }
-                        else if (code == "ne") {
-                        }
-                        else if (code == "pg") {
-                        }
-                        else if (code == "so") {
-                        }
-                        else if (code == "tl") {
-                        }
-                        else if (code == "ug") {
-                        }
-                        else if (code == "mz") {
-                        }
-                        else if (code == "sy") {
-                        }
-                        else if (code == "gd") {
-                        }
-                        else if (code == "dm") {
-                        }
-                        else if (code == "bz") {
-                        }
-                        else if (code == "ec") {
-                        }
-                        else if (code == "ly") {
-                        }
-                        else if (code == "ml") {
-                        }
-                        else if (code == "gw") {
-                        }
-                        else if (code == "kn") {
-                        }
-                        else if (code == "bw") {
-                        }
-                        else if (code == "sl") {
-                        }
-                        else if (code == "bi") {
-                        }
-                        else if (code == "mw") {
-                        }
-                        else if (code == "fk") {
-                        }
-                        else if (code == "st") {
-                        }
-                        else if (code == "ye") {
-                        }
-
-
-
+                         if (code == "cn") { findHistoryByCountry("China"); }
+                    else if (code == "it") { findHistoryByCountry("Italy"); }
+                    else if (code == "es") { findHistoryByCountry("Spain"); }
+                    else if (code == "us") { findHistoryByCountry("USA"); }
+                    else if (code == "de") { findHistoryByCountry("Germany"); }
+                    else if (code == "ir") { findHistoryByCountry("Iran"); }
+                    else if (code == "fr") { findHistoryByCountry("France"); }
+                    else if (code == "kr") { findHistoryByCountry("S-Korea"); }
+                    else if (code == "ch") { findHistoryByCountry("Switzerland"); }
+                    else if (code == "gb") { findHistoryByCountry("UK"); }
+                    else if (code == "nl") { findHistoryByCountry("Netherlands"); }
+                    else if (code == "at") { findHistoryByCountry("Austria"); }
+                    else if (code == "be") { findHistoryByCountry("Belgium"); }
+                    else if (code == "no") { findHistoryByCountry("Norway"); }
+                    else if (code == "se") { findHistoryByCountry("Sweden"); }
+                    else if (code == "ca") { findHistoryByCountry("Canada"); }
+                    else if (code == "dk") { findHistoryByCountry("Denmark"); }
+                    else if (code == "pt") { findHistoryByCountry("Portugal"); }
+                    else if (code == "my") { findHistoryByCountry("Malaysia"); }
+                    else if (code == "br") { findHistoryByCountry("Brazil"); }
+                    else if (code == "au") { findHistoryByCountry("Australia"); }
+                    else if (code == "jp") { findHistoryByCountry("Japan"); }
+                    else if (code == "cz") { findHistoryByCountry("Czechia"); }
+                    else if (code == "tr") { findHistoryByCountry("Turkey"); }
+                    else if (code == "il") { findHistoryByCountry("Israel"); }
+                    else if (code == "ie") { findHistoryByCountry("Ireland"); }
+                    else if (code == "pk") { findHistoryByCountry("Pakistan"); }
+                    else if (code == "cl") { findHistoryByCountry("Chile"); }
+                    else if (code == "pl") { findHistoryByCountry("Poland"); }
+                    else if (code == "ec") { findHistoryByCountry("Ecuador"); }
+                    else if (code == "gr") { findHistoryByCountry("Greece"); }
+                    else if (code == "fi") { findHistoryByCountry("Finland"); }
+                    else if (code == "qa") { findHistoryByCountry("Qatar"); }
+                    else if (code == "is") { findHistoryByCountry("Iceland"); }
+                    else if (code == "id") { findHistoryByCountry("Indonesia"); }
+                    else if (code == "th") { findHistoryByCountry("Thailand"); }
+                    else if (code == "sa") { findHistoryByCountry("Saudi-Arabia"); }
+                    else if (code == "si") { findHistoryByCountry("Slovenia"); }
+                    else if (code == "ro") { findHistoryByCountry("Romania"); }
+                    else if (code == "in") { findHistoryByCountry("India"); }
+                    else if (code == "pe") { findHistoryByCountry("Peru"); }
+                    else if (code == "ph") { findHistoryByCountry("Philippines"); }
+                    else if (code == "ru") { findHistoryByCountry("Russia"); }
+                    else if (code == "ee") { findHistoryByCountry("Estonia"); }
+                    else if (code == "eg") { findHistoryByCountry("Egypt"); }
+                    else if (code == "za") { findHistoryByCountry("South-Africa"); }
+                    else if (code == "lb") { findHistoryByCountry("Lebanon"); }
+                    else if (code == "iq") { findHistoryByCountry("Iraq"); }
+                    else if (code == "hr") { findHistoryByCountry("Croatia"); }
+                    else if (code == "mx") { findHistoryByCountry("Mexico"); }
+                    else if (code == "pa") { findHistoryByCountry("Panama"); }
+                    else if (code == "co") { findHistoryByCountry("Colombia"); }
+                    else if (code == "sk") { findHistoryByCountry("Slovakia"); }
+                    else if (code == "kw") { findHistoryByCountry("Kuwait"); }
+                    else if (code == "rs") { findHistoryByCountry("Serbia"); }
+                    else if (code == "bg") { findHistoryByCountry("Bulgaria"); }
+                    else if (code == "am") { findHistoryByCountry("Armenia"); }
+                    else if (code == "ar") { findHistoryByCountry("Argentina"); }
+                    else if (code == "tw") { findHistoryByCountry("Taiwan"); }
+                    else if (code == "ae") { findHistoryByCountry("UAE"); }
+                    else if (code == "dz") { findHistoryByCountry("Algeria"); }
+                    else if (code == "lv") { findHistoryByCountry("Latvia"); }
+                    else if (code == "cr") { findHistoryByCountry("Costa-Rica"); }
+                    else if (code == "do") { findHistoryByCountry("Dominican-Republic"); }
+                    else if (code == "uy") { findHistoryByCountry("Uruguay"); }
+                    else if (code == "hu") { findHistoryByCountry("Hungary"); }
+                    else if (code == "jo") { findHistoryByCountry("Jordan"); }
+                    else if (code == "lt") { findHistoryByCountry("Lithuania"); }
+                    else if (code == "ma") { findHistoryByCountry("Morocco"); }
+                    else if (code == "vn") { findHistoryByCountry("Vietnam"); }
+                    else if (code == "ba") { findHistoryByCountry("Bosnia-and-Herzegovina"); }
+                    else if (code == "mk") { findHistoryByCountry("North-Macedonia"); }
+                    else if (code == "cy") { findHistoryByCountry("Cyprus"); }
+                    else if (code == "bn") { findHistoryByCountry("Brunei"); }
+                    else if (code == "md") { findHistoryByCountry("Moldova"); }
+                    else if (code == "lk") { findHistoryByCountry("Sri-Lanka"); }
+                    else if (code == "al") { findHistoryByCountry("Albania"); }
+                    else if (code == "by") { findHistoryByCountry("Belarus"); }
+                    else if (code == "mt") { findHistoryByCountry("Malta"); }
+                    else if (code == "ve") { findHistoryByCountry("Venezuela"); }
+                    else if (code == "bf") { findHistoryByCountry("Burkina-Faso"); }
+                    else if (code == "tn") { findHistoryByCountry("Tunisia"); }
+                    else if (code == "sn") { findHistoryByCountry("Senegal"); }
+                    else if (code == "kz") { findHistoryByCountry("Kazakhstan"); }
+                    else if (code == "az") { findHistoryByCountry("Azerbaijan"); }
+                    else if (code == "kh") { findHistoryByCountry("Cambodia"); }
+                    else if (code == "nz") { findHistoryByCountry("New-Zealand"); }
+                    else if (code == "om") { findHistoryByCountry("Oman"); }
+                    else if (code == "ge") { findHistoryByCountry("Georgia"); }
+                    else if (code == "tt") { findHistoryByCountry("Trinidad-and-Tobago"); }
+                    else if (code == "ua") { findHistoryByCountry("Ukraine"); }
+                    else if (code == "uz") { findHistoryByCountry("Uzbekistan"); }
+                    else if (code == "cm") { findHistoryByCountry("Cameroon"); }
+                    else if (code == "bd") { findHistoryByCountry("Bangladesh"); }
+                    else if (code == "af") { findHistoryByCountry("Afghanistan"); }
+                    else if (code == "hn") { findHistoryByCountry("Honduras"); }
+                    else if (code == "cd") { findHistoryByCountry("DRC"); }
+                    else if (code == "ng") { findHistoryByCountry("Nigeria"); }
+                    else if (code == "cu") { findHistoryByCountry("Cuba"); }
+                    else if (code == "gh") { findHistoryByCountry("Ghana"); }
+                    else if (code == "") { findHistoryByCountry("Puerto-Rico"); }
+                    else if (code == "jm") { findHistoryByCountry("Jamaica"); }
+                    else if (code == "bo") { findHistoryByCountry("Bolivia"); }
+                    else if (code == "gy") { findHistoryByCountry("Guyana"); }
+                    else if (code == "py") { findHistoryByCountry("Paraguay"); }
+                    else if (code == "gf") { findHistoryByCountry("French-Guiana"); }
+                    else if (code == "gt") { findHistoryByCountry("Guatemala"); }
+                    else if (code == "rw") { findHistoryByCountry("Rwanda"); }
+                    else if (code == "tg") { findHistoryByCountry("Togo"); }
+                    else if (code == "pf") { findHistoryByCountry("French-Polynesia"); }
+                    else if (code == "mu") { findHistoryByCountry("Mauritius"); }
+                    else if (code == "bb") { findHistoryByCountry("Barbados"); }
+                    else if (code == "mv") { findHistoryByCountry("Maldives"); }
+                    else if (code == "mn") { findHistoryByCountry("Mongolia"); }
+                    else if (code == "et") { findHistoryByCountry("Ethiopia"); }
+                    else if (code == "ke") { findHistoryByCountry("Kenya"); }
+                    else if (code == "sc") { findHistoryByCountry("Seychelles"); }
+                    else if (code == "gq") { findHistoryByCountry("Equatorial-Guinea"); }
+                    else if (code == "tz") { findHistoryByCountry("Tanzania"); }
+                    else if (code == "ga") { findHistoryByCountry("Gabon"); }
+                    else if (code == "sr") { findHistoryByCountry("Suriname"); }
+                    else if (code == "bs") { findHistoryByCountry("Bahamas"); }
+                    else if (code == "nc") { findHistoryByCountry("New-Caledonia"); }
+                    else if (code == "cv") { findHistoryByCountry("Cabo-Verde"); }
+                    else if (code == "cg") { findHistoryByCountry("Congo"); }
+                    else if (code == "sv") { findHistoryByCountry("El-Salvador"); }
+                    else if (code == "lr") { findHistoryByCountry("Liberia"); }
+                    else if (code == "mg") { findHistoryByCountry("Madagascar"); }
+                    else if (code == "na") { findHistoryByCountry("Namibia"); }
+                    else if (code == "") { findHistoryByCountry("St-Barth"); }
+                    else if (code == "zw") { findHistoryByCountry("Zimbabwe"); }
+                    else if (code == "sd") { findHistoryByCountry("Sudan"); }
+                    else if (code == "ao") { findHistoryByCountry("Angola"); }
+                    else if (code == "bj") { findHistoryByCountry("Benin"); }
+                    else if (code == "") { findHistoryByCountry("Bermuda"); }
+                    else if (code == "fj") { findHistoryByCountry("Fiji"); }
+                    else if (code == "gl") { findHistoryByCountry("Greenland"); }
+                    else if (code == "gn") { findHistoryByCountry("Guinea"); }
+                    else if (code == "ht") { findHistoryByCountry("Haiti"); }
+                    else if (code == "mr") { findHistoryByCountry("Mauritania"); }
+                    else if (code == "ni") { findHistoryByCountry("Nicaragua"); }
+                    else if (code == "lc") { findHistoryByCountry("Saint-Lucia"); }
+                    else if (code == "zm") { findHistoryByCountry("Zambia"); }
+                    else if (code == "np") { findHistoryByCountry("Nepal"); }
+                    else if (code == "ag") { findHistoryByCountry("Antigua-and-Barbuda"); }
+                    else if (code == "td") { findHistoryByCountry("Chad"); }
+                    else if (code == "dj") { findHistoryByCountry("Djibouti"); }
+                    else if (code == "er") { findHistoryByCountry("Eritrea"); }
+                    else if (code == "gm") { findHistoryByCountry("Gambia"); }
+                    else if (code == "ne") { findHistoryByCountry("Niger"); }
+                    else if (code == "pg") { findHistoryByCountry("Papua-New-Guinea"); }
+                    else if (code == "so") { findHistoryByCountry("Somalia"); }
+                    else if (code == "tl") { findHistoryByCountry("Timor-Leste"); }
+                    else if (code == "ug") { findHistoryByCountry("Uganda"); }
+                    else if (code == "mz") { findHistoryByCountry("Mozambique"); }
+                    else if (code == "sy") { findHistoryByCountry("Syria"); }
+                    else if (code == "gd") { findHistoryByCountry("Grenada"); }
+                    else if (code == "dm") { findHistoryByCountry("Dominica"); }
+                    else if (code == "bz") { findHistoryByCountry("Belize"); }
+                    else if (code == "mm") { findHistoryByCountry("Myanmar"); }
+                    else if (code == "ly") { findHistoryByCountry("Libya"); }
+                    else if (code == "ml") { findHistoryByCountry("Mali"); }
+                    else if (code == "gw") { findHistoryByCountry("Guinea-Bissau"); }
+                    else if (code == "kn") { findHistoryByCountry("Saint-Kitts-and-Nevis"); }
+                    else if (code == "bw") { findHistoryByCountry("Botswana"); }
+                    else if (code == "sl") { findHistoryByCountry("Sierra-Leone"); }
+                    else if (code == "bi") { findHistoryByCountry("Burundi"); }
+                    else if (code == "mw") { findHistoryByCountry("Malawi"); }
+                    else if (code == "fk") { findHistoryByCountry("Falkland-Islands"); }
+                    else if (code == "st") { findHistoryByCountry("Sao-Tome-and-Principe"); }
+                    else if (code == "sd") { findHistoryByCountry("South-Sudan"); }
+                    else if (code == "ye") { findHistoryByCountry("Yemen"); }
                         }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             });
                 });
-        </script>
+            </script>
 
-    }
-</body>
+        }
+    </body>
