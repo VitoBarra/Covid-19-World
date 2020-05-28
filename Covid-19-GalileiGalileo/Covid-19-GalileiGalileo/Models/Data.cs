@@ -58,9 +58,6 @@ namespace Covid_19_GalileiGalileo.Models
         public DateTime Time { get; set; }
 
 
-
-
-
     }
 
     public class Cases
@@ -93,8 +90,9 @@ namespace Covid_19_GalileiGalileo.Models
 
     public class CovidList<T> : List<T> where T : CovidData
     {
+        int DataRatio { get; set; } = 1;
 
-        public CovidList(T[] ItemList, bool isHistory = false) : base(ItemList)
+        public CovidList(T[] ItemList, bool isHistory = false) : base(ItemList.Reverse())
         {
             if (isHistory)
             {
@@ -102,59 +100,122 @@ namespace Covid_19_GalileiGalileo.Models
                 while (i != this.Count - 1)
                 {
                     if (this[i].Time.Day == this[i + 1].Time.Day)
-                        this.RemoveAt(i + 1);
+                        this.RemoveAt(i);
                     else
                         i++;
                 }
             }
         }
 
-        public IList<double?> TotalCases(int DataRatio = 1)
+
+        #region Dati Base
+
+        public IList<double?> TotalCases()
         {
             List<double?> DoubleList = new List<double?>();
 
             for (int i = 0; i < this.Count; i++)
                 if (i % DataRatio == 0)
-                    DoubleList.Add(int.Parse(this[i].Cases.Active));
-
+                    try
+                    {
+                        DoubleList.Add(int.Parse(this[i].Cases.Active));
+                    }
+                    catch
+                    {
+                        DoubleList.Add(DoubleList.Last());
+                    }
             return DoubleList;
         }
 
 
-        public IList<double?> DiferenceIncrease(int DataRatio = 1)
+
+        public IList<double?> TotalDeaths()
+        {
+            List<double?> DoubleList = new List<double?>();
+
+            for (int i = 0; i < this.Count; i++)
+                if (i % DataRatio == 0)
+                    try
+                    {
+                        DoubleList.Add(int.Parse(this[i].Deaths.Total));
+                    }
+                    catch
+                    {
+                        DoubleList.Add(DoubleList.Last());
+                    }
+            return DoubleList;
+        }
+
+
+        public IList<double?> TotalRecoverd()
+        {
+            List<double?> DoubleList = new List<double?>();
+
+            for (int i = 0; i < this.Count; i++)
+                if (i % DataRatio == 0)
+                    try
+                    {
+                        DoubleList.Add(int.Parse(this[i].Cases.Recovered));
+                    }
+                    catch
+                    {
+                        DoubleList.Add(DoubleList.Last());
+                    }
+            return DoubleList;
+        }
+
+
+        #endregion
+
+
+        #region Dati Elaborati
+        /// <summary>
+        /// dati elaborati
+        /// </summary>
+
+        public IList<double?> NewCases()
         {
             List<double?> DoubleList = new List<double?>();
 
             for (int i = 1; i < this.Count - 1; i++)
                 if (i % DataRatio == 0)
-                    DoubleList.Add(int.Parse(this[i].Cases.New) - int.Parse(this[i + 1].Cases.New));
-
+                    try
+                    {
+                        DoubleList.Add(int.Parse(this[i].Cases.New));
+                    }
+                    catch
+                    {
+                        DoubleList.Add(0);
+                    }
             return DoubleList;
         }
 
-        public IList<double?> NewCases(int DataRatio = 1)
+        public IList<double?> DiferenceIncrease()
         {
             List<double?> DoubleList = new List<double?>();
 
             for (int i = 1; i < this.Count - 1; i++)
                 if (i % DataRatio == 0)
-                    DoubleList.Add(int.Parse(this[i].Cases.New));
+                    try
+                    {
+                        DoubleList.Add(int.Parse(this[i + 1].Cases.New) - int.Parse(this[i].Cases.New));
+                    }
+                    catch
+                    {
+                        if (this[i + 1].Cases.New == null)
+                            DoubleList.Add(-int.Parse(this[i].Cases.New));
+                        else if (this[i ].Cases.New == null)
+                            DoubleList.Add(int.Parse(this[i + 1].Cases.New));
+                        else
+                            DoubleList.Add(0);
+                    }
 
             return DoubleList;
         }
-        public IList<double?> fixeds(int DataRatio = 1)
-        {
-            List<double?> DoubleList = new List<double?>();
+        #endregion
 
-            for (int i = 1; i < this.Count - 1; i++)
-                if (i % DataRatio == 0)
-                    DoubleList.Add(int.Parse(this[i].Cases.Active) - int.Parse(this[i + 1].Cases.Active) + 
-                        (int.Parse(this[i].Cases.Recovered)-int.Parse(this[i+1].Cases.Recovered)));
 
-            return DoubleList;
-        }
-
-        public IList<string> ListTime(int DataRatio = 1)
+        public IList<string> ListTime()
         {
             List<string> labelList = new List<string>();
 
