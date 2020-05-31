@@ -44,7 +44,7 @@ namespace Covid_19_GalileiGalileo.Controllers
                 {
                     DatasetName = "Casi attivi",
                     Data = worldHistory.TotalCases(),
-                    ChartPalette = ChartPalette.red
+                    ChartPalette = ChartPalette.blue
 
                 }, new ChartData()
                 {
@@ -55,7 +55,7 @@ namespace Covid_19_GalileiGalileo.Controllers
                 {
                     DatasetName = "Guariti",
                     Data = worldHistory.TotalRecoverd(),
-                    ChartPalette = ChartPalette.blue
+                    ChartPalette = ChartPalette.orange
                 }}) ;
 
 
@@ -758,7 +758,7 @@ namespace Covid_19_GalileiGalileo.Controllers
 
 
             if (worldHistory != null)
-                return View(worldHistory[0]);
+                return View(worldHistory.Last());
             else
                 return BadRequest();
         }
@@ -788,7 +788,7 @@ namespace Covid_19_GalileiGalileo.Controllers
         }
 
 
-        public IActionResult AboutUS()
+        public IActionResult AboutMe()
         {
             return View();
         }

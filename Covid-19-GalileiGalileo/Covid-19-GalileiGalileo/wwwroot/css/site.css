@@ -88,9 +88,9 @@
 }
 
 /* Style the counter cards */
-.card {
-    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.6); /* this adds the "card" effect */
-    padding: 16px;
+/*.card {
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.6);*/ /* this adds the "card" effect */
+    /*padding: 16px;
     text-align: center;
     background-color: #f1f1f1;
 }
@@ -104,7 +104,7 @@
 .card > label {
     font-size: 25px;
     font-weight: bold;
-}
+}*/
 
 
 
@@ -117,11 +117,25 @@
     border-radius: 25px;
     padding: 10px;
     margin: 10px;
+    color: white;
+    text-align: center;
+
 }
-.ChartBox > .ChartBox 
-{
-    display:inline-block;
-}
+
+
+    .ChartBox > p:first-child 
+    {   padding:4px 0px 0px 0px;
+        margin:auto;
+        font-size: 15px;
+        font-weight: initial;
+    }
+
+    .ChartBox > p {
+        margin: auto;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
 
 .grafico
 {
@@ -141,22 +155,62 @@
     left: 300px;
 }
 
-.arancio
-{
-    color: #ff8d00;
+.arancio {
+    display: block;
+    color: white;
     font-size: 17px;
 }
 
 .update
 {
-    position: absolute;
-    right: 100px;
+    position:absolute;
+    right: 380px;
 }
 
 .world
 {
     padding: 50px
 }
+
+
+.WorldButton {
+    display: block;
+    margin: auto;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+
+    transition: all .5s;
+/*    transform-origin: 50% 50%;*/
+}
+
+
+.WorldButton:hover 
+{
+    transform: scale(1.2);
+}
+
+.Worldsvg 
+{
+    fill: #C8EEFF;
+    width: 60px;
+    height: 60px;
+    transform-origin: 50% 50%;
+    transition: all 1s;
+}
+.WorldButton > .Worldsvg:hover {
+    fill: #a04347;
+}
+
+
+
+
+
+
+
 
 /*  Tip:
     se il browser non aggiorna il css è perche salva il file in cache

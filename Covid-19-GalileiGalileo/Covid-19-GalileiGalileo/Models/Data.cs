@@ -98,7 +98,7 @@ namespace Covid_19_GalileiGalileo.Models
             {
                     //string str = "";
                 int i = 0;
-                while (i != this.Count - 1)
+                while (i < this.Count - 1)
                 {
                         //str += $"{this[i].Time} A:{this[i].Cases.Active} N:{this[i].Cases.New} R:{this[i].Cases.Recovered} \n" ;
                     if (this[i].Time.Date == this[i + 1].Time.Date)
