@@ -50,7 +50,7 @@ namespace Covid_19_GalileiGalileo.Controllers
                 {
                     DatasetName = "Morti",
                     Data = worldHistory.TotalDeaths(),
-                    ChartPalette = ChartPalette.violette
+                    ChartPalette = ChartPalette.blue
                 },new ChartData()
                 {
                     DatasetName = "Guariti",
