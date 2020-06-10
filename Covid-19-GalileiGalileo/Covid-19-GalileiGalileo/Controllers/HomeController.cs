@@ -5,14 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Covid_19_GalileiGalileo.Models;
-using Covid_19_GalileiGalileo.Services;
+using Covid_World.Models;
+using Covid_World.Services;
 using ChartJSCore.Models;
 using ChartJSCore.Helpers;
-using Covid_19_GalileiGalileo.Tool;
+using Covid_World.Tool;
 using Newtonsoft.Json;
 
-namespace Covid_19_GalileiGalileo.Controllers
+namespace Covid_World.Controllers
 {
     public class HomeController : Controller
     {
@@ -33,7 +33,7 @@ namespace Covid_19_GalileiGalileo.Controllers
             {
                 RestServices.StartUpAPI();
                 worldHistory = new CovidList<CovidData>(RestServices.GetDataHistory().ToArray(), true);
-            } catch (Exception e)
+            } catch 
             {
                 return Error();
             }

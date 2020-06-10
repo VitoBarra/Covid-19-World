@@ -1,5 +1,5 @@
-﻿using Covid_19_GalileiGalileo.Models;
-using Covid_19_GalileiGalileo.Services;
+﻿using Covid_World.Models;
+using Covid_World.Services;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Covid_19_GalileiGalileo.Services
+namespace Covid_World.Services
 {
     public static class RestServices
     {
@@ -50,7 +50,7 @@ namespace Covid_19_GalileiGalileo.Services
         }
 
 
-        public static IList<CovidData> GetStatByCountry(string? country = null)
+        public static IList<CovidData> GetStatByCountry(string country = null)
         {
             IList<CovidData> Data = null;
             string EndPoint;
@@ -75,7 +75,6 @@ namespace Covid_19_GalileiGalileo.Services
 
             return Data;
         }
-
         public static IList<string> GetCountryList()
         {
             IList<string> Data = null;

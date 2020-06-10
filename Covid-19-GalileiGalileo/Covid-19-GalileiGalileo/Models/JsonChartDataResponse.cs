@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Covid_19_GalileiGalileo.Models
+namespace Covid_World.Models
 {
     public class JsonChartDataResponse
     {

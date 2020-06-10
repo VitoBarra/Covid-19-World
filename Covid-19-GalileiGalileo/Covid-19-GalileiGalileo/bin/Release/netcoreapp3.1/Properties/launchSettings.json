@@ -1,0 +1,42 @@
+﻿{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:62303",
+      "sslPort": 44397
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "launchBrowser": true
+    },
+    "Covid-World debug": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "Covid-World Relase": {
+        "commandName": "Project rel",
+        "launchBrowser": true,
+        "applicationUrl": "https://localhost:5001;http://localhost:5000",
+        "environmentVariables": {
+          "ASPNETCORE_ENVIRONMENT": "Relese"
+        }
+      }
+    },
+    "LiveReload": {
+      "LiveReloadEnabled": true,
+      "ClientFileExtensions": ".cshtml,.razor,.css,.js,.htm,.html",
+      "ServerRefreshTimeout": 3000,
+      "WebSocketUrl": "/__livereload",
+      "WebSocketHost": "wss://localhost:5001",
+      "FolderToMonitor": "~/"
+    }
+  }

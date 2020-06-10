@@ -6,7 +6,8 @@
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/lib/jqvmap/dist/css/jqvmap.css"  />
+    <link rel="stylesheet" href="~/lib/jqvmap/dist/css/jqvmap.css" />
+    <link rel="icon" href="~/Resource/Covid_World_Logo_white.png">
     <PackageReference Condition="'$(Configuration)' == 'Debug'"
                       Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
     <PackageReference Condition="'$(Configuration)' == 'Debug'"
@@ -16,6 +17,8 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
+
+                <img src="~/Resource/Covid_World_Logo_white.png" width="30" style="margin-right:15px;" />
 
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Covid-19 World HomePage</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
