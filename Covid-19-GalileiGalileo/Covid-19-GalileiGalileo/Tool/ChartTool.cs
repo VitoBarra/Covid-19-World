@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Covid_19_GalileiGalileo.Tool
+namespace Covid_World.Tool
 {
         public enum ChartPalette { blue, pink, violette, red, orange, yellow }
 

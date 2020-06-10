@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Westwind.AspNetCore.LiveReload;
 
-namespace Covid_19_GalileiGalileo
+namespace Covid_World
 {
     public class Startup
     {
@@ -24,10 +24,12 @@ namespace Covid_19_GalileiGalileo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews()
 #if DEBUG
+            services.AddControllersWithViews()
             .AddRazorRuntimeCompilation();
             services.AddLiveReload();
+#else                
+            services.AddControllersWithViews();
 #endif
         }
 

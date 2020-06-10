@@ -1,6 +1,6 @@
 using System;
 
-namespace Covid_19_GalileiGalileo.Models
+namespace Covid_World.Models
 {
     public class ErrorViewModel
     {
