@@ -41,25 +41,25 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>10/06/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid_World.deps.json">
-      <publishTime>06/10/2020 21:55:23</publishTime>
+      <publishTime>06/11/2020 03:21:24</publishTime>
     </File>
     <File Include="Covid_World.dll">
-      <publishTime>06/10/2020 21:55:22</publishTime>
+      <publishTime>06/11/2020 03:21:23</publishTime>
     </File>
     <File Include="Covid_World.exe">
-      <publishTime>06/10/2020 21:55:22</publishTime>
+      <publishTime>06/11/2020 03:21:23</publishTime>
     </File>
     <File Include="Covid_World.pdb">
-      <publishTime>06/10/2020 21:55:22</publishTime>
+      <publishTime>06/11/2020 03:21:23</publishTime>
     </File>
     <File Include="Covid_World.runtimeconfig.json">
       <publishTime>06/10/2020 18:53:25</publishTime>
     </File>
     <File Include="Covid_World.Views.dll">
-      <publishTime>06/10/2020 21:55:22</publishTime>
+      <publishTime>06/11/2020 03:21:23</publishTime>
     </File>
     <File Include="Covid_World.Views.pdb">
-      <publishTime>06/10/2020 21:55:22</publishTime>
+      <publishTime>06/11/2020 03:21:23</publishTime>
     </File>
     <File Include="cs/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:08:58</publishTime>
@@ -1088,7 +1088,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>06/10/2020 21:55:24</publishTime>
+      <publishTime>06/11/2020 03:21:25</publishTime>
     </File>
     <File Include="Westwind.AspnetCore.LiveReload.dll">
       <publishTime>06/02/2020 20:37:38</publishTime>

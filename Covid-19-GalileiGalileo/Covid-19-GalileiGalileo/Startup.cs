@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Covid_World.ModelsDB;
+using Covid_World.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,9 +30,10 @@ namespace Covid_World
 #if DEBUG
             services.AddControllersWithViews()
             .AddRazorRuntimeCompilation();
-            services.AddLiveReload();
+            services.AddLiveReload()
+            .AddDbContext<Covid19wDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Covid19wDB")));
 #else                
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddDbContext<Covid19wDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Covid19wDB")))
 #endif
         }
 
@@ -65,6 +69,8 @@ namespace Covid_World
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            RestServices.StartUpAPI();
         }
     }
 }

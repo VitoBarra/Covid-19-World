@@ -2,9 +2,13 @@
 # Il file gitignore è stato creato automaticamente da Microsoft(R) Visual Studio.
 ################################################################################
 
+/.vs/Covid-19-GalileiGalileo/v16/.suo
 /.vs
+/.vs/Covid_world/v16/.suo
 /Covid-19-GalileiGalileo/.vs/Covid-19-GalileiGalileo/v16
 /Covid-19-GalileiGalileo/Covid-19-GalileiGalileo/obj
 /Covid-19-GalileiGalileo/.vs/Covid-19-GalileiGalileo/DesignTimeBuild
 /Covid-19-GalileiGalileo/Covid-19-GalileiGalileo/bin/Debug/netcoreapp3.1
 /Covid-19-GalileiGalileo/.vs/Covid-19-GalileiGalileo/config
+
+*.suo
