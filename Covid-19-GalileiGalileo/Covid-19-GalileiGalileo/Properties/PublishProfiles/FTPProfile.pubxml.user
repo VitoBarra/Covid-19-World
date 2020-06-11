@@ -11,7 +11,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
   </PropertyGroup>
   <ItemGroup>
     <File Include="appsettings.Development.json">
-      <publishTime>03/29/2020 15:59:28</publishTime>
+      <publishTime>06/10/2020 18:36:35</publishTime>
     </File>
     <File Include="appsettings.json">
       <publishTime>03/29/2020 15:59:28</publishTime>
@@ -20,25 +20,46 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>02/03/2020 11:22:56</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.deps.json">
-      <publishTime>06/10/2020 17:46:05</publishTime>
+      <publishTime>10/06/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.dll">
-      <publishTime>06/10/2020 17:46:05</publishTime>
+      <publishTime>10/06/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.exe">
-      <publishTime>06/10/2020 17:46:05</publishTime>
+      <publishTime>10/06/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.pdb">
-      <publishTime>06/10/2020 17:46:05</publishTime>
+      <publishTime>10/06/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.runtimeconfig.json">
-      <publishTime>06/10/2020 17:22:39</publishTime>
+      <publishTime>10/06/2020 17:22:39</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.Views.dll">
-      <publishTime>06/10/2020 17:46:05</publishTime>
+      <publishTime>10/06/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.Views.pdb">
-      <publishTime>06/10/2020 17:46:05</publishTime>
+      <publishTime>10/06/2020 17:46:05</publishTime>
+    </File>
+    <File Include="Covid_World.deps.json">
+      <publishTime>06/10/2020 21:55:23</publishTime>
+    </File>
+    <File Include="Covid_World.dll">
+      <publishTime>06/10/2020 21:55:22</publishTime>
+    </File>
+    <File Include="Covid_World.exe">
+      <publishTime>06/10/2020 21:55:22</publishTime>
+    </File>
+    <File Include="Covid_World.pdb">
+      <publishTime>06/10/2020 21:55:22</publishTime>
+    </File>
+    <File Include="Covid_World.runtimeconfig.json">
+      <publishTime>06/10/2020 18:53:25</publishTime>
+    </File>
+    <File Include="Covid_World.Views.dll">
+      <publishTime>06/10/2020 21:55:22</publishTime>
+    </File>
+    <File Include="Covid_World.Views.pdb">
+      <publishTime>06/10/2020 21:55:22</publishTime>
     </File>
     <File Include="cs/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:08:58</publishTime>
@@ -65,7 +86,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="dotnet-aspnet-codegenerator-design.dll">
-      <publishTime>01/24/2020 22:47:12</publishTime>
+      <publishTime>05/12/2020 19:55:52</publishTime>
     </File>
     <File Include="es/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
@@ -128,13 +149,13 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="Microsoft.AspNetCore.Mvc.Razor.Extensions.dll">
-      <publishTime>02/29/2020 00:36:24</publishTime>
+      <publishTime>05/21/2020 02:50:40</publishTime>
     </File>
     <File Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll">
-      <publishTime>03/14/2020 05:30:32</publishTime>
+      <publishTime>05/21/2020 20:39:30</publishTime>
     </File>
     <File Include="Microsoft.AspNetCore.Razor.Language.dll">
-      <publishTime>02/29/2020 00:36:16</publishTime>
+      <publishTime>05/21/2020 02:50:24</publishTime>
     </File>
     <File Include="Microsoft.CodeAnalysis.CSharp.dll">
       <publishTime>09/12/2019 17:08:58</publishTime>
@@ -146,34 +167,34 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>09/12/2019 17:07:46</publishTime>
     </File>
     <File Include="Microsoft.CodeAnalysis.Razor.dll">
-      <publishTime>02/29/2020 00:36:20</publishTime>
+      <publishTime>05/21/2020 02:50:30</publishTime>
     </File>
     <File Include="Microsoft.CodeAnalysis.Workspaces.dll">
       <publishTime>09/12/2019 17:08:34</publishTime>
     </File>
     <File Include="Microsoft.Extensions.DependencyModel.dll">
-      <publishTime>02/28/2020 21:04:04</publishTime>
+      <publishTime>05/20/2020 20:58:24</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll">
-      <publishTime>01/24/2020 22:46:58</publishTime>
+      <publishTime>05/12/2020 19:55:36</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Core.dll">
-      <publishTime>01/24/2020 22:47:06</publishTime>
+      <publishTime>05/12/2020 19:55:42</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.dll">
-      <publishTime>01/24/2020 22:47:10</publishTime>
+      <publishTime>05/12/2020 19:55:46</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll">
-      <publishTime>01/24/2020 22:47:08</publishTime>
+      <publishTime>05/12/2020 19:55:44</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll">
-      <publishTime>01/24/2020 22:47:04</publishTime>
+      <publishTime>05/12/2020 19:55:40</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll">
-      <publishTime>01/24/2020 22:47:00</publishTime>
+      <publishTime>05/12/2020 19:55:38</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll">
-      <publishTime>01/24/2020 22:47:10</publishTime>
+      <publishTime>05/12/2020 19:55:48</publishTime>
     </File>
     <File Include="Newtonsoft.Json.dll">
       <publishTime>11/09/2019 00:56:44</publishTime>
@@ -1022,7 +1043,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>11/15/2019 08:36:30</publishTime>
     </File>
     <File Include="RestSharp.dll">
-      <publishTime>01/12/2020 10:02:42</publishTime>
+      <publishTime>05/18/2020 11:55:38</publishTime>
     </File>
     <File Include="ru/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
@@ -1052,7 +1073,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>07/20/2019 13:35:13</publishTime>
     </File>
     <File Include="System.Text.Json.dll">
-      <publishTime>01/17/2020 18:42:32</publishTime>
+      <publishTime>04/14/2020 22:49:30</publishTime>
     </File>
     <File Include="tr/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
@@ -1067,10 +1088,10 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>06/10/2020 17:46:06</publishTime>
+      <publishTime>06/10/2020 21:55:24</publishTime>
     </File>
     <File Include="Westwind.AspnetCore.LiveReload.dll">
-      <publishTime>03/15/2020 23:11:16</publishTime>
+      <publishTime>06/02/2020 20:37:38</publishTime>
     </File>
     <File Include="wwwroot/css/default.css.bak">
       <publishTime>03/30/2020 16:48:59</publishTime>
@@ -1303,8 +1324,17 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="wwwroot/lib/jqvmap/LICENSE">
       <publishTime>03/01/2018 07:46:38</publishTime>
     </File>
+    <File Include="wwwroot/Resource/Covid_World_Logo_black.png">
+      <publishTime>06/10/2020 18:51:33</publishTime>
+    </File>
+    <File Include="wwwroot/Resource/Covid_World_Logo_C8EEFF.png">
+      <publishTime>06/10/2020 18:52:19</publishTime>
+    </File>
+    <File Include="wwwroot/Resource/Covid_World_Logo_white.png">
+      <publishTime>06/10/2020 18:51:44</publishTime>
+    </File>
     <File Include="wwwroot/Resource/jvectormaps.png">
-      <publishTime>04/07/2020 21:31:42</publishTime>
+      <publishTime>07/04/2020 21:31:42</publishTime>
     </File>
     <File Include="wwwroot/Resource/photo_2020-04-26_18-07-18.jpg">
       <publishTime>06/01/2020 21:28:24</publishTime>

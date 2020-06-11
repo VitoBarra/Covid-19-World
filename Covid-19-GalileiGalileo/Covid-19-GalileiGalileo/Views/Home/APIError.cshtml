@@ -1,0 +1,26 @@
+﻿@model System.Net.Http.HttpResponseMessage
+
+@{
+    ViewData["Title"] = "APIError";
+}
+
+<h1 style="color:aliceblue">APIError</h1>
+
+<div style="color:aliceblue">
+    <h4>Responce</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <a> StatusCode: @Model.StatusCode</a>
+        </dt>
+        <dd class="col-sm-10">
+            <a> Headers: @Model.Headers</a>
+        </dd>
+        <dd class="col-sm-2">
+            <a> RequestMessage: @Model.RequestMessage</a>
+        </dd>
+        <dd class="col-sm-10">
+            <a> ReasonPhrase: @Model.ReasonPhrase</a>
+        </dd>
+    </dl>
+</div>

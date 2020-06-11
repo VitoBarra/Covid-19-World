@@ -56,8 +56,6 @@ namespace Covid_World.Models
         public Deaths Deaths { get; set; }
         [JsonProperty("time")]
         public DateTime Time { get; set; }
-
-
     }
 
     public class Cases
