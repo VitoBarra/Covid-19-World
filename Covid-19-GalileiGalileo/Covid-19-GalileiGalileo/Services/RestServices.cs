@@ -27,14 +27,14 @@ namespace Covid_World.Services
 
         }
 
-        public static IList<CovidData> GetDataHistory(string Country ="all")
+        public static IList<CovidData> GetDataHistory(out HttpResponseMessage response, string Country ="all")
         {
             IList<CovidData> Data = null;
             string EndPoint = $"https://covid-193.p.rapidapi.com/history?country={Country}";
 
             try
             {
-                HttpResponseMessage response = client.GetAsync(EndPoint).Result;
+                response = client.GetAsync(EndPoint).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string content = response.Content.ReadAsStringAsync().Result;
@@ -44,13 +44,14 @@ namespace Covid_World.Services
             catch (Exception ex)
             {
                 Debug.WriteLine("\tERROR {0}", ex.Message);
+                response = null;
             }
 
             return Data;
         }
 
 
-        public static IList<CovidData> GetStatByCountry(string country = null)
+        public static IList<CovidData> GetStatByCountry(out HttpResponseMessage response,string country = null)
         {
             IList<CovidData> Data = null;
             string EndPoint;
@@ -61,7 +62,7 @@ namespace Covid_World.Services
 
             try
             {
-                HttpResponseMessage response = client.GetAsync(EndPoint).Result;
+                response = client.GetAsync(EndPoint).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     string content = response.Content.ReadAsStringAsync().Result;
@@ -71,10 +72,12 @@ namespace Covid_World.Services
             catch (Exception ex)
             {
                 Debug.WriteLine("\tERROR {0}", ex.Message);
+                response = null;
             }
 
             return Data;
         }
+
         public static IList<string> GetCountryList()
         {
             IList<string> Data = null;
