@@ -1,51 +1,12 @@
-﻿using ChartJSCore.Models;
+﻿using Covid_World.ModelsDB;
 using Newtonsoft.Json;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Covid_World.Models
 {
-
-
-    public class Responce
-    {
-        [JsonProperty("get")]
-        public string Get { get; set; }
-        [JsonProperty("parameters")]
-        public Parameters[] Parameters { get; set; }
-        [JsonProperty("errors")]
-        public string[] errors { get; set; }
-        [JsonProperty("results")]
-        public string Results { get; set; }
-        [JsonProperty("response")]
-        public List<CovidData> Response { get; set; } = new List<CovidData>();
-    }
-
-    public class ResponceHistory
-    {
-        [JsonProperty("get")]
-        public string Get { get; set; }
-        [JsonProperty("parameters")]
-        public Parameters Parameters { get; set; }
-        [JsonProperty("errors")]
-        public string[] errors { get; set; }
-        [JsonProperty("results")]
-        public string Results { get; set; }
-        [JsonProperty("response")]
-        public List<CovidData> Response { get; set; } = new List<CovidData>();
-    }
-
-
-    public class Parameters
-    {
-        [JsonProperty("country")]
-        public string Country { get; set; }
-    }
-
-
     public class CovidData
     {
         [JsonProperty("country")]
@@ -83,9 +44,6 @@ namespace Covid_World.Models
 
 
 
-
-
-
     public class CovidList<T> : List<T> where T : CovidData
     {
         int DataRatio { get; set; } = 1;
@@ -94,11 +52,11 @@ namespace Covid_World.Models
         {
             if (isHistory)
             {
-                    //string str = "";
+                //string str = "";
                 int i = 0;
                 while (i < this.Count - 1)
                 {
-                        //str += $"{this[i].Time} A:{this[i].Cases.Active} N:{this[i].Cases.New} R:{this[i].Cases.Recovered} \n" ;
+                    //str += $"{this[i].Time} A:{this[i].Cases.Active} N:{this[i].Cases.New} R:{this[i].Cases.Recovered} \n" ;
                     if (this[i].Time.Date == this[i + 1].Time.Date)
                     {
                         if (this[i + 1].Cases.New == null)
@@ -232,6 +190,37 @@ namespace Covid_World.Models
 
     }
 
+    public static class CovidEx
+    {
+        public static CovidData[] CovidToArray(this Coviddatas[] coviddatas)
+        {
+
+            List<CovidData> cd = new List<CovidData>();
+
+             IEnumerable<Coviddatas> enume = coviddatas.OrderBy(a => a.Time).Reverse();
+
+
+            foreach (Coviddatas cs in enume)
+            {
+                CovidData te = new CovidData()
+                {
+                    Cases = new Cases
+                    {
+                        Active = cs.CaseActive,
+                        New = cs.CaseNew,
+                        Critical = cs.CaseCritical,
+                        Recovered = cs.CaseRecovered,
+                        Total = cs.CaseTotal 
+                    },
+                    Deaths = new Deaths { New = cs.DeathNew, Total = cs.DeathTotal },
+                    Country = cs.Country,
+                    Time = DateTime.Parse(cs.Time)
+                };
+                cd.Add(te);
+            }
+
+            return cd.ToArray();
+        }
+    }
 
 }
-
