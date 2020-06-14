@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Covid_World.Installers;
 using Covid_World.ModelsDB;
 using Covid_World.Services;
 using Microsoft.AspNetCore.Builder;
@@ -17,6 +18,7 @@ namespace Covid_World
 {
     public class Startup
     {
+        public static string ConectionString;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,13 +29,12 @@ namespace Covid_World
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.InstallServicesAssembly(Configuration);
 #if DEBUG
-            services.AddControllersWithViews()
-            .AddRazorRuntimeCompilation();
-            services.AddLiveReload()
-            .AddDbContext<Covid19wDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Covid19wDB")));
-#else                
-            services.AddControllersWithViews().AddDbContext<Covid19wDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Covid19wDB")))
+            ConectionString = Configuration.GetConnectionString("Default");
+#else
+                     
+            ConectionString = Configuration.GetConnectionString("Covid19wDB");
 #endif
         }
 

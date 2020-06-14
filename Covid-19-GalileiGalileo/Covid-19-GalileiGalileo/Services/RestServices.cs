@@ -43,7 +43,10 @@ namespace Covid_World.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("\tERROR {0}", ex.Message);
+                using (System.IO.StreamWriter file =new System.IO.StreamWriter(@".\APIErrorLog.txt", true))
+                {
+                    file.WriteLine($"ERROR from GetDataHistory: {ex.Message}" );
+                }
                 response = null;
             }
 
@@ -71,7 +74,10 @@ namespace Covid_World.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("\tERROR {0}", ex.Message);
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@".\APIErrorLog.txt", true))
+                {
+                    file.WriteLine($"ERROR from GetStatByCountry: {ex.Message}");
+                }
                 response = null;
             }
 
@@ -94,7 +100,10 @@ namespace Covid_World.Services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("\tERROR {0}", ex.Message);
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@".\APIErrorLog.txt", true))
+                {
+                    file.WriteLine($"ERROR from GetCountryList: {ex.Message}");
+                }
             }
 
             return Data;
