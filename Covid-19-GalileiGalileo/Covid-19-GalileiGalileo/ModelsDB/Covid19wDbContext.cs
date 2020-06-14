@@ -1,6 +1,8 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.DependencyModel;
 
 namespace Covid_World.ModelsDB
 {
@@ -10,7 +12,7 @@ namespace Covid_World.ModelsDB
         {
         }
 
-        public Covid19wDbContext(DbContextOptions<Covid19wDbContext> options)
+        public Covid19wDbContext([FromServices]DbContextOptions<Covid19wDbContext> options)
             : base(options)
         {
         }
@@ -22,11 +24,10 @@ namespace Covid_World.ModelsDB
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
 #if DEBUG
-                optionsBuilder.UseMySQL("server=localhost;user id=root;password=toor;persistsecurityinfo=True;database=Covid19w");
+                optionsBuilder.UseMySQL(Startup.ConectionString);
 #else
-                optionsBuilder.UseMySQL("server=db5000538659.hosting-data.io;user id=dbu899543;password=F<?(pXepz^x5;persistsecurityinfo=True;database=dbs517216");
+                optionsBuilder.UseMySQL(Startup.ConectionString);
 #endif
             }
         }
