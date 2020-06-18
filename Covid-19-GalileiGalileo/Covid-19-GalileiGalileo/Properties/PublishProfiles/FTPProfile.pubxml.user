@@ -14,7 +14,10 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>06/10/2020 18:36:35</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>03/29/2020 15:59:28</publishTime>
+      <publishTime>06/15/2020 15:18:41</publishTime>
+    </File>
+    <File Include="BouncyCastle.Crypto.dll">
+      <publishTime>05/28/2018 16:12:20</publishTime>
     </File>
     <File Include="ChartJSCore.dll">
       <publishTime>02/03/2020 11:22:56</publishTime>
@@ -41,25 +44,25 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>10/06/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid_World.deps.json">
-      <publishTime>06/11/2020 03:21:24</publishTime>
+      <publishTime>06/15/2020 17:14:33</publishTime>
     </File>
     <File Include="Covid_World.dll">
-      <publishTime>06/11/2020 03:21:23</publishTime>
+      <publishTime>06/15/2020 17:14:31</publishTime>
     </File>
     <File Include="Covid_World.exe">
-      <publishTime>06/11/2020 03:21:23</publishTime>
+      <publishTime>06/15/2020 17:14:31</publishTime>
     </File>
     <File Include="Covid_World.pdb">
-      <publishTime>06/11/2020 03:21:23</publishTime>
+      <publishTime>06/15/2020 17:14:31</publishTime>
     </File>
     <File Include="Covid_World.runtimeconfig.json">
-      <publishTime>06/10/2020 18:53:25</publishTime>
+      <publishTime>06/14/2020 00:12:16</publishTime>
     </File>
     <File Include="Covid_World.Views.dll">
-      <publishTime>06/11/2020 03:21:23</publishTime>
+      <publishTime>06/15/2020 17:14:32</publishTime>
     </File>
     <File Include="Covid_World.Views.pdb">
-      <publishTime>06/11/2020 03:21:23</publishTime>
+      <publishTime>06/15/2020 17:14:32</publishTime>
     </File>
     <File Include="cs/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:08:58</publishTime>
@@ -112,6 +115,9 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="fr/Microsoft.CodeAnalysis.Workspaces.resources.dll">
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
+    <File Include="Google.Protobuf.dll">
+      <publishTime>08/10/2018 18:51:54</publishTime>
+    </File>
     <File Include="it/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
     </File>
@@ -136,6 +142,15 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="ja/Microsoft.CodeAnalysis.Workspaces.resources.dll">
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
+    <File Include="K4os.Compression.LZ4.dll">
+      <publishTime>07/03/2019 22:59:30</publishTime>
+    </File>
+    <File Include="K4os.Compression.LZ4.Streams.dll">
+      <publishTime>07/03/2019 22:59:30</publishTime>
+    </File>
+    <File Include="K4os.Hash.xxHash.dll">
+      <publishTime>07/03/2019 20:39:02</publishTime>
+    </File>
     <File Include="ko/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
     </File>
@@ -157,6 +172,12 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="Microsoft.AspNetCore.Razor.Language.dll">
       <publishTime>05/21/2020 02:50:24</publishTime>
     </File>
+    <File Include="Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>04/14/2020 22:39:12</publishTime>
+    </File>
+    <File Include="Microsoft.Bcl.HashCode.dll">
+      <publishTime>11/15/2019 08:38:50</publishTime>
+    </File>
     <File Include="Microsoft.CodeAnalysis.CSharp.dll">
       <publishTime>09/12/2019 17:08:58</publishTime>
     </File>
@@ -172,8 +193,50 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="Microsoft.CodeAnalysis.Workspaces.dll">
       <publishTime>09/12/2019 17:08:34</publishTime>
     </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>05/21/2020 02:30:50</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>05/21/2020 02:31:04</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>05/21/2020 02:31:16</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Caching.Abstractions.dll">
+      <publishTime>05/20/2020 23:55:38</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Caching.Memory.dll">
+      <publishTime>05/20/2020 23:56:26</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Configuration.Abstractions.dll">
+      <publishTime>05/20/2020 23:55:56</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Configuration.Binder.dll">
+      <publishTime>05/20/2020 23:56:48</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Configuration.dll">
+      <publishTime>05/20/2020 23:56:46</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.DependencyInjection.Abstractions.dll">
+      <publishTime>05/20/2020 23:56:12</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.DependencyInjection.dll">
+      <publishTime>05/20/2020 23:56:04</publishTime>
+    </File>
     <File Include="Microsoft.Extensions.DependencyModel.dll">
       <publishTime>05/20/2020 20:58:24</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Logging.Abstractions.dll">
+      <publishTime>05/20/2020 23:56:52</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Logging.dll">
+      <publishTime>05/20/2020 23:56:56</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Options.dll">
+      <publishTime>05/20/2020 23:56:02</publishTime>
+    </File>
+    <File Include="Microsoft.Extensions.Primitives.dll">
+      <publishTime>05/20/2020 23:56:22</publishTime>
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll">
       <publishTime>05/12/2020 19:55:36</publishTime>
@@ -195,6 +258,12 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     </File>
     <File Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll">
       <publishTime>05/12/2020 19:55:48</publishTime>
+    </File>
+    <File Include="MySql.Data.dll">
+      <publishTime>03/17/2020 10:35:56</publishTime>
+    </File>
+    <File Include="MySql.Data.EntityFrameworkCore.dll">
+      <publishTime>03/17/2020 10:36:28</publishTime>
     </File>
     <File Include="Newtonsoft.Json.dll">
       <publishTime>11/09/2019 00:56:44</publishTime>
@@ -457,6 +526,12 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="refs/Microsoft.AspNetCore.WebUtilities.dll">
       <publishTime>01/18/2020 17:32:56</publishTime>
     </File>
+    <File Include="refs/Microsoft.Bcl.AsyncInterfaces.dll">
+      <publishTime>04/14/2020 22:36:20</publishTime>
+    </File>
+    <File Include="refs/Microsoft.Bcl.HashCode.dll">
+      <publishTime>11/15/2019 08:34:28</publishTime>
+    </File>
     <File Include="refs/Microsoft.CSharp.dll">
       <publishTime>11/15/2019 08:33:42</publishTime>
     </File>
@@ -648,6 +723,9 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     </File>
     <File Include="refs/System.ComponentModel.TypeConverter.dll">
       <publishTime>11/15/2019 08:34:56</publishTime>
+    </File>
+    <File Include="refs/System.Configuration.ConfigurationManager.dll">
+      <publishTime>11/20/2017 18:09:04</publishTime>
     </File>
     <File Include="refs/System.Configuration.dll">
       <publishTime>11/15/2019 08:36:16</publishTime>
@@ -916,6 +994,9 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="refs/System.Runtime.Serialization.Xml.dll">
       <publishTime>11/15/2019 08:34:52</publishTime>
     </File>
+    <File Include="refs/System.Security.AccessControl.dll">
+      <publishTime>09/13/2019 02:25:08</publishTime>
+    </File>
     <File Include="refs/System.Security.Claims.dll">
       <publishTime>11/15/2019 08:34:58</publishTime>
     </File>
@@ -937,8 +1018,14 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="refs/System.Security.dll">
       <publishTime>11/15/2019 08:36:24</publishTime>
     </File>
+    <File Include="refs/System.Security.Permissions.dll">
+      <publishTime>09/13/2019 02:26:20</publishTime>
+    </File>
     <File Include="refs/System.Security.Principal.dll">
       <publishTime>11/15/2019 08:34:32</publishTime>
+    </File>
+    <File Include="refs/System.Security.Principal.Windows.dll">
+      <publishTime>09/13/2019 02:26:16</publishTime>
     </File>
     <File Include="refs/System.Security.SecureString.dll">
       <publishTime>11/15/2019 08:34:52</publishTime>
@@ -1012,6 +1099,9 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="refs/System.Windows.dll">
       <publishTime>11/15/2019 08:36:28</publishTime>
     </File>
+    <File Include="refs/System.Windows.Extensions.dll">
+      <publishTime>09/13/2019 02:26:20</publishTime>
+    </File>
     <File Include="refs/System.Xml.dll">
       <publishTime>11/15/2019 08:36:28</publishTime>
     </File>
@@ -1039,8 +1129,14 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="refs/System.Xml.XPath.XDocument.dll">
       <publishTime>11/15/2019 08:34:58</publishTime>
     </File>
+    <File Include="refs/System.Xml.XPath.XmlDocument.dll">
+      <publishTime>06/11/2016 23:15:02</publishTime>
+    </File>
     <File Include="refs/WindowsBase.dll">
       <publishTime>11/15/2019 08:36:30</publishTime>
+    </File>
+    <File Include="Renci.SshNet.dll">
+      <publishTime>10/16/2017 20:53:06</publishTime>
     </File>
     <File Include="RestSharp.dll">
       <publishTime>05/18/2020 11:55:38</publishTime>
@@ -1057,6 +1153,15 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="ru/Microsoft.CodeAnalysis.Workspaces.resources.dll">
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
+    <File Include="runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>07/19/2017 10:01:34</publishTime>
+    </File>
+    <File Include="SshNet.Security.Cryptography.dll">
+      <publishTime>07/14/2016 20:47:20</publishTime>
+    </File>
+    <File Include="System.Collections.Immutable.dll">
+      <publishTime>04/14/2020 22:38:40</publishTime>
+    </File>
     <File Include="System.Composition.AttributedModel.dll">
       <publishTime>07/20/2019 13:35:12</publishTime>
     </File>
@@ -1072,8 +1177,20 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="System.Composition.TypedParts.dll">
       <publishTime>07/20/2019 13:35:13</publishTime>
     </File>
+    <File Include="System.Configuration.ConfigurationManager.dll">
+      <publishTime>11/20/2017 18:09:04</publishTime>
+    </File>
+    <File Include="System.Diagnostics.DiagnosticSource.dll">
+      <publishTime>04/14/2020 22:48:06</publishTime>
+    </File>
+    <File Include="System.Security.Cryptography.ProtectedData.dll">
+      <publishTime>07/19/2017 10:01:34</publishTime>
+    </File>
     <File Include="System.Text.Json.dll">
       <publishTime>04/14/2020 22:49:30</publishTime>
+    </File>
+    <File Include="System.Xml.XPath.XmlDocument.dll">
+      <publishTime>06/11/2016 23:15:02</publishTime>
     </File>
     <File Include="tr/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:09:00</publishTime>
@@ -1087,8 +1204,11 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="tr/Microsoft.CodeAnalysis.Workspaces.resources.dll">
       <publishTime>09/12/2019 17:08:36</publishTime>
     </File>
+    <File Include="Ubiety.Dns.Core.dll">
+      <publishTime>03/17/2020 10:35:10</publishTime>
+    </File>
     <File Include="web.config">
-      <publishTime>06/11/2020 03:21:25</publishTime>
+      <publishTime>06/15/2020 17:14:33</publishTime>
     </File>
     <File Include="Westwind.AspnetCore.LiveReload.dll">
       <publishTime>06/02/2020 20:37:38</publishTime>
@@ -1362,6 +1482,9 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     </File>
     <File Include="zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll">
       <publishTime>09/12/2019 17:08:36</publishTime>
+    </File>
+    <File Include="Zstandard.Net.dll">
+      <publishTime>03/17/2020 10:35:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

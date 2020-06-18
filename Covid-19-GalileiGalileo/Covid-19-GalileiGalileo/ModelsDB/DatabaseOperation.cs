@@ -58,6 +58,8 @@ namespace Covid_World.ModelsDB
 
         public static bool IsDataToOld(string Country = "all")
         {
+            return true;
+
             var LastData = (from a in CovidDB.Coviddatas where a.Country == Country select a.Time).ToList();
 
             if (LastData != null) return true;

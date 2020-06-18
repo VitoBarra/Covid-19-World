@@ -24,11 +24,7 @@ namespace Covid_World.ModelsDB
         {
             if (!optionsBuilder.IsConfigured)
             {
-#if DEBUG
                 optionsBuilder.UseMySQL(Startup.ConectionString);
-#else
-                optionsBuilder.UseMySQL(Startup.ConectionString);
-#endif
             }
         }
 

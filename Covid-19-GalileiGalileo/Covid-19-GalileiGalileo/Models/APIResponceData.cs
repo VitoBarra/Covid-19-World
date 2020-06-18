@@ -44,5 +44,13 @@ namespace Covid_World.Models
         [JsonProperty("country")]
         public string Country { get; set; }
     }
+
+    public class CountryPairs
+    {
+        [JsonProperty("Country")]
+        public string Country { get; set; }
+        [JsonProperty("MapCode")]
+        public string MapCode { get; set; }
+    }
 }
 

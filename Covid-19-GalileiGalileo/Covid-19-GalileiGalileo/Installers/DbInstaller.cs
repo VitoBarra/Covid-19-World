@@ -12,12 +12,13 @@ namespace Covid_World.Installers
     public class DbInstaller : IInstaller
     {
         public void InstallService(IServiceCollection services, IConfiguration configuration)
+        
         {
 #if DEBUG
             services.AddDbContext<Covid19wDbContext>(options => options.UseMySQL(configuration.GetConnectionString("Default")));
 #else
                      
-            services.AddDbContext<Covid19wDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("Covid19wDB")));       
+            services.AddDbContext<Covid19wDbContext>(options => options.UseMySQL(configuration.GetConnectionString("Covid19wDB")));       
 #endif
         }
     }
