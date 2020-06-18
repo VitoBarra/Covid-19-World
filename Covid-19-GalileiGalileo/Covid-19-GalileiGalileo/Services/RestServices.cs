@@ -14,15 +14,15 @@ namespace Covid_World.Services
     public static class RestServices
     {
         public static HttpClient client = new HttpClient();
-        public static bool Unstarded = true;
+        public static bool Unstarted = true;
 
         public static void StartUpAPI()
         {
-            if (Unstarded)
+            if (Unstarted)
             {
                 client.DefaultRequestHeaders.Add("x-rapidapi-host", "covid-193.p.rapidapi.com");
                 client.DefaultRequestHeaders.Add("x-rapidapi-key", "f4d025568cmsh12e79fdec8e33b1p174ff5jsn48a341aa1fc0");
-                Unstarded = false;
+                Unstarted = false;
             }
 
         }

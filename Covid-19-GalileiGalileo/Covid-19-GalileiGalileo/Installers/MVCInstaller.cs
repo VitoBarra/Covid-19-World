@@ -18,7 +18,7 @@ namespace Covid_World.Installers
             services.AddLiveReload();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 #else
-                   services.AddControllersWithViews();    
+            services.AddControllersWithViews();    
 #endif
         }
     }

@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -11,32 +11,25 @@
     "Covid-World debug": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "Covid-World Relase": {
-        "commandName": "Project rel",
-        "launchBrowser": true,
-        "applicationUrl": "https://localhost:5001;http://localhost:5000",
-        "environmentVariables": {
-          "ASPNETCORE_ENVIRONMENT": "Relese"
-        }
-      }
+      "sqlDebugging": false,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     },
     "IIS Express": {
       "commandName": "IISExpress",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "launchBrowser": true
+      }
     },
     "LiveReload": {
-      "LiveReloadEnabled": true,
       "ClientFileExtensions": ".cshtml,.razor,.css,.js,.htm,.html",
+      "LiveReloadEnabled": true,
       "ServerRefreshTimeout": 3000,
-      "WebSocketUrl": "/__livereload",
       "WebSocketHost": "wss://localhost:5001",
+      "WebSocketUrl": "/__livereload",
       "FolderToMonitor": "~/"
     }
   }

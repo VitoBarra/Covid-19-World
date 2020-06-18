@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.DependencyModel;
 
-namespace Covid_World.ModelsDB
+namespace Covid_World.DBContext
 {
     public partial class Covid19wDbContext : DbContext
     {
@@ -12,8 +12,7 @@ namespace Covid_World.ModelsDB
         {
         }
 
-        public Covid19wDbContext([FromServices]DbContextOptions<Covid19wDbContext> options)
-            : base(options)
+        public Covid19wDbContext([FromServices]DbContextOptions<Covid19wDbContext> options): base(options)
         {
         }
 
@@ -24,11 +23,7 @@ namespace Covid_World.ModelsDB
         {
             if (!optionsBuilder.IsConfigured)
             {
-#if DEBUG
-                optionsBuilder.UseMySQL(Startup.ConectionString);
-#else
-                optionsBuilder.UseMySQL(Startup.ConectionString);
-#endif
+               optionsBuilder.UseMySQL(Startup.ConectionString);
             }
         }
 

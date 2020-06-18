@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Covid_World.ModelsDB
+namespace Covid_World.DBContext
 {
     public static class DatabaseOperation
     {
@@ -58,6 +58,8 @@ namespace Covid_World.ModelsDB
 
         public static bool IsDataToOld(string Country = "all")
         {
+            //return true;
+
             var LastData = (from a in CovidDB.Coviddatas where a.Country == Country select a.Time).ToList();
 
             if (LastData != null) return true;
