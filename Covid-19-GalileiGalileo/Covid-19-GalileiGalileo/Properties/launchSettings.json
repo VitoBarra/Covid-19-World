@@ -31,6 +31,10 @@
       "WebSocketHost": "wss://localhost:5001",
       "WebSocketUrl": "/__livereload",
       "FolderToMonitor": "~/"
+    },
+    "Azure Dev Spaces": {
+      "commandName": "AzureDevSpaces",
+      "launchBrowser": true
     }
   }
 }

@@ -12,7 +12,7 @@ namespace Covid_World.DBContext
         {
         }
 
-        public Covid19wDbContext([FromServices]DbContextOptions<Covid19wDbContext> options): base(options)
+        public Covid19wDbContext([FromServices] DbContextOptions<Covid19wDbContext> options) : base(options)
         {
         }
 
@@ -23,7 +23,7 @@ namespace Covid_World.DBContext
         {
             if (!optionsBuilder.IsConfigured)
             {
-               optionsBuilder.UseMySQL(Startup.ConectionString);
+                optionsBuilder.UseMySQL(Startup.ConectionString);
             }
         }
 

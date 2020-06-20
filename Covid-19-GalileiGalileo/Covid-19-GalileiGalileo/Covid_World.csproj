@@ -7,6 +7,8 @@
     <IsPackable>true</IsPackable>
     <AssemblyName>Covid_World</AssemblyName>
   </PropertyGroup>
+  
+  
 
   <ItemGroup>
     <PackageReference Include="ChartJSCore" Version="1.5.7" />

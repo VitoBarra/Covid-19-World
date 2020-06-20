@@ -12,16 +12,17 @@ namespace Covid_World.Models
     }
 
 
-    public class ErrorAPI:IDisposable
+    public class ErrorAPI
     {
-        public HttpResponseMessage HttpResponse;
+        public HttpResponseMessage httpResponse;
+
+
 
         public string Description { get; set; }
+        public HttpResponseMessage HttpResponse { get => httpResponse; set => httpResponse = value; }
 
-        public void Dispose()
-        {
-            HttpResponse?.Dispose();
-        }
+
+
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using ChartJSCore.Models;
 using Covid_World.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,9 @@ namespace Covid_World.DBContext
 {
     public static class DatabaseOperation
     {
+
         public static Covid19wDbContext CovidDB = new Covid19wDbContext();
+
         public static void SaveOnDatabase(this IList<CovidData> History)
         {
 
@@ -58,7 +61,7 @@ namespace Covid_World.DBContext
 
         public static bool IsDataToOld(string Country = "all")
         {
-            //return true;
+
 
             var LastData = (from a in CovidDB.Coviddatas where a.Country == Country select a.Time).ToList();
 
@@ -79,6 +82,7 @@ namespace Covid_World.DBContext
                 return false;
         }
 
+        public static CovidData[] GetCountryHistory(string Country = "all") => (from a in DatabaseOperation.CovidDB.Coviddatas where a.Country.Equals(Country) select a).ToArray().CovidToArray();
     }
 
   

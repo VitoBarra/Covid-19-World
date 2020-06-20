@@ -111,4 +111,5 @@ namespace Covid_World.Migrations
 #pragma warning restore 612, 618
         }
     }
+
 }

@@ -12,14 +12,10 @@ namespace Covid_World.Installers
     {
         public void InstallService(IServiceCollection services, IConfiguration configuration)
         {
-
-
 #if DEBUG
             services.AddLiveReload();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-#else
-            services.AddControllersWithViews();    
 #endif
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();  
         }
     }
 }
