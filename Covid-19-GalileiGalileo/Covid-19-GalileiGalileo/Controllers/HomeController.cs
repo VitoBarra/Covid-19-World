@@ -32,24 +32,24 @@ namespace Covid_World.Controllers
         public IActionResult Index()
         {
             CovidList<CovidData> worldHistory;
+            ErrorAPI ErrorAPIHendler = new ErrorAPI();
 
             if (DatabaseOperation.IsDataToOld())
             {
-                ErrorAPI ErrorAPIHendler = new ErrorAPI();
                 try
                 {
-                    worldHistory = new CovidList<CovidData>(RestServices.GetDataHistory(out ErrorAPIHendler.HttpResponse).ToArray(), true);
+                    worldHistory = new CovidList<CovidData>(RestServices.GetDataHistory(out ErrorAPIHendler.httpResponse).ToArray(), true);
                 }
                 catch (Exception e)
                 {
-                    ErrorAPIHendler.Description = $"questo errore viene dal recupero iniziale dei dati: {e.Message}";
+                    ErrorAPIHendler.Description = $"questo errore viene dal recupero iniziale dei dati: {e.Message} || code: {ErrorAPIHendler.HttpResponse.StatusCode}";
                     return RedirectToAction("APIError", ErrorAPIHendler);
                 }
                 worldHistory.SaveOnDatabase();
 
             }
             else
-                worldHistory = new CovidList<CovidData>((from a in DatabaseOperation.CovidDB.Coviddatas where a.Country.Equals("all") select a).ToArray().CovidToArray(), true);
+                worldHistory = new CovidList<CovidData>(DatabaseOperation.GetCountryHistory(), true);
 
 
 
@@ -116,20 +116,20 @@ namespace Covid_World.Controllers
             Dictionary<string, int> pairs = new Dictionary<string, int>();
             ErrorStatus = null;
 
-            using (ErrorAPI ErrorAPIHendler = new ErrorAPI())
+            ErrorAPI ErrorAPIHendler = new ErrorAPI();
+
+            try
             {
-                try
-                {
-                    LastStatOfallCountry = new CovidList<CovidData>(RestServices.GetStatByCountry(out ErrorAPIHendler.HttpResponse).ToArray());
-                }
-                catch
-                {
-                    ErrorAPIHendler.Description = "questo errore viene dala generazione della lista di associazione dei valori";
-                    ErrorStatus = RedirectToAction("APIError", ErrorAPIHendler);
-                    return null;
-                }
-                LastStatOfallCountry.SaveOnDatabase();
+                LastStatOfallCountry = new CovidList<CovidData>(RestServices.GetStatByCountry(out ErrorAPIHendler.httpResponse).ToArray());
             }
+            catch
+            {
+                ErrorAPIHendler.Description = "questo errore viene dala generazione della lista di associazione dei valori";
+                ErrorStatus = RedirectToAction("APIError", ErrorAPIHendler);
+                return null;
+            }
+            LastStatOfallCountry.SaveOnDatabase();
+
 
 
 
@@ -162,17 +162,17 @@ namespace Covid_World.Controllers
                 ErrorAPI ErrorAPIhendler = new ErrorAPI();
                 try
                 {
-                    CountryHistory = new CovidList<CovidData>(RestServices.GetDataHistory(out ErrorAPIhendler.HttpResponse, Country).ToArray(), true);
+                    CountryHistory = new CovidList<CovidData>(RestServices.GetDataHistory(out ErrorAPIhendler.httpResponse, Country).ToArray(), true);
                 }
                 catch
                 {
                     ErrorAPIhendler.Description = "questo errore viene dal click di una regione";
                     return RedirectToAction("APIError", ErrorAPIhendler);
                 }
-                    CountryHistory.SaveOnDatabase();
+                CountryHistory.SaveOnDatabase();
             }
             else
-                CountryHistory = new CovidList<CovidData>((from a in DatabaseOperation.CovidDB.Coviddatas where a.Country.Equals(Country) select a).ToArray().CovidToArray(), true);
+                CountryHistory = new CovidList<CovidData>(DatabaseOperation.GetCountryHistory(Country), true);
 
 
 
