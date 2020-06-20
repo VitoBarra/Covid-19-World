@@ -14,7 +14,10 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>06/10/2020 18:36:35</publishTime>
     </File>
     <File Include="appsettings.json">
-      <publishTime>06/15/2020 15:18:41</publishTime>
+      <publishTime>06/19/2020 22:54:22</publishTime>
+    </File>
+    <File Include="appsettings.production.json">
+      <publishTime>06/19/2020 23:41:09</publishTime>
     </File>
     <File Include="BouncyCastle.Crypto.dll">
       <publishTime>05/28/2018 16:12:20</publishTime>
@@ -22,47 +25,50 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="ChartJSCore.dll">
       <publishTime>02/03/2020 11:22:56</publishTime>
     </File>
+    <File Include="CountryPairs.json">
+      <publishTime>06/18/2020 22:38:10</publishTime>
+    </File>
     <File Include="Covid-19-GalileiGalileo.deps.json">
-      <publishTime>10/06/2020 17:46:05</publishTime>
+      <publishTime>06/10/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.dll">
-      <publishTime>10/06/2020 17:46:05</publishTime>
+      <publishTime>06/10/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.exe">
-      <publishTime>10/06/2020 17:46:05</publishTime>
+      <publishTime>06/10/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.pdb">
-      <publishTime>10/06/2020 17:46:05</publishTime>
+      <publishTime>06/10/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.runtimeconfig.json">
-      <publishTime>10/06/2020 17:22:39</publishTime>
+      <publishTime>06/10/2020 17:22:39</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.Views.dll">
-      <publishTime>10/06/2020 17:46:05</publishTime>
+      <publishTime>06/10/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid-19-GalileiGalileo.Views.pdb">
-      <publishTime>10/06/2020 17:46:05</publishTime>
+      <publishTime>06/10/2020 17:46:05</publishTime>
     </File>
     <File Include="Covid_World.deps.json">
-      <publishTime>06/15/2020 17:14:33</publishTime>
+      <publishTime>06/19/2020 23:41:09</publishTime>
     </File>
     <File Include="Covid_World.dll">
-      <publishTime>06/15/2020 17:14:31</publishTime>
+      <publishTime>06/19/2020 23:41:03</publishTime>
     </File>
     <File Include="Covid_World.exe">
-      <publishTime>06/15/2020 17:14:31</publishTime>
+      <publishTime>06/19/2020 23:41:03</publishTime>
     </File>
     <File Include="Covid_World.pdb">
-      <publishTime>06/15/2020 17:14:31</publishTime>
+      <publishTime>06/19/2020 23:41:03</publishTime>
     </File>
     <File Include="Covid_World.runtimeconfig.json">
       <publishTime>06/14/2020 00:12:16</publishTime>
     </File>
     <File Include="Covid_World.Views.dll">
-      <publishTime>06/15/2020 17:14:32</publishTime>
+      <publishTime>06/19/2020 23:41:04</publishTime>
     </File>
     <File Include="Covid_World.Views.pdb">
-      <publishTime>06/15/2020 17:14:32</publishTime>
+      <publishTime>06/19/2020 23:41:04</publishTime>
     </File>
     <File Include="cs/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:08:58</publishTime>
@@ -698,7 +704,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>11/15/2019 08:34:38</publishTime>
     </File>
     <File Include="refs/System.Collections.Immutable.dll">
-      <publishTime>11/15/2019 08:34:46</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="refs/System.Collections.NonGeneric.dll">
       <publishTime>11/15/2019 08:34:38</publishTime>
@@ -752,7 +758,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>11/15/2019 08:34:36</publishTime>
     </File>
     <File Include="refs/System.Diagnostics.DiagnosticSource.dll">
-      <publishTime>11/15/2019 08:33:46</publishTime>
+      <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="refs/System.Diagnostics.FileVersionInfo.dll">
       <publishTime>11/15/2019 08:34:38</publishTime>
@@ -1208,7 +1214,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>03/17/2020 10:35:10</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>06/15/2020 17:14:33</publishTime>
+      <publishTime>06/19/2020 23:41:09</publishTime>
     </File>
     <File Include="Westwind.AspnetCore.LiveReload.dll">
       <publishTime>06/02/2020 20:37:38</publishTime>
@@ -1454,7 +1460,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>06/10/2020 18:51:44</publishTime>
     </File>
     <File Include="wwwroot/Resource/jvectormaps.png">
-      <publishTime>07/04/2020 21:31:42</publishTime>
+      <publishTime>04/07/2020 21:31:42</publishTime>
     </File>
     <File Include="wwwroot/Resource/photo_2020-04-26_18-07-18.jpg">
       <publishTime>06/01/2020 21:28:24</publishTime>
@@ -1486,5 +1492,15 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
     <File Include="Zstandard.Net.dll">
       <publishTime>03/17/2020 10:35:10</publishTime>
     </File>
+  </ItemGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="Covid19wDB">
+      <Value>server=db5000538659.hosting-data.io:3306%3buserid=dbu899543%3bpassword=F&lt;%3f%28pXepz^x5%3bpersistsecurityinfo=True%3bdatabase=dbs517216</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="Covid_World.ModelsDB.Covid19wDbContext">
+      <Value>server=db5000538659.hosting-data.io:3306%3buserid=dbu899543%3bpassword=F&lt;%3f%28pXepz^x5%3bpersistsecurityinfo=True%3bdatabase=dbs517216</Value>
+    </EFMigrations>
   </ItemGroup>
 </Project>

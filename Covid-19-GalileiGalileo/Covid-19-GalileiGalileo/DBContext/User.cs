@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Covid_World.ModelsDB
+namespace Covid_World.DBContext
 {
     public partial class User
     {

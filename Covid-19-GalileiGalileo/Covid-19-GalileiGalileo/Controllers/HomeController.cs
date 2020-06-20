@@ -13,7 +13,7 @@ using Covid_World.Tool;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
-using Covid_World.ModelsDB;
+using Covid_World.DBContext;
 using System.IO;
 using MySql.Data.EntityFrameworkCore.Query.Internal;
 
@@ -21,9 +21,6 @@ namespace Covid_World.Controllers
 {
     public class HomeController : Controller
     {
-
-
-
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -32,12 +29,9 @@ namespace Covid_World.Controllers
         }
 
 
-        [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
             CovidList<CovidData> worldHistory;
-
-
 
             if (DatabaseOperation.IsDataToOld())
             {
@@ -46,9 +40,9 @@ namespace Covid_World.Controllers
                 {
                     worldHistory = new CovidList<CovidData>(RestServices.GetDataHistory(out ErrorAPIHendler.HttpResponse).ToArray(), true);
                 }
-                catch
+                catch (Exception e)
                 {
-                    ErrorAPIHendler.Description = "questo errore viene dal recupero iniziale dei dati";
+                    ErrorAPIHendler.Description = $"questo errore viene dal recupero iniziale dei dati: {e.Message}";
                     return RedirectToAction("APIError", ErrorAPIHendler);
                 }
                 worldHistory.SaveOnDatabase();
@@ -110,10 +104,7 @@ namespace Covid_World.Controllers
                 return actionResult;
 
 
-            if (worldHistory != null)
-                return View(worldHistory.Last());
-            else
-                return BadRequest();
+            return View(worldHistory.Last());
         }
 
 
@@ -204,21 +195,18 @@ namespace Covid_World.Controllers
         {
             return View();
         }
-
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         public IActionResult NewsLetter()
         {
             return View();
         }
 
-        public IActionResult APIError(HttpResponseMessage s)
+        public IActionResult APIError(ErrorAPI s)
         {
             return View(s);
+        }
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
