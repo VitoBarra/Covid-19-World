@@ -27,7 +27,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>06/20/2020 11:07:49</publishTime>
     </File>
     <File Include="appsettings.production.json">
-      <publishTime>06/20/2020 14:27:55</publishTime>
+      <publishTime>06/20/2020 16:50:18</publishTime>
     </File>
     <File Include="BouncyCastle.Crypto.dll">
       <publishTime>05/28/2018 16:12:20</publishTime>
@@ -39,25 +39,25 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>06/18/2020 22:38:10</publishTime>
     </File>
     <File Include="Covid_World.deps.json">
-      <publishTime>06/20/2020 14:27:55</publishTime>
+      <publishTime>06/20/2020 16:50:18</publishTime>
     </File>
     <File Include="Covid_World.dll">
-      <publishTime>06/20/2020 14:25:19</publishTime>
+      <publishTime>06/20/2020 16:50:11</publishTime>
     </File>
     <File Include="Covid_World.exe">
-      <publishTime>06/20/2020 14:25:19</publishTime>
+      <publishTime>06/20/2020 16:50:11</publishTime>
     </File>
     <File Include="Covid_World.pdb">
-      <publishTime>06/20/2020 14:25:19</publishTime>
+      <publishTime>06/20/2020 16:50:11</publishTime>
     </File>
     <File Include="Covid_World.runtimeconfig.json">
       <publishTime>06/14/2020 00:12:16</publishTime>
     </File>
     <File Include="Covid_World.Views.dll">
-      <publishTime>06/20/2020 14:25:21</publishTime>
+      <publishTime>06/20/2020 16:50:13</publishTime>
     </File>
     <File Include="Covid_World.Views.pdb">
-      <publishTime>06/20/2020 14:25:21</publishTime>
+      <publishTime>06/20/2020 16:50:13</publishTime>
     </File>
     <File Include="cs/Microsoft.CodeAnalysis.CSharp.resources.dll">
       <publishTime>09/12/2019 17:08:58</publishTime>
@@ -1164,7 +1164,7 @@ modificando il file MSBuild. Per altre informazioni su questo argomento, vedere 
       <publishTime>03/17/2020 10:35:10</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>06/20/2020 14:27:55</publishTime>
+      <publishTime>06/20/2020 16:50:18</publishTime>
     </File>
     <File Include="Westwind.AspnetCore.LiveReload.dll">
       <publishTime>06/02/2020 20:37:38</publishTime>
