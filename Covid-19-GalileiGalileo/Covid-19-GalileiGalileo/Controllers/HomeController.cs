@@ -29,6 +29,7 @@ namespace Covid_World.Controllers
         }
 
 
+        [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
             CovidList<CovidData> worldHistory;
@@ -150,7 +151,7 @@ namespace Covid_World.Controllers
 
 
 
-
+        [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult CovidStatistic(string Country = "all")
         {
 
