@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using MySql.Data.EntityFrameworkCore.Metadata;
 
-namespace Covid_World.Migrations
+namespace Covid_World.EFDataAccessLibrary.Migrations
 {
     public partial class Covid19W : Migration
     {

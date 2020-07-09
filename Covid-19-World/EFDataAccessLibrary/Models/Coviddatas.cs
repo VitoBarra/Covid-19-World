@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Covid_World.DBContext
+namespace Covid_World.EFDataAccessLibrary.Models
 {
     public partial class Coviddatas
     {

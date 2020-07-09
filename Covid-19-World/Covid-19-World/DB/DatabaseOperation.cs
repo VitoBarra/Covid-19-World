@@ -1,4 +1,6 @@
 ﻿using ChartJSCore.Models;
+using Covid_World.EFDataAccessLibrary.DataAccess;
+using Covid_World.EFDataAccessLibrary.Models;
 using Covid_World.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,18 +8,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Hoc = Covid_World.Controllers.HomeController;
 
 namespace Covid_World.DBContext
 {
     public static class DatabaseOperation
     {
-
-        public static Covid19wDbContext CovidDB = new Covid19wDbContext();
-
         public static void SaveOnDatabase(this IList<CovidData> History)
         {
 
-            List<Coviddatas> PresetData = (from a in CovidDB.Coviddatas select a).ToList();
+            List<Coviddatas> PresetData = (from a in Hoc.Covid19WDbContext.Coviddatas select a).ToList();
 
             foreach (CovidData CovidDataFromAPI in History)
             {
@@ -49,21 +49,19 @@ namespace Covid_World.DBContext
                     TempCovidRow.DeathNew = CovidDataFromAPI.Deaths.New;
                     TempCovidRow.DeathTotal = CovidDataFromAPI.Deaths.Total;
 
-                    CovidDB.Add(TempCovidRow);
+                    Hoc.Covid19WDbContext.Add(TempCovidRow);
 
                 }
 
             }
 
-            CovidDB.SaveChanges();
+            Hoc.Covid19WDbContext.SaveChanges();
         }
 
 
         public static bool IsDataToOld(string Country = "all")
         {
-
-
-            var LastData = (from a in CovidDB.Coviddatas where a.Country == Country select a.Time).ToList();
+            var LastData = (from a in Hoc.Covid19WDbContext.Coviddatas where a.Country == Country select a.Time).ToList();
 
             if (LastData != null) return true;
 
@@ -82,8 +80,41 @@ namespace Covid_World.DBContext
                 return false;
         }
 
-        public static CovidData[] GetCountryHistory(string Country = "all") => (from a in DatabaseOperation.CovidDB.Coviddatas where a.Country.Equals(Country) select a).ToArray().CovidToArray();
+        public static CovidData[] GetCountryHistory(string Country = "all") => (from a in Hoc.Covid19WDbContext.Coviddatas where a.Country.Equals(Country) select a).ToArray().CovidToArray();
     }
 
-  
+
+    public static class CovidEx
+    {
+        public static CovidData[] CovidToArray(this Coviddatas[] coviddatas)
+        {
+
+            List<CovidData> cd = new List<CovidData>();
+
+            IEnumerable<Coviddatas> enume = coviddatas.OrderBy(a => a.Time).Reverse();
+
+
+            foreach (Coviddatas cs in enume)
+            {
+                CovidData te = new CovidData()
+                {
+                    Cases = new Cases
+                    {
+                        Active = cs.CaseActive,
+                        New = cs.CaseNew,
+                        Critical = cs.CaseCritical,
+                        Recovered = cs.CaseRecovered,
+                        Total = cs.CaseTotal
+                    },
+                    Deaths = new Deaths { New = cs.DeathNew, Total = cs.DeathTotal },
+                    Country = cs.Country,
+                    Time = DateTime.Parse(cs.Time)
+                };
+                cd.Add(te);
+            }
+
+            return cd.ToArray();
+        }
+    }
+
 }
