@@ -1,5 +1,4 @@
-﻿using Covid_World.DBContext;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -190,37 +189,6 @@ namespace Covid_World.Models
 
     }
 
-    public static class CovidEx
-    {
-        public static CovidData[] CovidToArray(this Coviddatas[] coviddatas)
-        {
-
-            List<CovidData> cd = new List<CovidData>();
-
-             IEnumerable<Coviddatas> enume = coviddatas.OrderBy(a => a.Time).Reverse();
-
-
-            foreach (Coviddatas cs in enume)
-            {
-                CovidData te = new CovidData()
-                {
-                    Cases = new Cases
-                    {
-                        Active = cs.CaseActive,
-                        New = cs.CaseNew,
-                        Critical = cs.CaseCritical,
-                        Recovered = cs.CaseRecovered,
-                        Total = cs.CaseTotal 
-                    },
-                    Deaths = new Deaths { New = cs.DeathNew, Total = cs.DeathTotal },
-                    Country = cs.Country,
-                    Time = DateTime.Parse(cs.Time)
-                };
-                cd.Add(te);
-            }
-
-            return cd.ToArray();
-        }
-    }
+   
 
 }

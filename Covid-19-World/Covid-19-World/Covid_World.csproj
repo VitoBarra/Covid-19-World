@@ -31,6 +31,12 @@
   
 
   <ItemGroup>
+    <ProjectReference Include="..\EFDataAccessLibrary\Covid_World.EFDataAccessLibrary.csproj" />
+  </ItemGroup>
+  
+  
+
+  <ItemGroup>
     <Reference Include="AspNetCore.Instalers">
       <HintPath>..\..\..\..\SharedLibrary\SharedLibrary\bin\Release\netstandard2.0\AspNetCore.Instalers.dll</HintPath>
     </Reference>

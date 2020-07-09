@@ -1,18 +1,14 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
+using Covid_World.EFDataAccessLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.DependencyModel;
 
-namespace Covid_World.DBContext
+namespace Covid_World.EFDataAccessLibrary.DataAccess
 {
     public partial class Covid19wDbContext : DbContext
     {
-        public Covid19wDbContext()
-        {
-        }
-
-        public Covid19wDbContext([FromServices] DbContextOptions<Covid19wDbContext> options) : base(options)
+  
+        public Covid19wDbContext( DbContextOptions<Covid19wDbContext> options) : base(options)
         {
         }
 
@@ -24,9 +20,9 @@ namespace Covid_World.DBContext
             if (!optionsBuilder.IsConfigured)
             {
 #if DEBUG
-                optionsBuilder.UseMySQL(Startup.ConectionString);
+                optionsBuilder.UseMySQL("server=localhost;user id=root;password=toor;persistsecurityinfo=True;database=Covid19w;");
 #else
-                optionsBuilder.UseSqlServer(Startup.ConectionString);
+                optionsBuilder.UseSqlServer("Server=db834093830.hosting-data.io;Database=db834093830;User Id=dbo834093830;Password=RSai@fHz6y&9;");
 #endif
             }
         }

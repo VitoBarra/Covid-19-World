@@ -16,16 +16,19 @@ using System.Net.Http;
 using Covid_World.DBContext;
 using System.IO;
 using MySql.Data.EntityFrameworkCore.Query.Internal;
+using Covid_World.EFDataAccessLibrary.DataAccess;
 
 namespace Covid_World.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public static Covid19wDbContext Covid19WDbContext;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Covid19wDbContext covid19WDB )
         {
             _logger = logger;
+            Covid19WDbContext = covid19WDB;
         }
 
 
