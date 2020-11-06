@@ -13,7 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Westwind.AspNetCore.LiveReload;
-using MyPersonalStandardLibrary.AspNetCore.Installers;
+using SharedLibrary.AspNetCore.ChartJsTool;
+using SharedLibrary.AspNetCore.Installers;
 
 namespace Covid_World
 {

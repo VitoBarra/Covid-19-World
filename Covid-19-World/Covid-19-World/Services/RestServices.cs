@@ -27,9 +27,9 @@ namespace Covid_World.Services
 
         }
 
-        public static IList<CovidData> GetDataHistory(out HttpResponseMessage response, string Country ="all")
+        public static IList<CovidDataAPI> GetDataHistory(out HttpResponseMessage response, string Country ="all")
         {
-            IList<CovidData> Data = null;
+            IList<CovidDataAPI> Data = null;
             string EndPoint = $"https://covid-193.p.rapidapi.com/history?country={Country}";
 
             try
@@ -54,9 +54,9 @@ namespace Covid_World.Services
         }
 
 
-        public static IList<CovidData> GetStatByCountry(out HttpResponseMessage response,string country = null)
+        public static IList<CovidDataAPI> GetStatByCountry(out HttpResponseMessage response,string country = null)
         {
-            IList<CovidData> Data = null;
+            IList<CovidDataAPI> Data = null;
             string EndPoint;
             if (string.IsNullOrEmpty(country))
                 EndPoint = $"https://covid-193.p.rapidapi.com/statistics";

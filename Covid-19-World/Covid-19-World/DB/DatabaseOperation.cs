@@ -14,54 +14,53 @@ namespace Covid_World.DBContext
 {
     public static class DatabaseOperation
     {
-        public static void SaveOnDatabase(this IList<CovidData> History)
+        /// <summary>
+        /// salva i dati di questa lista sul database 
+        /// </summary>
+        /// <param name="History">la lista che il metodo estende</param>
+        /// <param name="RefreshData">ti fa scegliere se vuoi aggiornare o meno i dati gia presenti sul database </param>
+        public static void SaveOnDatabase(this IList<CovidDataAPI> History, bool RefreshData = false)
         {
 
-            List<Coviddatas> PresetData = (from a in Hoc.Covid19WDbContext.Coviddatas select a).ToList();
+            List<CovidDatas> PresetData = (from a in Hoc.Covid19WDbContext.CovidDatas select a).ToList();
 
-            foreach (CovidData CovidDataFromAPI in History)
+            foreach (CovidDataAPI CovidDataFromAPI in History)
             {
-                Coviddatas TempCovidRow = new Coviddatas();
+                CovidDatas TempCovidRow = new CovidDatas();
 
                 TempCovidRow.Country = CovidDataFromAPI.Country;
                 TempCovidRow.Time = CovidDataFromAPI.Time.ToString("yyyy/MM/dd H:mm:ss");
 
 
-                Coviddatas ExistentRow = PresetData.Find(d => d.Country == CovidDataFromAPI.Country && d.Time.Equals(CovidDataFromAPI.Time.ToString("yyyy/MM/dd H:mm:ss")));
+                CovidDatas ExistentRow = PresetData.Find(d =>
+                    d.Country == TempCovidRow.Country &&
+                    d.Time.Equals(TempCovidRow.Time));
 
-                if (ExistentRow != null)
-                {
-                    ExistentRow.CaseNew = CovidDataFromAPI.Cases.New;
-                    ExistentRow.CaseActive = CovidDataFromAPI.Cases.Active;
-                    ExistentRow.CaseCritical = CovidDataFromAPI.Cases.Critical;
-                    ExistentRow.CaseRecovered = CovidDataFromAPI.Cases.Recovered;
-                    ExistentRow.CaseTotal = CovidDataFromAPI.Cases.Total;
-                    ExistentRow.DeathNew = CovidDataFromAPI.Deaths.New;
-                    ExistentRow.DeathTotal = CovidDataFromAPI.Deaths.Total;
-                }
-                else
-                {
-                    TempCovidRow.CaseNew = CovidDataFromAPI.Cases.New;
-                    TempCovidRow.CaseActive = CovidDataFromAPI.Cases.Active;
-                    TempCovidRow.CaseCritical = CovidDataFromAPI.Cases.Critical;
-                    TempCovidRow.CaseRecovered = CovidDataFromAPI.Cases.Recovered;
-                    TempCovidRow.CaseTotal = CovidDataFromAPI.Cases.Total;
-                    TempCovidRow.DeathNew = CovidDataFromAPI.Deaths.New;
-                    TempCovidRow.DeathTotal = CovidDataFromAPI.Deaths.Total;
-
+                if (ExistentRow != null )
+                    if(!RefreshData) continue;
+                    else TempCovidRow = ExistentRow;
+                else 
                     Hoc.Covid19WDbContext.Add(TempCovidRow);
 
-                }
 
+                TempCovidRow.CaseNew = CovidDataFromAPI.Cases.New;
+                TempCovidRow.CaseActive = CovidDataFromAPI.Cases.Active;
+                TempCovidRow.CaseCritical = CovidDataFromAPI.Cases.Critical;
+                TempCovidRow.CaseRecovered = CovidDataFromAPI.Cases.Recovered;
+                TempCovidRow.CaseTotal = CovidDataFromAPI.Cases.Total;
+                TempCovidRow.DeathNew = CovidDataFromAPI.Deaths.New;
+                TempCovidRow.DeathTotal = CovidDataFromAPI.Deaths.Total;
             }
+
 
             Hoc.Covid19WDbContext.SaveChanges();
         }
 
 
+
         public static bool IsDataToOld(string Country = "all")
         {
-            var LastData = (from a in Hoc.Covid19WDbContext.Coviddatas where a.Country == Country select a.Time).ToList();
+            var LastData = (from a in Hoc.Covid19WDbContext.CovidDatas where a.Country == Country select a.Time).ToList();
 
             if (LastData != null) return true;
 
@@ -80,23 +79,29 @@ namespace Covid_World.DBContext
                 return false;
         }
 
-        public static CovidData[] GetCountryHistory(string Country = "all") => (from a in Hoc.Covid19WDbContext.Coviddatas where a.Country.Equals(Country) select a).ToArray().CovidToArray();
+        public static CovidDataAPI[] GetCountryHistory(string Country = "all") => 
+            (from a in Hoc.Covid19WDbContext.CovidDatas where a.Country == Country select a).ToArray().FromDBtoAPI();
     }
 
 
     public static class CovidEx
     {
-        public static CovidData[] CovidToArray(this Coviddatas[] coviddatas)
+        /// <summary>
+        /// converte il formato database dei dati covid al formato API utilizato nel programma
+        /// </summary>
+        /// <param name="coviddatas"></param>
+        /// <returns></returns>
+        public static CovidDataAPI[] FromDBtoAPI(this CovidDatas[] coviddatas)
         {
 
-            List<CovidData> cd = new List<CovidData>();
+            List<CovidDataAPI> cd = new List<CovidDataAPI>();
 
-            IEnumerable<Coviddatas> enume = coviddatas.OrderBy(a => a.Time).Reverse();
+            IEnumerable<CovidDatas> enume = coviddatas.OrderBy(a => a.Time).Reverse();
 
 
-            foreach (Coviddatas cs in enume)
+            foreach (CovidDatas cs in enume)
             {
-                CovidData te = new CovidData()
+                CovidDataAPI te = new CovidDataAPI()
                 {
                     Cases = new Cases
                     {

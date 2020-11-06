@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Covid_World.Models
 {
-    public class CovidData
+    public class CovidDataAPI
     {
         [JsonProperty("country")]
         public string Country { get; set; }
@@ -43,7 +43,7 @@ namespace Covid_World.Models
 
 
 
-    public class CovidList<T> : List<T> where T : CovidData
+    public class CovidList<T> : List<T> where T : CovidDataAPI
     {
         int DataRatio { get; set; } = 1;
 

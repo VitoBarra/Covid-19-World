@@ -9,13 +9,12 @@ using Covid_World.Models;
 using Covid_World.Services;
 using ChartJSCore.Models;
 using ChartJSCore.Helpers;
-using Covid_World.Tool;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
-using Covid_World.DBContext;
 using System.IO;
-using MySql.Data.EntityFrameworkCore.Query.Internal;
+using SharedLibrary.AspNetCore.ChartJsTool;
+using Covid_World.DBContext;
 using Covid_World.EFDataAccessLibrary.DataAccess;
 
 namespace Covid_World.Controllers
@@ -35,14 +34,14 @@ namespace Covid_World.Controllers
         [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
-            CovidList<CovidData> worldHistory;
+            CovidList<CovidDataAPI> worldHistory;
             ErrorAPI ErrorAPIHendler = new ErrorAPI();
 
             if (DatabaseOperation.IsDataToOld())
             {
                 try
                 {
-                    worldHistory = new CovidList<CovidData>(RestServices.GetDataHistory(out ErrorAPIHendler.httpResponse).ToArray(), true);
+                    worldHistory = new CovidList<CovidDataAPI>(RestServices.GetDataHistory(out ErrorAPIHendler.httpResponse).ToArray(), true);
                 }
                 catch (Exception e)
                 {
@@ -53,7 +52,7 @@ namespace Covid_World.Controllers
 
             }
             else
-                worldHistory = new CovidList<CovidData>(DatabaseOperation.GetCountryHistory(), true);
+                worldHistory = new CovidList<CovidDataAPI>(DatabaseOperation.GetCountryHistory(), true);
 
 
 
@@ -116,7 +115,7 @@ namespace Covid_World.Controllers
 
         public Dictionary<string, int> GetCountryValue(out IActionResult ErrorStatus)
         {
-            CovidList<CovidData> LastStatOfallCountry;
+            CovidList<CovidDataAPI> LastStatOfallCountry;
             Dictionary<string, int> pairs = new Dictionary<string, int>();
             ErrorStatus = null;
 
@@ -124,7 +123,7 @@ namespace Covid_World.Controllers
 
             try
             {
-                LastStatOfallCountry = new CovidList<CovidData>(RestServices.GetStatByCountry(out ErrorAPIHendler.httpResponse).ToArray());
+                LastStatOfallCountry = new CovidList<CovidDataAPI>(RestServices.GetStatByCountry(out ErrorAPIHendler.httpResponse).ToArray());
             }
             catch
             {
@@ -142,7 +141,7 @@ namespace Covid_World.Controllers
                 string Json = r.ReadToEnd();
                 List<CountryPairs> CountryListr = JsonConvert.DeserializeObject<List<CountryPairs>>(Json);
 
-                foreach (CovidData CovidD in LastStatOfallCountry)
+                foreach (CovidDataAPI CovidD in LastStatOfallCountry)
                 {
                     var countrypairs = CountryListr.SingleOrDefault(cou => cou.Country.Equals(CovidD.Country));
                     if (countrypairs != null)
@@ -158,7 +157,7 @@ namespace Covid_World.Controllers
         public IActionResult CovidStatistic(string Country = "all")
         {
 
-            CovidList<CovidData> CountryHistory;
+            CovidList<CovidDataAPI> CountryHistory;
 
 
             if (DatabaseOperation.IsDataToOld(Country))
@@ -166,7 +165,7 @@ namespace Covid_World.Controllers
                 ErrorAPI ErrorAPIhendler = new ErrorAPI();
                 try
                 {
-                    CountryHistory = new CovidList<CovidData>(RestServices.GetDataHistory(out ErrorAPIhendler.httpResponse, Country).ToArray(), true);
+                    CountryHistory = new CovidList<CovidDataAPI>(RestServices.GetDataHistory(out ErrorAPIhendler.httpResponse, Country).ToArray(), true);
                 }
                 catch
                 {
@@ -176,7 +175,7 @@ namespace Covid_World.Controllers
                 CountryHistory.SaveOnDatabase();
             }
             else
-                CountryHistory = new CovidList<CovidData>(DatabaseOperation.GetCountryHistory(Country), true);
+                CountryHistory = new CovidList<CovidDataAPI>(DatabaseOperation.GetCountryHistory(Country), true);
 
 
 
