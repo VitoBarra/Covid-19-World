@@ -21,7 +21,7 @@ namespace Covid_World.Models
         [JsonProperty("results")]
         public string Results { get; set; }
         [JsonProperty("response")]
-        public List<CovidData> Response { get; set; } = new List<CovidData>();
+        public List<CovidDataAPI> Response { get; set; } = new List<CovidDataAPI>();
     }
 
     public class ResponceHistory
@@ -35,7 +35,7 @@ namespace Covid_World.Models
         [JsonProperty("results")]
         public string Results { get; set; }
         [JsonProperty("response")]
-        public List<CovidData> Response { get; set; } = new List<CovidData>();
+        public List<CovidDataAPI> Response { get; set; } = new List<CovidDataAPI>();
     }
 
 

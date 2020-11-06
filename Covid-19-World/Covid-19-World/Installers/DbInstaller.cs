@@ -3,7 +3,7 @@ using Covid_World.EFDataAccessLibrary.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MyPersonalStandardLibrary.AspNetCore.Installers;
+using SharedLibrary.AspNetCore.Installers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace Covid_World.Installers
         public void InstallService(IServiceCollection services, IConfiguration configuration)
         {
 #if DEBUG
-            services.AddDbContext<Covid19wDbContext>(options => options.UseMySQL(configuration.GetConnectionString("Default")));
+            services.AddDbContext<Covid19wDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Default")));
 #else       
             services.AddDbContext<Covid19wDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("Covid19wDB")));       
 #endif

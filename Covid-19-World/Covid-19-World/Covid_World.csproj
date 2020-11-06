@@ -12,20 +12,18 @@
 
   <ItemGroup>
     <PackageReference Include="ChartJSCore" Version="1.5.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.5">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.5" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.3" />
-    <PackageReference Include="MySql.Data" Version="8.0.20" />
-    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.20" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RestSharp" Version="106.11.4" />
-    <PackageReference Include="Westwind.AspnetCore.LiveReload" Version="0.2.4.2" />
+    <PackageReference Include="RestSharp" Version="106.11.7" />
+    <PackageReference Include="Westwind.AspnetCore.LiveReload" Version="0.2.14" />
   </ItemGroup>
   
   
@@ -37,8 +35,11 @@
   
 
   <ItemGroup>
+    <Reference Include="AspNetCore.ChartJsTool">
+      <HintPath>..\..\..\MyLibrary\SharedLibrary\AspNetCore.ChartJsTool\bin\Release\netstandard2.0\AspNetCore.ChartJsTool.dll</HintPath>
+    </Reference>
     <Reference Include="AspNetCore.Instalers">
-      <HintPath>..\..\..\..\SharedLibrary\SharedLibrary\bin\Release\netstandard2.0\AspNetCore.Instalers.dll</HintPath>
+      <HintPath>..\..\..\MyLibrary\SharedLibrary\AspNetCore.Instalers\bin\Release\netstandard2.0\AspNetCore.Instalers.dll</HintPath>
     </Reference>
   </ItemGroup>
 

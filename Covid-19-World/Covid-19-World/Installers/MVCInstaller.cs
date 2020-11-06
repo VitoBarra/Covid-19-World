@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MyPersonalStandardLibrary.AspNetCore.Installers;
+using SharedLibrary.AspNetCore.Installers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
