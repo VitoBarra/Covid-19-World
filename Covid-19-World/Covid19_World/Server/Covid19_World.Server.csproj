@@ -5,12 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ChartJSCore" Version="1.5.8" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Covid19_World.EFDataAccessLibrary\Covid19_World.EFDataAccessLibrary.csproj" />
     <ProjectReference Include="..\Client\Covid19_World.Client.csproj" />
     <ProjectReference Include="..\Shared\Covid19_World.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AspNetCore.ChartJsTool">
+      <HintPath>..\..\..\..\MyLibrary\SharedLibrary\AspNetCore.ChartJsTool\bin\Release\netstandard2.0\AspNetCore.ChartJsTool.dll</HintPath>
+    </Reference>
+    <Reference Include="AspNetCore.Instalers">
+      <HintPath>..\..\..\..\MyLibrary\SharedLibrary\AspNetCore.Instalers\bin\Release\netstandard2.0\AspNetCore.Instalers.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 
