@@ -29,7 +29,7 @@
   
 
   <ItemGroup>
-    <ProjectReference Include="..\EFDataAccessLibrary\Covid_World.EFDataAccessLibrary.csproj" />
+    <ProjectReference Include="..\Covid19_World.EFDataAccessLibrary\Covid19_World.EFDataAccessLibrary.csproj" />
   </ItemGroup>
   
   
