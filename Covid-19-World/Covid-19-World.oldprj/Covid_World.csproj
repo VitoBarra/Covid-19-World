@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Covid19_World.EFDataAccessLibrary\Covid19_World.EFDataAccessLibrary.csproj" />
+    <ProjectReference Include="..\Covid19_World\Shared\Covid19_World.Shared.csproj" />
   </ItemGroup>
   
   
@@ -40,6 +41,9 @@
     </Reference>
     <Reference Include="AspNetCore.Instalers">
       <HintPath>..\..\..\MyLibrary\SharedLibrary\AspNetCore.Instalers\bin\Release\netstandard2.0\AspNetCore.Instalers.dll</HintPath>
+    </Reference>
+    <Reference Include="GeneralUse.RestService">
+      <HintPath>..\..\..\MyLibrary\SharedLibrary\GeneralUse.RestService\bin\Release\netstandard2.0\GeneralUse.RestService.dll</HintPath>
     </Reference>
   </ItemGroup>
 

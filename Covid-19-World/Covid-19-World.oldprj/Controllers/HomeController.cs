@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Covid_World.Models;
 using Covid_World.Services;
 using ChartJSCore.Models;
 using ChartJSCore.Helpers;
@@ -14,8 +13,8 @@ using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 using System.IO;
 using SharedLibrary.AspNetCore.ChartJsTool;
-using Covid_World.DBContext;
 using Covid_World.EFDataAccessLibrary.DataAccess;
+using Covid19_World.Shared.Models;
 
 namespace Covid_World.Controllers
 {
@@ -32,27 +31,21 @@ namespace Covid_World.Controllers
 
 
         [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             CovidList<CovidDataAPI> worldHistory;
-            ErrorAPI ErrorAPIHendler = new ErrorAPI();
 
-            if (DatabaseOperation.IsDataToOld())
+
+            if (DatabaseOperation.IsDataToOld(Covid19WDbContext))
             {
-                try
-                {
-                    worldHistory = new CovidList<CovidDataAPI>(RestServices.GetDataHistory(out ErrorAPIHendler.httpResponse).ToArray(), true);
-                }
-                catch (Exception e)
-                {
-                    ErrorAPIHendler.Description = $"questo errore viene dal recupero iniziale dei dati: {e.Message} || code: {ErrorAPIHendler.HttpResponse.StatusCode}";
-                    return RedirectToAction("APIError", ErrorAPIHendler);
-                }
-                worldHistory.SaveOnDatabase();
+
+                    worldHistory = new CovidList<CovidDataAPI>((await RestServices.GetDataHistory()).ToArray(), true);
+
+                worldHistory.SaveOnDatabase(Covid19WDbContext);
 
             }
             else
-                worldHistory = new CovidList<CovidDataAPI>(DatabaseOperation.GetCountryHistory(), true);
+                worldHistory = new CovidList<CovidDataAPI>(DatabaseOperation.GetCountryHistory(Covid19WDbContext), true);
 
 
 
@@ -100,11 +93,11 @@ namespace Covid_World.Controllers
 
 
 
-            IActionResult actionResult;
 
-            ViewBag.CountryValue = GetCountryValue(out actionResult);
-            if (ViewBag.CountryValue == null)
-                return actionResult;
+
+            //ViewBag.CountryValue = JsonConvert.SerializeObject(await GetCountryValue());
+            //if (ViewBag.CountryValue == null)
+            //    return Redirect("Error");
 
 
             return View(worldHistory.Last());
@@ -113,27 +106,13 @@ namespace Covid_World.Controllers
 
 
 
-        public Dictionary<string, int> GetCountryValue(out IActionResult ErrorStatus)
+        public  async Task<IActionResult> ContryDic()
         {
             CovidList<CovidDataAPI> LastStatOfallCountry;
             Dictionary<string, int> pairs = new Dictionary<string, int>();
-            ErrorStatus = null;
 
-            ErrorAPI ErrorAPIHendler = new ErrorAPI();
-
-            try
-            {
-                LastStatOfallCountry = new CovidList<CovidDataAPI>(RestServices.GetStatByCountry(out ErrorAPIHendler.httpResponse).ToArray());
-            }
-            catch
-            {
-                ErrorAPIHendler.Description = "questo errore viene dala generazione della lista di associazione dei valori";
-                ErrorStatus = RedirectToAction("APIError", ErrorAPIHendler);
-                return null;
-            }
-            LastStatOfallCountry.SaveOnDatabase();
-
-
+            LastStatOfallCountry = new CovidList<CovidDataAPI>((await RestServices.GetStatByCountry()).ToArray());
+            LastStatOfallCountry.SaveOnDatabase(Covid19WDbContext);
 
 
             using (StreamReader r = new StreamReader("CountryPairs.json"))
@@ -143,39 +122,45 @@ namespace Covid_World.Controllers
 
                 foreach (CovidDataAPI CovidD in LastStatOfallCountry)
                 {
-                    var countrypairs = CountryListr.SingleOrDefault(cou => cou.Country.Equals(CovidD.Country));
+                    var countrypairs = CountryListr.SingleOrDefault(cou => cou.Country == CovidD.Country);
                     if (countrypairs != null)
                         pairs.Add(countrypairs.MapCode, int.Parse(CovidD.Cases.Active));
                 }
             }
-            return pairs;
+
+            return new JsonResult(JsonConvert.SerializeObject(pairs));
         }
 
+        public async Task<IActionResult> ContryCode()
+        {
 
+            List<CountryPairs> CountryListr;
+
+            using (StreamReader r = new StreamReader("CountryPairs.json"))
+            {
+                string Json = r.ReadToEnd();
+                CountryListr = JsonConvert.DeserializeObject<List<CountryPairs>>(Json);
+
+            }
+
+            return new JsonResult(JsonConvert.SerializeObject(CountryListr));
+        }
 
         [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult CovidStatistic(string Country = "all")
+        public async Task<IActionResult> CovidStatistic(string Country = "all")
         {
 
             CovidList<CovidDataAPI> CountryHistory;
 
 
-            if (DatabaseOperation.IsDataToOld(Country))
+            if (DatabaseOperation.IsDataToOld(Covid19WDbContext, Country))
             {
-                ErrorAPI ErrorAPIhendler = new ErrorAPI();
-                try
-                {
-                    CountryHistory = new CovidList<CovidDataAPI>(RestServices.GetDataHistory(out ErrorAPIhendler.httpResponse, Country).ToArray(), true);
-                }
-                catch
-                {
-                    ErrorAPIhendler.Description = "questo errore viene dal click di una regione";
-                    return RedirectToAction("APIError", ErrorAPIhendler);
-                }
-                CountryHistory.SaveOnDatabase();
+
+                CountryHistory = new CovidList<CovidDataAPI>((await RestServices.GetDataHistory(Country)).ToArray(), true);
+                CountryHistory.SaveOnDatabase(Covid19WDbContext);
             }
             else
-                CountryHistory = new CovidList<CovidDataAPI>(DatabaseOperation.GetCountryHistory(Country), true);
+                CountryHistory = new CovidList<CovidDataAPI>(DatabaseOperation.GetCountryHistory(Covid19WDbContext, Country), true);
 
 
 
@@ -188,7 +173,7 @@ namespace Covid_World.Controllers
                 DiferenceDailyCases = CountryHistory.DiferenceIncrease().ToList()
             };
 
-            string jsonStr = JsonConvert.SerializeObject(ChartData, Formatting.Indented);
+            string jsonStr = JsonConvert.SerializeObject(ChartData);
             return new JsonResult(jsonStr);
         }
 
