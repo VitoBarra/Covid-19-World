@@ -1,25 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Covid_World.Installers;
-using Covid_World.Services;
+using Covid19_World.Shared.Services;
+using Covid19_World.Shared.Services.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Westwind.AspNetCore.LiveReload;
-using SharedLibrary.AspNetCore.ChartJsTool;
 using SharedLibrary.AspNetCore.Installers;
+using System.Net;
 
 namespace Covid_World
 {
     public class Startup
     {
         public static string ConectionString;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,22 +25,22 @@ namespace Covid_World
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.InstallServicesAssembly(Configuration,this);
+            services.InstallServicesAssembly(Configuration, this);
+
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
+            });
 #if DEBUG
-            ConectionString = Configuration.GetConnectionString("Default");
-#else           
-            ConectionString = Configuration.GetConnectionString("Covid19wDB");
+            ConectionString = Configuration.GetConnectionString("Covid19wSQLServer");
+#else
+            ConectionString = Configuration.GetConnectionString("Covid19wMariaDB");
 #endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
-#if DEBUG
-            app.UseLiveReload();
-#endif
-
 
             if (env.IsDevelopment())
             {
@@ -57,10 +52,15 @@ namespace Covid_World
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.UseAuthorization();
 
@@ -71,7 +71,7 @@ namespace Covid_World
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            RestServices.StartUpAPI();
+            ApiService.StartUpAPI();
         }
     }
 }
