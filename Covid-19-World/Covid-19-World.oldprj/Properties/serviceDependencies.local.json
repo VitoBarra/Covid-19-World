@@ -1,12 +1,3 @@
 {
-  "dependencies": {
-    "secrets1": {
-      "type": "secrets.user"
-    },
-    "mssql1": {
-      "type": "mssql.local",
-      "connectionId": "Covid19wSQLServer",
-      "secretStore": "LocalSecretsFile"
-    }
-  }
+  "dependencies": {}
 }

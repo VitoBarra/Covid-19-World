@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Covid19_World.EFDataAccessLibrary.Migrations
+namespace EFDataAccessLibrary.Migrations
 {
     [DbContext(typeof(Covid19wDbContext))]
-    [Migration("20201112110715_CovidStart")]
+    [Migration("20201130162030_CovidStart")]
     partial class CovidStart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace Covid19_World.EFDataAccessLibrary.Migrations
                 .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Covid_World.EFDataAccessLibrary.Models.CovidDatas", b =>
+            modelBuilder.Entity("Covid_World.EFDataAccessLibrary.Models.CovidData", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,29 +63,6 @@ namespace Covid19_World.EFDataAccessLibrary.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CovidDatas");
-                });
-
-            modelBuilder.Entity("Covid_World.EFDataAccessLibrary.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Cognome")
-                        .HasColumnType("varchar(45) CHARACTER SET utf8mb4")
-                        .HasMaxLength(45);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("varchar(45) CHARACTER SET utf8mb4")
-                        .HasMaxLength(45);
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("varchar(45) CHARACTER SET utf8mb4")
-                        .HasMaxLength(45);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,6 +1,7 @@
 ﻿using Covid_World.EFDataAccessLibrary.DataAccess;
 using Covid_World.EFDataAccessLibrary.Models;
 using Covid_World.SharedData.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,6 +12,8 @@ namespace Covid19_World.Shared.Models
 {
     public static class DatabaseOperation
     {
+        public const string WORLD_DEFAULT_CODE = "all";
+
         /// <summary>
         /// salva i dati di questa lista sul database
         /// </summary>
@@ -48,7 +51,7 @@ namespace Covid19_World.Shared.Models
             covidData.DeathTotal = source.DeathTotal;
         }
 
-        public static bool IsDataToOld(Covid19wDbContext ContextDB, string Country = "all")
+        public static bool IsDataToOld(Covid19wDbContext ContextDB, string Country = WORLD_DEFAULT_CODE)
         {
             var LastData = (from a in ContextDB.CovidDatas where a.Country == Country select a.Time).ToList();
 
@@ -68,28 +71,32 @@ namespace Covid19_World.Shared.Models
                 return false;
         }
 
-        public static CovidDataModel[] GetCountryHistory(Covid19wDbContext ContextDB, string Country = "all") =>
-            (from a in ContextDB.CovidDatas where a.Country == Country select a).ToArray().FromDBtoModel();
-    }
+        public static CovidList<CovidDataModel> GetCountryHistory(Covid19wDbContext ContextDB, bool IsHistory = false, string Country = WORLD_DEFAULT_CODE) =>
+            new CovidList<CovidDataModel>((from a in ContextDB.CovidDatas where a.Country == Country select a).ToArray().FromDBtoModelArray(), IsHistory);
 
-    public static class CovidEx
-    {
-        /// <summary>
-        /// converte il formato database dei dati covid al formato API utilizato nel programma
-        /// </summary>
-        /// <param name="coviddatas"></param>
-        /// <returns></returns>
-        public static CovidDataModel[] FromDBtoModel(this CovidData[] coviddatas)
+
+
+
+        public static CovidList<CovidDataModel> GetLastStatsOfCountry(Covid19wDbContext ContextDB, bool IsHistory = false, string Country = WORLD_DEFAULT_CODE)
         {
-            List<CovidDataModel> cd = new List<CovidDataModel>();
+            var data = ContextDB.CovidDatas.Select(x => x).AsEnumerable();
 
-            IEnumerable<CovidData> enume = coviddatas.OrderBy(a => a.Time).Reverse();
+            var e = (from r in data
+                     group r by r.Country into g
+                     select new
+                     {
+                         Country = g.Key,
+                         Time = g.Max(x => x.Time)
+                     }).ToList();
 
-            foreach (CovidData cs in enume)
-                cd.Add(new CovidDataModel(cs));
-            
+            var LastData = data
+            .Where(r => e.Contains(new { r.Country, r.Time }))
+            .Select(r => r)
+            .ToArray();
 
-            return cd.ToArray();
+            return new CovidList<CovidDataModel>(LastData.FromDBtoModelArray());
         }
     }
 }
+
+    

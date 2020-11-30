@@ -6,13 +6,19 @@ using Covid19_World.Shared.Services.Api;
 using Covid19_World.Shared.Services.Api.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using SharedLibrary.AspNetCore.ChartJsTool;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using static Covid_World.SharedData.Models.CovidDataModel;
 
@@ -23,28 +29,21 @@ namespace Covid_World.Controllers
         private readonly ILogger<HomeController> _logger;
         public static Covid19wDbContext Covid19WDbContext;
 
-        public HomeController(ILogger<HomeController> logger, Covid19wDbContext covid19WDB)
+        public IList<CountryPairs> CountryList;
+
+        public HomeController(ILogger<HomeController> logger, Covid19wDbContext covid19WDB, IUtilityFileReader _countryList)
         {
             _logger = logger;
             Covid19WDbContext = covid19WDB;
+            CountryList = ((UtilityFileReader)_countryList).CountryList;
         }
 
+
+
         [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            CovidList<CovidDataModel> worldHistory;
-
-            if (DatabaseOperation.IsDataToOld(Covid19WDbContext))
-            {
-                worldHistory = new CovidList<CovidDataModel>(APIListTOModel((await ApiService.GetDataHistory()).ToArray()), true);
-
-                worldHistory.SaveOnDatabase(Covid19WDbContext);
-            }
-            else
-                worldHistory = new CovidList<CovidDataModel>(DatabaseOperation.GetCountryHistory(Covid19WDbContext), true);
-
-
-
+            CovidList<CovidDataModel> worldHistory = DatabaseOperation.GetCountryHistory(Covid19WDbContext, true);
 
             ViewBag.chartTotalCases = ChartTool.CreateChart(worldHistory.ListTime(),
                 new List<ChartData>()
@@ -79,7 +78,7 @@ namespace Covid_World.Controllers
                     ChartPalette = ChartPalette.orange
                 }});
 
-  
+
 
 
             return View(worldHistory.Last());
@@ -87,53 +86,34 @@ namespace Covid_World.Controllers
 
         public async Task<IActionResult> ContryDic()
         {
-            CovidList<CovidDataModel> LastStatOfallCountry;
-            Dictionary<string, int> pairs = new Dictionary<string, int>();
+            CovidList<CovidDataModel> LastStatOfAllCountry;
+            Dictionary<string, string> pairs = new Dictionary<string, string>();
 
-            LastStatOfallCountry = new CovidList<CovidDataModel>(APIListTOModel((await ApiService.GetStatByCountry()).ToArray()));
-            LastStatOfallCountry.SaveOnDatabase(Covid19WDbContext);
 
-            using (StreamReader r = new StreamReader("CountryPairs.json"))
+            LastStatOfAllCountry = DatabaseOperation.GetLastStatsOfCountry(Covid19WDbContext);
+            foreach (CovidDataModel CovidD in LastStatOfAllCountry)
             {
-                string Json = r.ReadToEnd();
-                List<CountryPairs> CountryListr = JsonConvert.DeserializeObject<List<CountryPairs>>(Json);
-
-                foreach (CovidDataModel CovidD in LastStatOfallCountry)
-                {
-                    var countrypairs = CountryListr.SingleOrDefault(cou => cou.Country == CovidD.Country);
-                    if (countrypairs != null)
-                        pairs.Add(countrypairs.MapCode, int.Parse(CovidD.Cases.Active));
-                }
+                    var countrypairs = CountryList.SingleOrDefault(cou => cou.Country == CovidD.Country);
+                    if (countrypairs != null && !pairs.ContainsKey(countrypairs.MapCode))
+                        pairs.Add(countrypairs.MapCode, CovidD.Cases.Active);
             }
+
 
             return new JsonResult(JsonConvert.SerializeObject(pairs));
         }
 
-        public ActionResult ContryCode()
-        {
-            List<CountryPairs> CountryListr;
 
-            using (StreamReader r = new StreamReader("CountryPairs.json"))
-            {
-                string Json = r.ReadToEnd();
-                CountryListr = JsonConvert.DeserializeObject<List<CountryPairs>>(Json);
-            }
 
-            return new JsonResult(JsonConvert.SerializeObject(CountryListr));
-        }
+
+        public ActionResult ContryCode() => new JsonResult(JsonConvert.SerializeObject(CountryList));
+
+
+
 
         [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> CovidStatistic(string Country = "all")
+        public IActionResult CovidStatistic(string Country = "all")
         {
-            CovidList<CovidDataModel> CountryHistory;
-
-            if (DatabaseOperation.IsDataToOld(Covid19WDbContext, Country))
-            {
-                CountryHistory = new CovidList<CovidDataModel>(APIListTOModel((await ApiService.GetDataHistory(Country)).ToArray()), true);
-                CountryHistory.SaveOnDatabase(Covid19WDbContext);
-            }
-            else
-                CountryHistory = new CovidList<CovidDataModel>(DatabaseOperation.GetCountryHistory(Covid19WDbContext, Country), true);
+            CovidList<CovidDataModel> CountryHistory = DatabaseOperation.GetCountryHistory(Covid19WDbContext,  true,Country);
 
             JsonChartDataResponse ChartData = new JsonChartDataResponse()
             {
@@ -144,18 +124,13 @@ namespace Covid_World.Controllers
                 DiferenceDailyCases = CountryHistory.DiferenceIncrease().ToList()
             };
 
-            string jsonStr = JsonConvert.SerializeObject(ChartData);
-            return new JsonResult(jsonStr);
+            return new JsonResult(JsonConvert.SerializeObject(ChartData));
         }
 
-        public IActionResult AboutMe()
-        {
-            return View();
-        }
+        public IActionResult AboutMe() => View();
 
-        public IActionResult NewsLetter()
-        {
-            return View();
-        }
+        public IActionResult NewsLetter() => View();
+
+
     }
 }
