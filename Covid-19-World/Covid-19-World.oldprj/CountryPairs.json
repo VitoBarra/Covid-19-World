@@ -1,5 +1,9 @@
 [
   {
+    "Country": "all",
+    "MapCode": "all"
+  },
+  {
     "Country": "China",
     "MapCode": "cn"
   },

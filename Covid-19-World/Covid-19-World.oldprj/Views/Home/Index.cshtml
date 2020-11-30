@@ -4,12 +4,10 @@
     ViewData["Title"] = "Covid-19 World";
 }
     <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
-        <link rel="stylesheet" href="~/css/site.css" />
-
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
+
     <body>
 
         <div class="row">
@@ -21,28 +19,55 @@
             <div class="column">
                 <div class="ChartBox ">
                     <p>Attualmente positivi</p>
-                    <p>@int.Parse(Model.Cases.Active).ToString("N0")</p>
+                    @if (Model.Cases.Active != null)
+                    {
+                        <p>@int.Parse(Model.Cases.Active).ToString("N0")</p>
+                    }
+                    else {
+                    <p>PlaceHolder</p>
+                    }
                 </div>
             </div>
 
             <div class="column">
                 <div class="ChartBox ">
                     <p>Guariti</p>
-                    <p>@int.Parse(Model.Cases.Recovered).ToString("N0")</p>
+                    @if (Model.Cases.Active != null)
+                    {
+                        <p>@int.Parse(Model.Cases.Recovered).ToString("N0")</p>
+                    }
+                    else
+                    {
+                        <p>PlaceHolder</p>
+                    }
                 </div>
             </div>
 
             <div class="column">
                 <div class="ChartBox ">
                     <p>Deceduti</p>
+                    @if (Model.Cases.Active != null)
+                    {
                     <p>@int.Parse(Model.Deaths.Total).ToString("N0")</p>
+                    }
+                    else
+                    {
+                        <p>PlaceHolder</p>
+                    }
                 </div>
             </div>
 
             <div class="column">
                 <div class="ChartBox ">
                     <p>Totale positivi</p>
-                    <p>@int.Parse(Model.Cases.Total).ToString("N0")</p>
+                    @if (Model.Cases.Active != null)
+                    {
+                        <p>@int.Parse(Model.Cases.Total).ToString("N0")</p>
+                    }
+                    else
+                    {
+                        <p>PlaceHolder</p>
+                    }
                 </div>
             </div>
         </div>,
@@ -64,6 +89,7 @@
             <div class="column ChartBox grafico">
                 <div><canvas id="lineChart2" width="400" height="200"></canvas></div>
             </div>
+
         </div>
 
         @section Scripts
@@ -146,7 +172,7 @@
                             color: '#ffffff',
                             hoverOpacity: 0.7,
                             selectedColor: '#666666',
-                            enableZoom: true,
+                            enableZoom: false,
                             showTooltip: true,
                             scaleColors: ['#C8EEFF', '#910000'],
                             values: Sample,
@@ -154,8 +180,10 @@
                             onRegionClick: async function (element, code, region) {
 
                                 for (let pair of CountryCode) {
-                                    if (pair["MapCode"] == code)
-                                         await findHistoryByCountry(pair["Country"])
+                                    if (pair["MapCode"] == code) {
+                                        await findHistoryByCountry(pair["Country"])
+                                    }
+                                    
                                 }
                             }
                         });

@@ -348,3 +348,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/Covid-19-World/TestEnviroment
+/Covid-19-World/Covid-19-World.oldprj/APIErrorLog.txt

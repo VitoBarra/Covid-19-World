@@ -24,14 +24,6 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "LiveReload": {
-      "ClientFileExtensions": ".cshtml,.razor,.css,.js,.htm,.html",
-      "LiveReloadEnabled": true,
-      "ServerRefreshTimeout": 3000,
-      "WebSocketHost": "wss://localhost:5001",
-      "WebSocketUrl": "/__livereload",
-      "FolderToMonitor": "~/"
-    },
     "Azure Dev Spaces": {
       "commandName": "AzureDevSpaces",
       "launchBrowser": true

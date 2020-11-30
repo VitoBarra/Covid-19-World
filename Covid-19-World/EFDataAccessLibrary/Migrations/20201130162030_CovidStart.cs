@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Covid19_World.EFDataAccessLibrary.Migrations
+namespace EFDataAccessLibrary.Migrations
 {
     public partial class CovidStart : Migration
     {
@@ -27,30 +27,12 @@ namespace Covid19_World.EFDataAccessLibrary.Migrations
                 {
                     table.PrimaryKey("PK_CovidDatas", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(maxLength: 45, nullable: true),
-                    Nome = table.Column<string>(maxLength: 45, nullable: true),
-                    Cognome = table.Column<string>(maxLength: 45, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.Id);
-                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "CovidDatas");
-
-            migrationBuilder.DropTable(
-                name: "User");
         }
     }
 }

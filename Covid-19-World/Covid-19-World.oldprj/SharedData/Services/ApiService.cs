@@ -15,20 +15,40 @@ namespace Covid19_World.Shared.Services.Api
         {
             if (Unstarted)
             {
-                RestService.client.DefaultRequestHeaders.Add("x-rapidapi-host", "covid-193.p.rapidapi.com");
-                RestService.client.DefaultRequestHeaders.Add("x-rapidapi-key", "f4d025568cmsh12e79fdec8e33b1p174ff5jsn48a341aa1fc0");
+                HTTPClientFactory.DefHeaders.Add(new Header ("x-rapidapi-host","covid-193.p.rapidapi.com" ));
+                HTTPClientFactory.DefHeaders.Add(new Header ("x-rapidapi-key", "f4d025568cmsh12e79fdec8e33b1p174ff5jsn48a341aa1fc0" ));
                 Unstarted = false;
             }
         }
 
-        public async static Task<IList<CovidDataAPI>> GetDataHistory(string Country = "all")
+        public async static Task<IList<CovidDataAPI>> GetDataHistoryAsync(string Country = "all")
         {
             IList<CovidDataAPI> Data = null;
             string EndPoint = $"https://covid-193.p.rapidapi.com/history?country={Country}";
 
             try
             {
-                Data = (await RestService.CallServiceAsync<ResponceHistory>(EndPoint)).Response;
+                    Data =(await RestService.CallServiceAsync<ResponceHistory>(EndPoint)).Response;
+            }
+            catch (Exception ex)
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@".\APIErrorLog.txt", true))
+                {
+                    file.WriteLine($"ERROR from GetDataHistory: {ex.Message}");
+                }
+            }
+
+            return Data;
+        }
+
+        public static IList<CovidDataAPI> GetDataHistory(string Country = "all")
+        {
+            IList<CovidDataAPI> Data = null;
+            string EndPoint = $"https://covid-193.p.rapidapi.com/history?country={Country}";
+
+            try
+            {
+                Data =  RestService.CallService<ResponceHistory>(EndPoint).Response;
             }
             catch (Exception ex)
             {

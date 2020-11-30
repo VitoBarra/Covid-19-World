@@ -4,14 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/jqvmap/dist/css/jqvmap.css" />
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment include="Production">
+        <link rel="stylesheet" href="~/css/site.min.css" />
+    </environment>
+
     <link rel="icon" href="~/Resource/Covid_World_Logo_white.png">
-    <PackageReference Condition="'$(Configuration)' == 'Debug'"
-                      Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
-    <PackageReference Condition="'$(Configuration)' == 'Debug'"
-                      Include="WestWind.AspnetCore.LiveReload" Version="0.1.12" />
 </head>
 <body>
     <header>
@@ -31,9 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="AboutMe">About me</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="NewsLetter">NewsLetter</a>
-                        </li>
+                        @*<li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="NewsLetter">NewsLetter</a>
+                            </li>*@
                     </ul>
                 </div>
             </div>
@@ -45,19 +50,20 @@
         </main>
     </div>
 
-    @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Covid_19_GalileiGalileo - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>*@
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    @*<script src="~/lib/Chart.js/dist/js/Chart.min.js"></script>*@
-    <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jqvmap/dist/js/jquery.vmap.js"></script>
     <script src="~/lib/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+
+    <environment include="Development">
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Production">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
