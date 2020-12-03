@@ -27,7 +27,7 @@ namespace Covid_World.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public static Covid19wDbContext Covid19WDbContext;
+        public Covid19wDbContext Covid19WDbContext;
 
         public IList<CountryPairs> CountryList;
 
@@ -43,6 +43,7 @@ namespace Covid_World.Controllers
         [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Index()
         {
+
             CovidList<CovidDataModel> worldHistory = DatabaseOperation.GetCountryHistory(Covid19WDbContext, true);
 
             ViewBag.chartTotalCases = ChartTool.CreateChart(worldHistory.ListTime(),
@@ -80,11 +81,23 @@ namespace Covid_World.Controllers
 
 
 
-
-            return View(worldHistory.Last());
+            if (worldHistory.Count != 0)
+                return View(worldHistory.Last());
+            else
+            {
+                _logger.LogWarning("Database was Empty");
+                return View(new CovidDataModel()
+                {
+                    Cases = new SharedData.Models.Cases { Active = "0", Critical = "0", New = "0", Recovered = "0", Total = "0" },
+                    Deaths = new SharedData.Models.Deaths { New = "0", Total = "0" },
+                    Time = new DateTime(),
+                    Country = "ERROR"
+                });
+            }
         }
 
-        public async Task<IActionResult> ContryDic()
+        [ResponseCache(Duration = 2000, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult ContryDic()
         {
             CovidList<CovidDataModel> LastStatOfAllCountry;
             Dictionary<string, string> pairs = new Dictionary<string, string>();
@@ -104,13 +117,13 @@ namespace Covid_World.Controllers
 
 
 
-
+        [ResponseCache(Duration = 2000, Location = ResponseCacheLocation.None, NoStore = true)]
         public ActionResult ContryCode() => new JsonResult(JsonConvert.SerializeObject(CountryList));
 
 
 
 
-        [ResponseCache(Duration = 600, Location = ResponseCacheLocation.None, NoStore = true)]
+        [ResponseCache(Duration = 2000, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult CovidStatistic(string Country = "all")
         {
             CovidList<CovidDataModel> CountryHistory = DatabaseOperation.GetCountryHistory(Covid19WDbContext,  true,Country);
@@ -127,9 +140,9 @@ namespace Covid_World.Controllers
             return new JsonResult(JsonConvert.SerializeObject(ChartData));
         }
 
+        [ResponseCache(Duration = 2000, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult AboutMe() => View();
 
-        public IActionResult NewsLetter() => View();
 
 
     }

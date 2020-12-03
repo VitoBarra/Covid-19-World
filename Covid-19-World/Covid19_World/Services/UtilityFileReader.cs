@@ -20,10 +20,8 @@ namespace Covid_World.SharedData.Models
 
         public UtilityFileReader()
         {
-            using (StreamReader r = new StreamReader("CountryPairs.json"))
-            {
-                CountryList = JsonConvert.DeserializeObject<List<CountryPairs>>(r.ReadToEnd());
-            }
+            using StreamReader r = new StreamReader("CountryPairs.json");
+            CountryList = JsonConvert.DeserializeObject<List<CountryPairs>>(r.ReadToEnd());
         }
 
     }

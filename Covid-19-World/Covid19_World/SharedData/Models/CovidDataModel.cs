@@ -132,24 +132,25 @@ namespace Covid_World.SharedData.Models
 
         public CovidList(T[] ItemList, bool isHistory = false) : base(ItemList.Reverse())
         {
-            CommonInit(ItemList, isHistory);
+            CommonInit( isHistory);
         }
 
-        public CovidList(CovidData[] ItemList, bool isHistory = false)
+        public CovidList(CovidData[] ItemList, bool isHistory = false) :base((IEnumerable<T>)ItemList.FromDBtoModelArray().Reverse())
         {
-            CommonInit((T[])ItemList.FromDBtoModelArray(), isHistory);
+            CommonInit( isHistory);
         }
 
-        public CovidList(CovidDataAPI[] ItemList, bool isHistory = false)
+        public CovidList(CovidDataAPI[] ItemList, bool isHistory = false) : base((IEnumerable<T>)ItemList.FromAPItoModelArray().Reverse())
         {
-            CommonInit((T[])ItemList.FromAPItoModelArray(), isHistory);
+            CommonInit(isHistory);
         }
 
 
 
 
-        private void CommonInit(T[] ItemList, bool isHistory = false)
+        private void CommonInit(bool isHistory = false)
         {
+            
             if (isHistory)
             {
                 int i = 0;

@@ -1,5 +1,6 @@
 ﻿using Covid19_World.Shared.Models;
 using Covid19_World.Shared.Services.Api.Model;
+using Microsoft.Extensions.Logging;
 using SharedLibrary.GeneralUse.RestService;
 using System;
 using System.Collections.Generic;
@@ -15,53 +16,49 @@ namespace Covid19_World.Shared.Services.Api
         {
             if (Unstarted)
             {
-                HTTPClientFactory.DefHeaders.Add(new Header ("x-rapidapi-host","covid-193.p.rapidapi.com" ));
-                HTTPClientFactory.DefHeaders.Add(new Header ("x-rapidapi-key", "f4d025568cmsh12e79fdec8e33b1p174ff5jsn48a341aa1fc0" ));
+                HTTPClientFactory.DefHeaders.Add(new Header("x-rapidapi-host", "covid-193.p.rapidapi.com"));
+                HTTPClientFactory.DefHeaders.Add(new Header("x-rapidapi-key", "f4d025568cmsh12e79fdec8e33b1p174ff5jsn48a341aa1fc0"));
                 Unstarted = false;
             }
         }
 
-        public async static Task<IList<CovidDataAPI>> GetDataHistoryAsync(string Country = "all")
+        public async static Task<IList<CovidDataAPI>> GetDataHistoryAsync(string Country = "all", ILogger logger = null)
         {
             IList<CovidDataAPI> Data = null;
             string EndPoint = $"https://covid-193.p.rapidapi.com/history?country={Country}";
 
             try
             {
-                    Data =(await RestService.CallServiceAsync<ResponceHistory>(EndPoint)).Response;
+                Data = (await RestService.CallServiceAsync<ResponceHistory>(EndPoint)).Response;
             }
             catch (Exception ex)
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@".\APIErrorLog.txt", true))
-                {
-                    file.WriteLine($"ERROR from GetDataHistory: {ex.Message}");
-                }
+                if (logger != null)
+                    logger.LogError("ERROR from GetDataHistoryAsync API Call: {Message}", ex.Message);
             }
 
             return Data;
         }
 
-        public static IList<CovidDataAPI> GetDataHistory(string Country = "all")
+        public static IList<CovidDataAPI> GetDataHistory(string Country = "all", ILogger logger = null)
         {
             IList<CovidDataAPI> Data = null;
             string EndPoint = $"https://covid-193.p.rapidapi.com/history?country={Country}";
 
             try
             {
-                Data =  RestService.CallService<ResponceHistory>(EndPoint).Response;
+                Data = RestService.CallService<ResponceHistory>(EndPoint).Response;
             }
             catch (Exception ex)
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@".\APIErrorLog.txt", true))
-                {
-                    file.WriteLine($"ERROR from GetDataHistory: {ex.Message}");
-                }
+                if (logger != null)
+                    logger.LogError("ERROR from GetDataHistory API Call: {Message}", ex.Message);
             }
 
             return Data;
         }
 
-        public async static Task<IList<CovidDataAPI>> GetStatByCountry(string country = null)
+        public async static Task<IList<CovidDataAPI>> GetStatByCountry(string country = null, ILogger logger = null)
         {
             IList<CovidDataAPI> Data = null;
             string EndPoint;
@@ -76,16 +73,14 @@ namespace Covid19_World.Shared.Services.Api
             }
             catch (Exception ex)
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@".\APIErrorLog.txt", true))
-                {
-                    file.WriteLine($"ERROR from GetStatByCountry: {ex.Message}");
-                }
+                if (logger != null)
+                    logger.LogError("ERROR from GetStatByCountry  API Call: {Message}", ex.Message);
             }
 
             return Data;
         }
 
-        public async static Task<IList<string>> GetCountryList()
+        public async static Task<IList<string>> GetCountryList(ILogger logger = null)
         {
             IList<string> Data = null;
             string EndPoint = $"https://covid-193.p.rapidapi.com/countries";
@@ -96,10 +91,8 @@ namespace Covid19_World.Shared.Services.Api
             }
             catch (Exception ex)
             {
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(@".\APIErrorLog.txt", true))
-                {
-                    file.WriteLine($"ERROR from GetCountryList: {ex.Message}");
-                }
+                if (logger != null)
+                    logger.LogError("ERROR from GetCountryList API Call: {Message}", ex.Message);
             }
 
             return Data;
