@@ -1,0 +1,53 @@
+version: '3.4'
+
+services:
+
+  Seq:
+    container_name: Seq
+    image: datalust/seq:latest
+    restart: always
+    environment:
+        ACCEPT_EULA: "Y"
+    ports:
+    - 9090:80
+    - 9091:5341
+
+
+  MariaDB:
+    container_name: MariaDB
+    restart: always
+    image: mariadb:10.5
+    environment:
+        MYSQL_ROOT_PASSWORD: toor
+    ports:
+    - 6603:3306 
+    
+  adminer:
+    container_name: Adminer
+    image: adminer
+    restart: always
+    ports:
+      - 7070:8080
+     
+  covid_world:
+    container_name: Covid19_World_WebSite
+    image: ${DOCKER_REGISTRY-}covidworld
+    restart: always
+    build:
+      context: .
+      dockerfile: Covid19_World/Dockerfile
+    ports:
+    - 8080:80
+    - 8081:443
+    depends_on:
+    - MariaDB
+    - Seq
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Production
+    - DB_NAME=MariaDB
+    - DB_USERNAME=root
+    - DB_PASSWORD=toor
+    - DB_SCHEME_NAME=covid19w
+#- ASPNETCORE_ENVIRONMENT=Development
+
+  

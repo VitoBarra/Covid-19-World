@@ -11,27 +11,29 @@ using SharedLibrary.AspNetCore.Installers;
 using System;
 using System.Collections.Generic;
 using System.Net;
-using static Covid_World.SharedData.Models.CovidDataModel;
+using Serilog;
+using Covid_World.EFDataAccessLibrary.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using System.Linq;
+using Covid_World.SharedData.DB;
 
 namespace Covid_World
 {
     public class Startup
     {
-        public static List<CountryPairs> CountryList;
+        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-        public CovidList<CovidDataModel> CountryHistory { get; private set; }
-        public object Covid19WDbContext { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            UserStartUP();
+            ApiService.StartUpAPI();
 
             services.InstallServicesAssembly(Configuration, this);
 
@@ -39,17 +41,13 @@ namespace Covid_World
             {
                 options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
             });
+
         }
 
-
-        private void UserStartUP()
-        {
-            ApiService.StartUpAPI();
-        }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
 
             if (env.IsDevelopment())
@@ -66,7 +64,7 @@ namespace Covid_World
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
             app.UseForwardedHeaders(new ForwardedHeadersOptions
@@ -76,6 +74,7 @@ namespace Covid_World
 
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -83,7 +82,8 @@ namespace Covid_World
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            
+
+            logger.LogInformation("Application Startup completed");
         }
 
 
