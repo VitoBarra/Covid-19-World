@@ -6,17 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Covid_World.SharedData.Models
 {
     [Serializable]
     public class Cases :ICloneable
     {
-        public string New { get; set; }
-
+#nullable enable
+        public string? New { get; set; }
+#nullable disable
         public string Active { get; set; }
-
-        public string Critical { get; set; }
 
         public string Recovered { get; set; }
 
@@ -28,7 +28,6 @@ namespace Covid_World.SharedData.Models
             {
                 New = this.New,
                 Active = this.Active,
-                Critical = this.Critical,
                 Recovered = this.Recovered,
                 Total = this.Total
             };
@@ -36,7 +35,9 @@ namespace Covid_World.SharedData.Models
     }
     public class Deaths :ICloneable
     {
-        public string New { get; set; }
+#nullable enable
+        public string? New { get; set; }
+#nullable disable
 
         public string Total { get; set; }
 
@@ -65,25 +66,31 @@ namespace Covid_World.SharedData.Models
 
         public CovidDataModel(){}
 
-        public CovidDataModel(CovidDataAPI dataAPI)
+        public CovidDataModel(CovidDataAPI dataAPI, CovidDataAPI dataAPINextDay =null)
         {
+#nullable enable
+            string? NewDeath= null, NewCase = null ;
+            if (dataAPINextDay != null)
+            {
+                NewCase = (int.Parse(dataAPINextDay.Confirmed) - int.Parse(dataAPI.Confirmed)).ToString();
+                NewDeath = (int.Parse(dataAPINextDay.Deaths) - int.Parse(dataAPI.Deaths)).ToString();
+            }
+
             Country = dataAPI.Country;
             Cases = new Cases
             {
-                Active = dataAPI.Cases.Active,
-                Critical = dataAPI.Cases.Critical,
-                New = dataAPI.Cases.New,
-                Recovered = dataAPI.Cases.Recovered,
-                Total = dataAPI.Cases.Total
+                Active = dataAPI.Active,
+                New = NewCase,
+                Recovered = dataAPI.Recovered,
+                Total = dataAPI.Confirmed
             };
             Deaths = new Deaths
             {
-                New = dataAPI.Deaths.New,
-                Total = dataAPI.Deaths.Total
+                New = NewDeath,
+                Total = dataAPI.Deaths
             };
-        Time = dataAPI.Time;
+            Time = dataAPI.Date;
         }
-
 
         public CovidDataModel(CovidData dataDB)
         {
@@ -91,7 +98,6 @@ namespace Covid_World.SharedData.Models
             Cases = new Cases
             {
                 Active = dataDB.CaseActive,
-                Critical = dataDB.CaseCritical,
                 New = dataDB.CaseNew,
                 Recovered = dataDB.CaseRecovered,
                 Total = dataDB.CaseTotal
@@ -128,29 +134,30 @@ namespace Covid_World.SharedData.Models
 
     public class CovidList<T> : List<T> where T : CovidDataModel
     {
-        private int DataRatio { get; set; } = 1;
+        public int DataRatio { get; set; } = 1;
 
-        public CovidList(T[] ItemList, bool isHistory = false) : base(ItemList.Reverse())
+        public CovidList(T[] ItemList, bool isHistory = false) : base(ItemList.OrderBy(x => x.Time))
         {
-            CommonInit( isHistory);
+            ClearOldData(isHistory);
         }
 
-        public CovidList(CovidData[] ItemList, bool isHistory = false) :base((IEnumerable<T>)ItemList.FromDBtoModelArray().Reverse())
+        public CovidList(CovidData[] ItemList, bool isHistory = false) : base((IEnumerable<T>)ItemList.FromDBtoModelArray().OrderBy(x => x.Time))
         {
-            CommonInit( isHistory);
+            ClearOldData(isHistory);
         }
 
-        public CovidList(CovidDataAPI[] ItemList, bool isHistory = false) : base((IEnumerable<T>)ItemList.FromAPItoModelArray().Reverse())
+        public CovidList(CovidDataAPI[] ItemList, bool isHistory = false) : base((IEnumerable<T>)ItemList.FromAPItoModelArray().OrderBy(x => x.Time))
         {
-            CommonInit(isHistory);
+            ClearOldData(isHistory);
+            FillNewCase();
         }
 
 
 
 
-        private void CommonInit(bool isHistory = false)
+        private void ClearOldData(bool isHistory = false)
         {
-            
+
             if (isHistory)
             {
                 int i = 0;
@@ -168,7 +175,20 @@ namespace Covid_World.SharedData.Models
                 }
             }
         }
-            
+
+
+        public void FillNewCase()
+        {
+            if (this.Count == 0) return;
+
+            this[0].Cases.New = "0";
+            this[0].Deaths.New = "0";
+            for (int i = 1; i < this.Count; i++)
+            {
+                this[i].Cases.New = (int.Parse(this[i].Cases.Total) - int.Parse(this[i - 1].Cases.Total)).ToString();
+                this[i].Deaths.New = (int.Parse(this[i].Deaths.Total) - int.Parse(this[i - 1].Deaths.Total)).ToString();
+            }
+        }
 
 
         #region Dati Base
@@ -177,12 +197,11 @@ namespace Covid_World.SharedData.Models
         {
             List<double?> DoubleList = new List<double?>();
 
-            for (int i = 0; i < this.Count; i++)
-                if (i % DataRatio == 0)
-                    if (this[i].Cases.Active != null)
-                        DoubleList.Add(int.Parse(this[i].Cases.Active));
-                    else
-                        DoubleList.Add(DoubleList.Last());
+            for (int i = 0; i < this.Count; i += DataRatio)
+                if (this[i].Cases.Active != null)
+                    DoubleList.Add(int.Parse(this[i].Cases.Active));
+                else
+                    DoubleList.Add(DoubleList.Last());
 
             return DoubleList;
         }
@@ -191,12 +210,11 @@ namespace Covid_World.SharedData.Models
         {
             List<double?> DoubleList = new List<double?>();
 
-            for (int i = 0; i < this.Count; i++)
-                if (i % DataRatio == 0)
-                    if (this[i].Deaths.Total != null)
-                        DoubleList.Add(int.Parse(this[i].Deaths.Total));
-                    else
-                        DoubleList.Add(DoubleList.Last());
+            for (int i = 0; i < this.Count; i += DataRatio)
+                if (this[i].Deaths.Total != null)
+                    DoubleList.Add(int.Parse(this[i].Deaths.Total));
+                else
+                    DoubleList.Add(DoubleList.Last());
 
             return DoubleList;
         }
@@ -205,16 +223,17 @@ namespace Covid_World.SharedData.Models
         {
             List<double?> DoubleList = new List<double?>();
 
-            for (int i = 0; i < this.Count; i++)
-                if (i % DataRatio == 0)
-                    try
-                    {
-                        DoubleList.Add(int.Parse(this[i].Cases.Recovered));
-                    }
-                    catch
-                    {
-                        DoubleList.Add(DoubleList.Last());
-                    }
+            for (int i = 0; i < this.Count; i += DataRatio)
+            {
+                try
+                {
+                    DoubleList.Add(int.Parse(this[i].Cases.Recovered));
+                }
+                catch
+                {
+                    DoubleList.Add(DoubleList.Last());
+                }
+            }
             return DoubleList;
         }
 
@@ -226,12 +245,11 @@ namespace Covid_World.SharedData.Models
         {
             List<double?> DoubleList = new List<double?>();
 
-            for (int i = 1; i < this.Count - 1; i++)
-                if (i % DataRatio == 0)
-                    if (this[i].Cases.New != null)
-                        DoubleList.Add(int.Parse(this[i].Cases.New));
-                    else
-                        DoubleList.Add(null);
+            for (int i = 1; i < this.Count - 1; i += DataRatio)
+                if (this[i].Cases.New != null)
+                    DoubleList.Add(int.Parse(this[i].Cases.New));
+                else
+                    DoubleList.Add(null);
 
             return DoubleList;
         }
@@ -240,14 +258,17 @@ namespace Covid_World.SharedData.Models
         {
             List<double?> DoubleList = new List<double?>();
 
-            for (int i = 0; i < this.Count - 2; i++)
-                if (i % DataRatio == 0)
+            for (int i = 0; i < this.Count - 2; i += DataRatio)
+            {   
+                if (this[i + 1].Cases != null && this[i + 1].Cases != null)
                 {
-                    if (this[i + 1].Cases.New == null || this[i].Cases.New == null)
-                        DoubleList.Add(null);
-                    else
+                    if (this[i + 1].Cases.New != null && this[i].Cases.New != null)
                         DoubleList.Add(int.Parse(this[i + 1].Cases.New) - int.Parse(this[i].Cases.New));
+                    else
+                        DoubleList.Add(null);
                 }
+            }
+
 
             return DoubleList;
         }
@@ -273,54 +294,11 @@ namespace Covid_World.SharedData.Models
 public static class CovidCoverterEX
 {
 
-    public static CovidDataModel FromAPItoModel(this CovidDataAPI dataAPI)
-    {
-        return new CovidDataModel
-        {
-            Country = dataAPI.Country,
-            Cases = new Covid_World.SharedData.Models.Cases
-            {
-                Active = dataAPI.Cases.Active,
-                Critical = dataAPI.Cases.Critical,
-                New = dataAPI.Cases.New,
-                Recovered = dataAPI.Cases.Recovered,
-                Total = dataAPI.Cases.Total
-            },
-            Deaths = new Covid_World.SharedData.Models.Deaths
-            {
-                New = dataAPI.Deaths.New,
-                Total = dataAPI.Deaths.Total
-            },
-            Time = dataAPI.Time
-        };
 
-    }
-
-    public static CovidDataModel FromDBtoModel(this CovidData dataDB)
+    public static CovidDataModel[] FromAPItoModelArray(this CovidDataAPI[] dataAPIs, ILogger Logger = null)
     {
-        return new CovidDataModel
-        {
-            Country = dataDB.Country,
-            Cases = new Covid_World.SharedData.Models.Cases
-            {
-                Active = dataDB.CaseActive,
-                Critical = dataDB.CaseCritical,
-                New = dataDB.CaseNew,
-                Recovered = dataDB.CaseRecovered,
-                Total = dataDB.CaseTotal
-            },
-            Deaths = new Covid_World.SharedData.Models.Deaths
-            {
-                New = dataDB.DeathNew,
-                Total = dataDB.DeathTotal
-            },
-            Time = DateTime.Parse(dataDB.Time)
-        };
-    }
-    
 
-    public static CovidDataModel[] FromAPItoModelArray(this CovidDataAPI[] dataAPIs)
-    {
+        if (dataAPIs == null) return null;
 
         IList<CovidDataModel> CovidDataModel = new List<CovidDataModel>();
         foreach (var data in dataAPIs)
@@ -363,7 +341,6 @@ public static class CovidCoverterEX
             Time = covidDataModel.Time.ToString("yyyy/MM/dd H:mm:ss"),
             CaseNew = covidDataModel.Cases.New,
             CaseActive = covidDataModel.Cases.Active,
-            CaseCritical = covidDataModel.Cases.Critical,
             CaseRecovered = covidDataModel.Cases.Recovered,
             CaseTotal = covidDataModel.Cases.Total,
             DeathNew = covidDataModel.Deaths.New,

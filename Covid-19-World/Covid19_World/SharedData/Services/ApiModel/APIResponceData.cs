@@ -1,56 +1,21 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Covid19_World.Shared.Services.Api.Model
 {
-    public class Responce
+    /// <summary>
+    /// a class that contains the meta data of the country also used in views so be careful when you change it
+    /// </summary>
+    public class CountryMetaData
     {
-        [JsonProperty("get")]
-        public string Get { get; set; }
-
-        [JsonProperty("parameters")]
-        public Parameters[] Parameters { get; set; }
-
-        [JsonProperty("errors")]
-        public string[] errors { get; set; }
-
-        [JsonProperty("results")]
-        public string Results { get; set; }
-
-        [JsonProperty("response")]
-        public List<CovidDataAPI> Response { get; set; } = new List<CovidDataAPI>();
-    }
-
-    public class ResponceHistory
-    {
-        [JsonProperty("get")]
-        public string Get { get; set; }
-
-        [JsonProperty("parameters")]
-        public Parameters Parameters { get; set; }
-
-        [JsonProperty("errors")]
-        public string[] errors { get; set; }
-
-        [JsonProperty("results")]
-        public string Results { get; set; }
-
-        [JsonProperty("response")]
-        public List<CovidDataAPI> Response { get; set; } = new List<CovidDataAPI>();
-    }
-
-    public class Parameters
-    {
-        [JsonProperty("country")]
-        public string Country { get; set; }
-    }
-
-    public class CountryPairs
-    {
+        //to user in app
         [JsonProperty("Country")]
         public string Country { get; set; }
-
-        [JsonProperty("MapCode")]
-        public string MapCode { get; set; }
+        //to call api
+        [JsonProperty("Slug")]
+        public string Slug { get; set; }
+        [JsonProperty("ISO2")]
+        public string ISO2 { get; set; }
     }
 }

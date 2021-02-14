@@ -17,7 +17,6 @@ namespace EFDataAccessLibrary.Migrations
                     Time = table.Column<string>(nullable: false),
                     CaseNew = table.Column<string>(maxLength: 45, nullable: true),
                     CaseActive = table.Column<string>(maxLength: 45, nullable: true),
-                    CaseCritical = table.Column<string>(maxLength: 45, nullable: true),
                     CaseRecovered = table.Column<string>(maxLength: 45, nullable: true),
                     CaseTotal = table.Column<string>(maxLength: 45, nullable: true),
                     DeathNew = table.Column<string>(maxLength: 45, nullable: true),

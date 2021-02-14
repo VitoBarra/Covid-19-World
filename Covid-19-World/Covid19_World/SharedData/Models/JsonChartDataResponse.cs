@@ -6,18 +6,20 @@ namespace Covid19_World.Shared.Models
     public class JsonChartDataResponse
     {
         [JsonProperty("ActiveCase")]
-        public List<double?> ActiveCase { get; set; }
+        public IList<double?> ActiveCase { get; set; }
 
         [JsonProperty("TotalDeaths")]
-        public List<double?> TotalDeaths { get; set; }
+        public IList<double?> TotalDeaths { get; set; }
 
         [JsonProperty("TotalRecoverd")]
-        public List<double?> TotalRecoverd { get; set; }
+        public IList<double?> TotalRecoverd { get; set; }
 
         [JsonProperty("DailyCases")]
-        public List<double?> DailyCases { get; set; }
+        public IList<double?> DailyCases { get; set; }
 
         [JsonProperty("DiferenceDailyCases")]
-        public List<double?> DiferenceDailyCases { get; set; }
+        public IList<double?> DiferenceDailyCases { get; set; }
+        [JsonProperty("LabelList")]
+        public IList<string> LabelList { get; set; }
     }
 }
