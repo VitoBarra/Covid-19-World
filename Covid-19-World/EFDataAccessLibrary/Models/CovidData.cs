@@ -21,9 +21,6 @@ namespace Covid_World.EFDataAccessLibrary.Models
         public string CaseActive { get; set; }
 
         [MaxLength(45)]
-        public string CaseCritical { get; set; }
-
-        [MaxLength(45)]
         public string CaseRecovered { get; set; }
 
         [MaxLength(45)]
@@ -48,7 +45,6 @@ namespace Covid_World.EFDataAccessLibrary.Models
                 Time = this.Time,
                 CaseNew = this.CaseNew,
                 CaseActive = this.CaseActive,
-                CaseCritical = this.CaseCritical,
                 CaseRecovered = this.CaseRecovered,
                 CaseTotal = this.CaseTotal,
                 DeathNew = this.DeathNew,

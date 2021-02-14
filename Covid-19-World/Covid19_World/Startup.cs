@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using Covid_World.SharedData.DB;
+using Hangfire;
 
 namespace Covid_World
 {
@@ -67,10 +68,15 @@ namespace Covid_World
             app.UseSerilogRequestLogging();
 
             app.UseRouting();
+            //aggiunte da me
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
                 ForwardedHeaders = ForwardedHeaders.All
             });
+
+            app.ApplicationServices.CreateScope().ServiceProvider.GetService<HangFireContext>().Database.Migrate();
+
+            app.UseHangfireDashboard();
 
             app.UseAuthorization();
 
@@ -80,6 +86,7 @@ namespace Covid_World
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHangfireDashboard();
             });
 
 

@@ -1,6 +1,7 @@
 ﻿using Covid_World.EFDataAccessLibrary.DataAccess;
 using Covid_World.EFDataAccessLibrary.Models;
 using Covid_World.SharedData.Models;
+using Covid19_World.Shared.Services.Api;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace Covid19_World.Shared.Models
 
                 if (ExistentRow != null)
                     if (!RefreshData) continue;
-                    else FastCopy(ExistentRow,ConvTable);
+                    else FastCopy(ExistentRow, ConvTable);
                 else
                     ContextDB.Add(ConvTable);
             }
@@ -43,7 +44,6 @@ namespace Covid19_World.Shared.Models
             {
                 covidData.CaseNew = source.CaseNew;
                 covidData.CaseActive = source.CaseActive;
-                covidData.CaseCritical = source.CaseCritical;
                 covidData.CaseRecovered = source.CaseRecovered;
                 covidData.CaseTotal = source.CaseTotal;
                 covidData.DeathNew = source.DeathNew;
@@ -53,13 +53,46 @@ namespace Covid19_World.Shared.Models
 
 
 
-        public static CovidList<CovidDataModel> GetCountryHistory(Covid19wDbContext ContextDB, bool IsHistory = false, string Country = WORLD_DEFAULT_CODE) =>
-            new CovidList<CovidDataModel>((from a in ContextDB.CovidDatas where a.Country == Country select a).ToArray().FromDBtoModelArray(), IsHistory);
+        public static CovidList<CovidDataModel> GetCountryHistory(this Covid19wDbContext ContextDB, bool IsHistory = false, string CountrySlug = WORLD_DEFAULT_CODE)
+        {
+            var History = ContextDB.CovidDatas.Where(x=> x.Country == CountrySlug).Select(x=>x).ToArray().FromDBtoModelArray();
+
+            if (History == null)
+                History = ApiService.GetDataHistory(CountrySlug).FromAPItoModelArray();
+
+
+            return new CovidList<CovidDataModel>(History, IsHistory);
+        }
+
+
+        public static CovidList<CovidDataModel> GenerateSumOfAll(this Covid19wDbContext ContextDB)
+        {
+            var data = ContextDB.CovidDatas.Select(x => x).AsEnumerable();
+
+            var LastData = (from r in data
+                            group r by r.Time into g
+                            select new CovidData
+                            {
+                                Time = g.Key,
+                                CaseActive = g.Sum(x => { if (x.CaseActive != null) return int.Parse(x.CaseActive); else return null; }).ToString(),
+                                CaseNew = g.Sum(x => { if (x.CaseActive != null) return int.Parse(x.CaseNew); else return null; }).ToString(),
+                                DeathTotal = g.Sum(x => { if (x.CaseActive != null) return int.Parse(x.DeathTotal); else return null; }).ToString(),
+                                DeathNew = g.Sum(x => { if (x.CaseActive != null) return int.Parse(x.DeathNew); else return null; }).ToString(),
+                                CaseTotal = g.Sum(x => { if (x.CaseTotal != null) return int.Parse(x.CaseTotal); else return null; }).ToString(),
+                                CaseRecovered = g.Sum(x => { if (x.CaseRecovered != null) return int.Parse(x.CaseRecovered); else return null; }).ToString(),
+                                Country = "All"
+
+                            }).ToArray();
+
+            var CovidALL = new CovidList<CovidDataModel>(LastData.FromDBtoModelArray());
+            CovidALL.FillNewCase();
+            return CovidALL;
+        }
 
 
 
 
-        public static CovidList<CovidDataModel> GetLastStatsOfCountry(Covid19wDbContext ContextDB)
+        public static CovidList<CovidDataModel> GetLastStatsOfCountry( this Covid19wDbContext ContextDB)
         {
             var data = ContextDB.CovidDatas.Select(x => x).AsEnumerable();
 

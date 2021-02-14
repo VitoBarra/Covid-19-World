@@ -26,10 +26,6 @@ namespace EFDataAccessLibrary.Migrations
                         .HasColumnType("varchar(45) CHARACTER SET utf8mb4")
                         .HasMaxLength(45);
 
-                    b.Property<string>("CaseCritical")
-                        .HasColumnType("varchar(45) CHARACTER SET utf8mb4")
-                        .HasMaxLength(45);
-
                     b.Property<string>("CaseNew")
                         .HasColumnType("varchar(45) CHARACTER SET utf8mb4")
                         .HasMaxLength(45);

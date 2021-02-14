@@ -117,16 +117,15 @@
                             async: true
                         });
 
-                    lineChart1["data"]["datasets"][0]["data"] = CountryData["ActiveCase"];
-                    lineChart1.update();
-                    lineChart1["data"]["datasets"][1]["data"] = CountryData["TotalDeaths"];
-                    lineChart1.update();
-                    lineChart1["data"]["datasets"][2]["data"] = CountryData["TotalRecoverd"];
+                    lineChart1.data.datasets[0].data = CountryData["ActiveCase"];
+                    lineChart1.data.datasets[1].data = CountryData["TotalDeaths"];
+                    lineChart1.data.datasets[2].data = CountryData["TotalRecoverd"];
+                    lineChart1.data.labels = CountryData["LabelList"];
                     lineChart1.update();
 
-                    lineChart2["data"]["datasets"][0]["data"] = CountryData["DailyCases"];
-                    lineChart2.update();
-                    lineChart2["data"]["datasets"][1]["data"] = CountryData["DiferenceDailyCases"];
+                    lineChart2.data.datasets[0].data = CountryData["DailyCases"];
+                    lineChart2.data.datasets[1].data = CountryData["DiferenceDailyCases"];
+                    lineChart2.data.labels = CountryData["LabelList"];
                     lineChart2.update();
 
                     if (country == "all")
@@ -180,8 +179,9 @@
                             onRegionClick: async function (element, code, region) {
 
                                 for (let pair of CountryCode) {
-                                    if (pair["MapCode"] == code) {
-                                        await findHistoryByCountry(pair["Country"])
+                                    if (pair["ISO2"] == code) {
+                                        await findHistoryByCountry(pair["Country"]);
+                                        break;
                                     }
                                     
                                 }

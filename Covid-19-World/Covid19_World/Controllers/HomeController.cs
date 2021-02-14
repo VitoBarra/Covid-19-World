@@ -29,13 +29,13 @@ namespace Covid_World.Controllers
         private readonly ILogger<HomeController> _logger;
         public Covid19wDbContext Covid19WDbContext;
 
-        public IList<CountryPairs> CountryList;
+        public IList<CountryMetaData> CountryDataList;
 
         public HomeController(ILogger<HomeController> logger, Covid19wDbContext covid19WDB, IUtilityFileReader _countryList)
         {
             _logger = logger;
             Covid19WDbContext = covid19WDB;
-            CountryList = ((UtilityFileReader)_countryList).CountryList;
+            CountryDataList = ((UtilityFileReader)_countryList).CountryList;
         }
 
 
@@ -44,7 +44,7 @@ namespace Covid_World.Controllers
         public IActionResult Index()
         {
 
-            CovidList<CovidDataModel> worldHistory = DatabaseOperation.GetCountryHistory(Covid19WDbContext, true);
+            CovidList<CovidDataModel> worldHistory = Covid19WDbContext.GetCountryHistory(true);
 
             ViewBag.chartTotalCases = ChartTool.CreateChart(worldHistory.ListTime(),
                 new List<ChartData>()
@@ -85,10 +85,10 @@ namespace Covid_World.Controllers
                 return View(worldHistory.Last());
             else
             {
-                _logger.LogWarning("Database was Empty");
+                _logger.LogWarning("didin't find eny'all' row");
                 return View(new CovidDataModel()
                 {
-                    Cases = new SharedData.Models.Cases { Active = "0", Critical = "0", New = "0", Recovered = "0", Total = "0" },
+                    Cases = new SharedData.Models.Cases { Active = "0", New = "0", Recovered = "0", Total = "0" },
                     Deaths = new SharedData.Models.Deaths { New = "0", Total = "0" },
                     Time = new DateTime(),
                     Country = "ERROR"
@@ -100,25 +100,25 @@ namespace Covid_World.Controllers
         public IActionResult ContryDic()
         {
             CovidList<CovidDataModel> LastStatOfAllCountry;
-            Dictionary<string, string> pairs = new Dictionary<string, string>();
+            Dictionary<string, string> Pairs = new Dictionary<string, string>();
 
 
-            LastStatOfAllCountry = DatabaseOperation.GetLastStatsOfCountry(Covid19WDbContext);
+            LastStatOfAllCountry = Covid19WDbContext.GetLastStatsOfCountry();
             foreach (CovidDataModel CovidD in LastStatOfAllCountry)
             {
-                    var countrypairs = CountryList.SingleOrDefault(cou => cou.Country == CovidD.Country);
-                    if (countrypairs != null && !pairs.ContainsKey(countrypairs.MapCode))
-                        pairs.Add(countrypairs.MapCode, CovidD.Cases.Active);
+                    var Country = CountryDataList.SingleOrDefault(cou => cou.Country == CovidD.Country);
+                    if (Country != null && !Pairs.ContainsKey(Country.ISO2))
+                        Pairs.Add(Country.ISO2, CovidD.Cases.Active);
             }
 
 
-            return new JsonResult(JsonConvert.SerializeObject(pairs));
+            return new JsonResult(JsonConvert.SerializeObject(Pairs));
         }
 
 
 
         [ResponseCache(Duration = 2000, Location = ResponseCacheLocation.None, NoStore = true)]
-        public ActionResult ContryCode() => new JsonResult(JsonConvert.SerializeObject(CountryList));
+        public ActionResult ContryCode() => new JsonResult(JsonConvert.SerializeObject(CountryDataList));
 
 
 
@@ -126,13 +126,14 @@ namespace Covid_World.Controllers
         [ResponseCache(Duration = 2000, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult CovidStatistic(string Country = "all")
         {
-            CovidList<CovidDataModel> CountryHistory = DatabaseOperation.GetCountryHistory(Covid19WDbContext,  true,Country);
+            CovidList<CovidDataModel> CountryHistory = Covid19WDbContext.GetCountryHistory(true,Country);
 
             JsonChartDataResponse ChartData = new JsonChartDataResponse()
             {
                 ActiveCase = CountryHistory.TotalCases().ToList(),
                 TotalDeaths = CountryHistory.TotalDeaths().ToList(),
                 TotalRecoverd = CountryHistory.TotalRecoverd().ToList(),
+                LabelList = CountryHistory.ListTime(),
                 DailyCases = CountryHistory.NewCases().ToList(),
                 DiferenceDailyCases = CountryHistory.DiferenceIncrease().ToList()
             };

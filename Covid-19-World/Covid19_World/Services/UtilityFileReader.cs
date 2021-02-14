@@ -16,12 +16,15 @@ namespace Covid_World.SharedData.Models
     }
     public class UtilityFileReader : IUtilityFileReader
     {
-        public IList<CountryPairs> CountryList { get; private set; }
+        public IList<CountryMetaData> CountryList { get; private set; }
 
         public UtilityFileReader()
         {
             using StreamReader r = new StreamReader("CountryPairs.json");
-            CountryList = JsonConvert.DeserializeObject<List<CountryPairs>>(r.ReadToEnd());
+            CountryList = JsonConvert.DeserializeObject<List<CountryMetaData>>(r.ReadToEnd());
+
+            foreach (var Item in CountryList)
+                Item.ISO2 = Item.ISO2.ToLower();
         }
 
     }

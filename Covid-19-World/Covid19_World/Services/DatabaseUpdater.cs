@@ -3,12 +3,17 @@ using Covid_World.SharedData.Models;
 using Covid19_World.Shared.Models;
 using Covid19_World.Shared.Services.Api;
 using Covid19_World.Shared.Services.Api.Model;
+using Hangfire;
+using Hangfire.MySql.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Polly;
+using Polly.Retry;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,55 +23,79 @@ namespace Covid_World.SharedData.DB
 {
     public interface IDatabaseUpdater
     {
-        void StartTimer();
-        void TimerCall();
+        void StartJob();
+        void JobDelegate();
+
     }
 
     public class DatabaseUpdater : IDatabaseUpdater
     {
-
-        private Timer Timer;
+        //dependesy injected
         private readonly Covid19wDbContext Covid19WDbContext;
-        private readonly ILogger<DatabaseUpdater> _logger;
-        public IList<CountryPairs> CountryList { get; private set; }
+        private readonly HangFireContext HangFireContext;
+        private readonly ILogger<DatabaseUpdater> logger;
 
-        public DatabaseUpdater(Covid19wDbContext _db, ILogger<DatabaseUpdater> logger, IUtilityFileReader _contryShred)
+        private readonly RetryPolicy ApiCallRetryPolicy;
+
+        public IList<CountryMetaData> CountryList { get; private set; }
+
+        public DatabaseUpdater(Covid19wDbContext _db,HangFireContext _hf, ILogger<DatabaseUpdater> _logger, IUtilityFileReader _contryShred)
         {
             Covid19WDbContext = _db;
+            HangFireContext = _hf;
             CountryList = ((UtilityFileReader)_contryShred).CountryList;
-            _logger = logger;
+            logger = _logger;
 
-            StartTimer();
+            ApiCallRetryPolicy = Policy.Handle<Exception>()
+                        .Retry(3, (ex, RetryCount) => this.logger.LogInformation("Api call Failed with message: {Message}\n retried {RetryCount} Time", ex.Message, RetryCount));
+
         }
 
         //This method runs at the start of the application
-        public void StartTimer()
+        public void StartJob()
         {
-            Timer = new Timer(e=>TimerCall(), null, TimeSpan.Zero, TimeSpan.FromHours(1));
+            if (!HangFireContext.Database.GetAppliedMigrations().Any())
+            {
+                RecurringJob.AddOrUpdate(() => JobDelegate(), cronExpression: "0 0 0/3 ? * * *");
+            }
         }
 
-        public void TimerCall()
+        public void JobDelegate()
         {
-            if (Covid19WDbContext.Database.GetPendingMigrations().Any()) 
+            if (Covid19WDbContext.Database.GetPendingMigrations().Any())
             {
-                _logger.LogDebug("Do the migration frist");
+                logger.LogDebug("Do the migration frist");
                 return;
             }
 
-                _logger.LogInformation("Filling Database...");
+            logger.LogInformation("Filling Database...");
+
+            foreach (CountryMetaData s in CountryList)
+            {
+                logger.LogInformation("Request For ( {Mapde} ~||~ {Slug} ~||~ {Country})", s.ISO2, s.Slug, s.Country);
+
+                try
+                {
+                        ApiCallRetryPolicy.Execute(() =>
+                        new CovidList<CovidDataModel>(ApiService.GetDataHistory(s.Slug, logger), true)
+                            .SaveOnDatabase(Covid19WDbContext));
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError("Fill database failed with message: {Messasage}", ex.Message);
+                }
+            }
+
+
             try
             {
-                foreach (CountryPairs s in CountryList)
-                {
-                    _logger.LogInformation("Request For ({Mapde}:{Country})", s.MapCode, s.Country);
-                    new CovidList<CovidDataModel>(ApiService.GetDataHistory(s.Country, _logger).ToArray(), true).SaveOnDatabase(Covid19WDbContext);
-                }
-                _logger.LogInformation("Database filled successfully");
+                Covid19WDbContext.GenerateSumOfAll().SaveOnDatabase(Covid19WDbContext);
             }
             catch (Exception ex)
             {
-                _logger.LogError("Fill database failed with message: {Messasage}", ex.Message);
+                logger.LogError("Fill database failed on Generate Total with message: {Messasage}", ex.Message);
             }
+            logger.LogInformation("Database filled successfully");
 
             //IList<Task<IList<CovidDataAPI>>> CallList = new List<Task<IList<CovidDataAPI>>>();
 
@@ -79,7 +108,6 @@ namespace Covid_World.SharedData.DB
 
 
         }
-
 
 
     }

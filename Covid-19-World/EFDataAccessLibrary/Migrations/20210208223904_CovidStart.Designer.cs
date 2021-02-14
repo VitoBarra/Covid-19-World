@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFDataAccessLibrary.Migrations
 {
     [DbContext(typeof(Covid19wDbContext))]
-    [Migration("20201130162030_CovidStart")]
+    [Migration("20210208223904_CovidStart")]
     partial class CovidStart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,10 +25,6 @@ namespace EFDataAccessLibrary.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CaseActive")
-                        .HasColumnType("varchar(45) CHARACTER SET utf8mb4")
-                        .HasMaxLength(45);
-
-                    b.Property<string>("CaseCritical")
                         .HasColumnType("varchar(45) CHARACTER SET utf8mb4")
                         .HasMaxLength(45);
 
